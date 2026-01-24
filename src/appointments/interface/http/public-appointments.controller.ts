@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ThrottlerGuard } from '@nestjs/throttler';
+
 import { PublicBookingService } from '../../applications/use-cases/public-booking.service';
 import { PublicBookingDto } from '../../applications/dto/public-booking.dto';
 import { AppointmentResponseDto } from '../../applications/dto/appointment-response.dto';

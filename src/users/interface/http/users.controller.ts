@@ -26,6 +26,9 @@ import {
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
+import { ThrottlerGuard } from '@nestjs/throttler';
+
 import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { Roles } from '../../../auth/interface/decorators/roles.decorator';
 import { GetUser } from '../../../auth/interface/decorators/get-user.decorator';
@@ -39,8 +42,6 @@ import { FindUsersQueryDto } from '../../applications/dto/find-users-query.dto';
 import { UserResponseDto } from '../../applications/dto/user-response.dto';
 import { PasswordChangeResponseDto } from '../../applications/dto/password-change-response.dto';
 import { User } from '../../domains/entities/user.entity';
-import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
-import { ThrottlerGuard } from '@nestjs/throttler';
 import { AccountActivationService } from '../../applications/use-cases/account-activation.service';
 import {
   RequestActivationDto,

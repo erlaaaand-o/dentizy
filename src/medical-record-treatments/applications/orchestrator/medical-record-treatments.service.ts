@@ -1,5 +1,6 @@
 // backend/src/medical-record-treatments/applications/orchestrator/medical-record-treatments.service.ts
 import { Injectable } from '@nestjs/common';
+
 import { CreateMedicalRecordTreatmentUseCase } from '../use-cases/create-medical-record-treatment.use-case';
 import { UpdateMedicalRecordTreatmentUseCase } from '../use-cases/update-medical-record-treatment.use-case';
 import { DeleteMedicalRecordTreatmentUseCase } from '../use-cases/delete-medical-record-treatment.use-case';

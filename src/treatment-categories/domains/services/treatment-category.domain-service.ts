@@ -1,5 +1,6 @@
 // backend/src/treatment-categories/domains/services/treatment-category.domain-service.ts
 import { Injectable } from '@nestjs/common';
+
 import { TreatmentCategoryRepository } from '../../infrastructures/persistence/repositories/treatment-category.repository';
 
 @Injectable()

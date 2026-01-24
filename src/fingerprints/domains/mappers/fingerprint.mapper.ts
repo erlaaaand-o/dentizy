@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
+
 import { Fingerprint } from '../entities/fingerprint.entity';
 import { FingerprintResponseDto } from '../../application/dto/fingerprint-response.dto';
 

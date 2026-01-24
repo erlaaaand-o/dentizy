@@ -1,5 +1,6 @@
 // backend/src/treatments/domains/services/treatment-validation.service.ts
 import { Injectable } from '@nestjs/common';
+
 import { TreatmentCode } from '../value-objects/treatment-code.vo';
 import { TreatmentPrice } from '../value-objects/treatment-price.vo';
 

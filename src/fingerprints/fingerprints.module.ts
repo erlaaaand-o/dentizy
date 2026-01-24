@@ -5,8 +5,9 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
 // Entities
-import { Fingerprint } from './domains/entities/fingerprint.entity';
 import { Patient } from '../patients/domains/entities/patient.entity';
+
+import { Fingerprint } from './domains/entities/fingerprint.entity';
 
 // Controllers
 import { FingerprintsController } from './interface/http/fingerprints.controller';

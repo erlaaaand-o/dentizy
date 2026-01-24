@@ -1,4 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
+
 import { CreateFingerprintDto } from '../../application/dto/create-fingerprint.dto';
 import { VerifyFingerprintDto } from '../../application/dto/verify-fingerprint.dto';
 

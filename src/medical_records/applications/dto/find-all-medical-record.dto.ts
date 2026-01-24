@@ -1,6 +1,7 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer'; // Penting untuk konversi string query ke tipe asli
 import { IsOptional, IsInt, IsEnum, IsString, IsDate } from 'class-validator';
+
 import { AppointmentStatus } from '../../../appointments/domains/entities/appointment.entity';
 
 export enum SortOrder {

@@ -1,6 +1,7 @@
 // backend/src/payments/applications/listeners/payment-completed.listener.ts
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
+
 import { PaymentCompletedEvent } from '../events/payment-completed.event';
 
 @Injectable()

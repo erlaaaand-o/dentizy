@@ -2,6 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOptionsWhere, Between } from 'typeorm';
+
 import { MedicalRecord } from '../../../domains/entities/medical-record.entity';
 
 export interface DoctorPerformance {

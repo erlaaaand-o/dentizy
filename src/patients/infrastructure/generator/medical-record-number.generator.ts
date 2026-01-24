@@ -4,6 +4,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { DataSource } from 'typeorm';
+
 import { Patient } from '../../domains/entities/patient.entity';
 
 interface DatabaseError {

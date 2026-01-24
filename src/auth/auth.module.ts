@@ -6,6 +6,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
 // Controllers
+import { UsersModule } from '../users/users.module';
+
 import { AuthController } from './interface/http/auth.controller';
 
 // Strategies
@@ -34,7 +36,6 @@ import { RolesGuard } from './interface/guards/roles.guard';
 import { JwtAuthGuard } from './interface/guards/jwt-auth.guard';
 
 // External Modules
-import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [

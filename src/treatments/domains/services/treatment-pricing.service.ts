@@ -1,5 +1,6 @@
 // backend/src/treatments/domains/services/treatment-pricing.service.ts
 import { Injectable } from '@nestjs/common';
+
 import { Treatment } from '../entities/treatments.entity';
 
 export interface PricingRule {

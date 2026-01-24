@@ -1,6 +1,7 @@
 import { Injectable, BadRequestException, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { Patient } from '../../domains/entities/patient.entity';
 import { SearchPatientDto } from '../dto/search-patient.dto';
 import { PatientQueryBuilder } from '../../infrastructure/persistence/query/patient-query.builder';

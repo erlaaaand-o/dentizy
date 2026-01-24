@@ -1,5 +1,6 @@
 // backend/src/medical-record-treatments/applications/mappers/medical-record-treatment.mapper.ts
 import { Injectable } from '@nestjs/common';
+
 import { MedicalRecordTreatment } from '../../domains/entities/medical-record-treatments.entity';
 import { MedicalRecordTreatmentResponseDto } from '../../applications/dto/medical-record-treatment-response.dto';
 import { CreateMedicalRecordTreatmentDto } from '../../applications/dto/create-medical-record-treatment.dto';

@@ -7,6 +7,7 @@ import {
   IsOptional,
   MaxLength,
 } from 'class-validator';
+
 import {
   FingerPosition,
   FingerprintQuality,

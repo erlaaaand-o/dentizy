@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+
 import { CreateAppointmentDto } from '../dto/create-appointment.dto';
 import { Appointment } from '../../domains/entities/appointment.entity';
 import { AppointmentsRepository } from '../../infrastructures/persistence/repositories/appointments.repository';

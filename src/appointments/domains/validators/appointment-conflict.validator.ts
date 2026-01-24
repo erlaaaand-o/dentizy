@@ -1,5 +1,6 @@
 import { Injectable, ConflictException, Logger } from '@nestjs/common';
 import { Brackets, QueryRunner } from 'typeorm';
+
 import { Appointment, AppointmentStatus } from '../entities/appointment.entity';
 
 /**

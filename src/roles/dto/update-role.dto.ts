@@ -1,4 +1,5 @@
 import { IsOptional, IsString, IsEnum } from 'class-validator';
+
 import { UserRole } from '../entities/role.entity';
 
 export class UpdateRoleDto {

@@ -1,10 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Fingerprint } from '../../domains/entities/fingerprint.entity';
 import type { Cache } from 'cache-manager';
 import { Inject } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
+
+import { Fingerprint } from '../../domains/entities/fingerprint.entity';
 
 @Injectable()
 export class FingerprintCacheService {

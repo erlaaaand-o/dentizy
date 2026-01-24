@@ -1,6 +1,7 @@
 // backend/src/treatments/applications/listeners/treatment-status-changed.listener.ts
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
+
 import { TreatmentActivatedEvent } from '../../infrastructures/events/treatment-activated.event';
 import { TreatmentDeactivatedEvent } from '../../infrastructures/events/treatment-deactivated.event';
 

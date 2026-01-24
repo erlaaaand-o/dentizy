@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { Patient } from '../../domains/entities/patient.entity';
 import { PatientResponseDto } from '../dto/patient-response.dto';
 import { SearchPatientDto } from '../dto/search-patient.dto';

@@ -5,6 +5,7 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+
 import { MedicalRecordTreatmentRepository } from '../../infrastructures/persistence/repositories/medical-record-treatment.repository';
 import { TreatmentRepository } from '../../../treatments/infrastructures/persistence/repositories/treatment.repository';
 import { MedicalRecordTreatmentCalculatorService } from '../../domains/services/medical-record-treatment-calculator.service';

@@ -8,6 +8,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+
 import { Patient } from '../../domains/entities/patient.entity';
 import { UpdatePatientDto } from '../dto/update-patient.dto';
 import { PatientResponseDto } from '../dto/patient-response.dto';

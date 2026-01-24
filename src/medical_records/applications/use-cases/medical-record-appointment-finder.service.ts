@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { MedicalRecord } from '../../domains/entities/medical-record.entity';
 import { User } from '../../../users/domains/entities/user.entity';
 import { MedicalRecordAuthorizationService } from '../../domains/services/medical-record-authorization.service';

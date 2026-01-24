@@ -1,6 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { VerifyFingerprintDto } from '../../application/dto/verify-fingerprint.dto';
 import { Fingerprint } from '../entities/fingerprint.entity';
 import { Patient } from '../../../patients/domains/entities/patient.entity';

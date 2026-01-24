@@ -1,6 +1,7 @@
 // backend/src/treatments/infrastructures/persistence/query-handlers/get-treatment.handler.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+
 import { GetTreatmentQuery } from '../query/get-treatment.query';
 import { TreatmentRepository } from '../repositories/treatment.repository';
 import { TreatmentMapper } from '../../../domains/mappers/treatment.mapper';

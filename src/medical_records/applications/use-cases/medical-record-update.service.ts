@@ -1,5 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { DataSource, EntityManager } from 'typeorm';
+
 import { MedicalRecord } from '../../domains/entities/medical-record.entity';
 import {
   Appointment,

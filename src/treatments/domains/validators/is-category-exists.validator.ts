@@ -7,6 +7,7 @@ import {
   ValidationOptions,
   registerDecorator,
 } from 'class-validator';
+
 import { TreatmentCategoryRepository } from '../../../treatment-categories/infrastructures/persistence/repositories/treatment-category.repository';
 
 @ValidatorConstraint({ name: 'IsCategoryExists', async: true })

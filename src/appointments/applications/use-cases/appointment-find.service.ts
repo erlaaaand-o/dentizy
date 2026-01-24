@@ -1,4 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
+
 import { Appointment } from '../../domains/entities/appointment.entity';
 import { User } from '../../../users/domains/entities/user.entity';
 import { AppointmentsRepository } from '../../infrastructures/persistence/repositories/appointments.repository';

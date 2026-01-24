@@ -1,6 +1,7 @@
 // backend/src/treatments/infrastructures/persistence/query-handlers/get-treatment-by-code.handler.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+
 import { GetTreatmentByCodeQuery } from '../query/get-treatment-by-code.query';
 import { TreatmentRepository } from '../repositories/treatment.repository';
 import { TreatmentMapper } from '../../../domains/mappers/treatment.mapper';

@@ -2,14 +2,13 @@ import {
   IsDateString,
   IsEnum,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
   IsString,
   Matches,
   MaxLength,
-  ValidateIf,
 } from 'class-validator';
 import { Transform } from 'class-transformer';
+
 import { AppointmentStatus } from '../../domains/entities/appointment.entity';
 
 export class CreateAppointmentDto {

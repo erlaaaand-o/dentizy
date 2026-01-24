@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+
 import { IFingerprintDevice } from './fingerprint-device.interface';
 import { ZKTecoAdapter } from './adapters/zkteco-adapter';
 import { MorphoAdapter } from './adapters/morpho-adapter';

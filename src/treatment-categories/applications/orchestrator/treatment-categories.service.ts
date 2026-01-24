@@ -1,5 +1,6 @@
 // backend/src/treatment-categories/applications/orchestrator/treatment-categories.service.ts
 import { Injectable } from '@nestjs/common';
+
 import { CreateTreatmentCategoryDto } from '../dto/create-treatment-category.dto';
 import { UpdateTreatmentCategoryDto } from '../dto/update-treatment-category.dto';
 import { QueryTreatmentCategoryDto } from '../dto/query-treatment-category.dto';

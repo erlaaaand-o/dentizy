@@ -2,11 +2,17 @@
 import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { APP_FILTER } from '@nestjs/core';
+
 import { AuthModule } from '../auth/auth.module';
 
 // Entities
-import { User } from './domains/entities/user.entity';
 import { Role } from '../roles/entities/role.entity';
+import { PasswordHasherService } from '../auth/infrastructures/security/password-hasher.service';
+import { TimingDefenseService } from '../auth/infrastructures/security/timing-defense.service';
+import { NotificationsModule } from '../notifications/notifications.module';
+
+import { User } from './domains/entities/user.entity';
 
 // Controllers
 import { UsersController } from './interface/http/users.controller';
@@ -32,15 +38,12 @@ import { PasswordPolicyService } from './domains/services/password-policy.servic
 import { UserRepository } from './infrastructures/repositories/user.repository';
 
 // Import from Auth module
-import { PasswordHasherService } from '../auth/infrastructures/security/password-hasher.service';
-import { TimingDefenseService } from '../auth/infrastructures/security/timing-defense.service';
 
-import { APP_FILTER } from '@nestjs/core';
 import { UserExceptionFilter } from './interface/filters/user-exception.filter';
 import { ValidationExceptionFilter } from './interface/filters/validation-exception.filter';
 
 // import notification module
-import { NotificationsModule } from '../notifications/notifications.module';
+
 import { UserCreatedListener } from './infrastructures/listeners/user-created.listener';
 import { PasswordChangedListener } from './infrastructures/listeners/password-changed.listener';
 

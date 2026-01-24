@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SelectQueryBuilder } from 'typeorm';
+
 import {
   Appointment,
   AppointmentStatus,

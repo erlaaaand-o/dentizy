@@ -1,5 +1,6 @@
 // backend/src/treatment-categories/applications/use-cases/find-treatment-categories.usecase.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
+
 import { TreatmentCategoryRepository } from '../../infrastructures/persistence/repositories/treatment-category.repository';
 import { QueryTreatmentCategoryDto } from '../dto/query-treatment-category.dto';
 import { TreatmentCategoryMapper } from '../../domains/mappers/treatment-category.mapper';

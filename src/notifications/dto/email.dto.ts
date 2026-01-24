@@ -6,9 +6,7 @@ import {
   IsString,
   IsNumber,
   IsOptional,
-  IsEnum,
 } from 'class-validator';
-import { EmailType } from '../types/email.types';
 
 export class SendEmailDto {
   @IsEmail()

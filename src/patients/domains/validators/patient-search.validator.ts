@@ -1,4 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
+
 import { SearchPatientDto } from '../../application/dto/search-patient.dto';
 
 @Injectable()

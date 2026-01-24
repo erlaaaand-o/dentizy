@@ -1,5 +1,6 @@
 import { Expose, Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+
 import { Gender } from '../../domains/entities/patient.entity';
 
 export class PatientResponseDto {

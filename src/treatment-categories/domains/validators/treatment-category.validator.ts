@@ -4,6 +4,7 @@ import {
   BadRequestException,
   ConflictException,
 } from '@nestjs/common';
+
 import { TreatmentCategoryRepository } from '../../infrastructures/persistence/repositories/treatment-category.repository';
 import { CreateTreatmentCategoryDto } from '../../applications/dto/create-treatment-category.dto';
 import { UpdateTreatmentCategoryDto } from '../../applications/dto/update-treatment-category.dto';

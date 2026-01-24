@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SeederService } from './seeder.service';
+import { MedicalRecord } from 'src/medical_records/domains/entities/medical-record.entity';
+
 import { Role } from '../roles/entities/role.entity';
 import { User } from '../users/domains/entities/user.entity';
 import { Patient } from '../patients/domains/entities/patient.entity';
 import { Appointment } from '../appointments/domains/entities/appointment.entity';
-import { MedicalRecord } from 'src/medical_records/domains/entities/medical-record.entity';
+
+import { SeederService } from './seeder.service';
 
 @Module({
   imports: [

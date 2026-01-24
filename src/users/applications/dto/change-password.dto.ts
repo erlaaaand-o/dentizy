@@ -1,10 +1,11 @@
 import { IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+
 import {
   IsStrongPassword,
   PASSWORD_MIN_LENGTH,
 } from '../../../shared/validators/password.validator';
 import { Match } from '../../../shared/validators/match.validator';
-import { ApiProperty } from '@nestjs/swagger';
 
 export class ChangePasswordDto {
   @ApiProperty({

@@ -3,9 +3,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
 // Entities
-import { Appointment } from './domains/entities/appointment.entity';
 import { Patient } from '../patients/domains/entities/patient.entity';
 import { User } from '../users/domains/entities/user.entity';
+import { NotificationsModule } from '../notifications/notifications.module';
+import { PatientsModule } from '../patients/patients.module'; // IMPORT PATIENTS MODULE
+import { MedicalRecordsModule } from '../medical_records/medical_records.module';
+import { TreatmentsModule } from '../treatments/treatments.module';
+import { MedicalRecordTreatmentsModule } from '../medical-record-treatments/medical-record-treatments.module';
+import { PaymentsModule } from '../payments/payments.module';
+import { UsersModule } from '../users/users.module';
+
+import { Appointment } from './domains/entities/appointment.entity';
 
 // Interface Layer
 import { AppointmentsController } from './interface/http/appointments.controller';
@@ -38,13 +46,6 @@ import { TransactionManager } from './infrastructures/transactions/transaction.m
 import { AppointmentEventListener } from './infrastructures/listeners/appointment.event-listener';
 
 // External Modules
-import { NotificationsModule } from '../notifications/notifications.module';
-import { PatientsModule } from '../patients/patients.module'; // IMPORT PATIENTS MODULE
-import { MedicalRecordsModule } from '../medical_records/medical_records.module';
-import { TreatmentsModule } from '../treatments/treatments.module';
-import { MedicalRecordTreatmentsModule } from '../medical-record-treatments/medical-record-treatments.module';
-import { PaymentsModule } from '../payments/payments.module';
-import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [

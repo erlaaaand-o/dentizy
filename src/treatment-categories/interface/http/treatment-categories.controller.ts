@@ -20,10 +20,11 @@ import {
   ApiResponse,
   ApiBearerAuth,
   ApiParam,
-  ApiQuery,
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+
 import { TreatmentCategoriesService } from '../../applications/orchestrator/treatment-categories.service';
 import { CreateTreatmentCategoryDto } from '../../applications/dto/create-treatment-category.dto';
 import { UpdateTreatmentCategoryDto } from '../../applications/dto/update-treatment-category.dto';
@@ -32,7 +33,6 @@ import { TreatmentCategoryResponseDto } from '../../applications/dto/treatment-c
 import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { Roles } from '../../../auth/interface/decorators/roles.decorator';
 import { UserRole } from '../../../roles/entities/role.entity';
-import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Treatment Categories')
 @ApiBearerAuth('access-token')

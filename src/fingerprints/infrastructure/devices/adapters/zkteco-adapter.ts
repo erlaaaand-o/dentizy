@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+
 import { IFingerprintDevice } from '../fingerprint-device.interface';
 // import ZKLib from 'zklib'; // Install: npm install zklib
 

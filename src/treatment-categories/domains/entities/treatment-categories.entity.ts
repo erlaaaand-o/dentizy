@@ -9,6 +9,7 @@ import {
   OneToMany,
   Index,
 } from 'typeorm';
+
 import { Treatment } from '../../../treatments/domains/entities/treatments.entity';
 
 @Entity('treatment_categories')

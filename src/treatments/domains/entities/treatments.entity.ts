@@ -11,6 +11,7 @@ import {
   JoinColumn,
   Index,
 } from 'typeorm';
+
 import { TreatmentCategory } from '../../../treatment-categories/domains/entities/treatment-categories.entity';
 import { MedicalRecordTreatment } from '../../../medical-record-treatments/domains/entities/medical-record-treatments.entity';
 

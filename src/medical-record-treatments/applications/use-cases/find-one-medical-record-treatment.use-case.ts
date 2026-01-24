@@ -1,5 +1,6 @@
 // backend/src/medical-record-treatments/applications/use-cases/find-one-medical-record-treatment.use-case.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
+
 import { MedicalRecordTreatmentRepository } from '../../infrastructures/persistence/repositories/medical-record-treatment.repository';
 import { MedicalRecordTreatmentMapper } from '../../domains/mappers/medical-record-treatment.mapper';
 import { MedicalRecordTreatmentResponseDto } from '../dto/medical-record-treatment-response.dto';

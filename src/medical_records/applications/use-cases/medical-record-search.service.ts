@@ -2,6 +2,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
+
 import { MedicalRecord } from '../../domains/entities/medical-record.entity';
 import { User } from '../../../users/domains/entities/user.entity';
 import { SearchMedicalRecordDto } from '../dto/search-medical-record.dto';

@@ -3,6 +3,7 @@ import {
   BadRequestException,
   UnauthorizedException,
 } from '@nestjs/common';
+
 import { CreateMedicalRecordDto } from '../../applications/dto/create-medical-record.dto';
 import {
   Appointment,

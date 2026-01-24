@@ -24,6 +24,9 @@ import {
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
+
 import { AppointmentsService } from '../../applications/orchestrator/appointments.service';
 import { CreateAppointmentDto } from '../../applications/dto/create-appointment.dto';
 import { UpdateAppointmentDto } from '../../applications/dto/update-appointment.dto';
@@ -32,13 +35,11 @@ import {
   AppointmentResponseDto,
   PaginatedAppointmentResponseDto,
 } from '../../applications/dto/appointment-response.dto';
-import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { Roles } from '../../../auth/interface/decorators/roles.decorator';
 import { UserRole } from '../../../roles/entities/role.entity';
 import { GetUser } from '../../../auth/interface/decorators/get-user.decorator';
 import { User } from '../../../users/domains/entities/user.entity';
-import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 
 @ApiTags('Appointments')
 @ApiBearerAuth('access-token')

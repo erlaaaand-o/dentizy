@@ -5,6 +5,8 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
 // Entities
+import { TreatmentCategoriesModule } from '../treatment-categories/treatment-categories.module';
+
 import { Treatment } from './domains/entities/treatments.entity';
 
 // Controller
@@ -53,9 +55,7 @@ import { IsTreatmentCodeUniqueConstraint } from './domains/validators/is-treatme
 import { IsCategoryExistsConstraint } from './domains/validators/is-category-exists.validator';
 
 // External Modules
-import { TreatmentCategoriesModule } from '../treatment-categories/treatment-categories.module';
 import { GetTreatmentByCodeUseCase } from './applications/use-cases/get-treatment-by-code.use-case';
-
 import { TreatmentsIdGenerator } from './infrastructures/generator/treatments-id.generator'; // Sesuaikan path
 import { TreatmentsService } from './applications/orchestrator/treatments.service';
 

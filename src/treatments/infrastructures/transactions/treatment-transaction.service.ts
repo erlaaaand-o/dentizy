@@ -2,6 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository, QueryRunner } from 'typeorm';
+
 import { Treatment } from '../../domains/entities/treatments.entity';
 
 @Injectable()

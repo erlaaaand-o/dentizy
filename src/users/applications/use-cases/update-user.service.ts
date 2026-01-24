@@ -1,13 +1,13 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserRepository } from '../../infrastructures/repositories/user.repository';
 import { UserValidationService } from '../../domains/services/user-validation.service';
 import { UserMapper } from '../../domains/mappers/user.mapper';
 import { UserResponseDto } from '../dto/user-response.dto';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import {
   UserUpdatedEvent,
-  UserChanges,
   UserChangeValue,
 } from '../../infrastructures/events/user-updated.event';
 import { UsernameValidator } from '../../domains/validators/username.validator';

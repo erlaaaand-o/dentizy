@@ -24,6 +24,9 @@ import {
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
+import { ThrottlerGuard } from '@nestjs/throttler';
+
 import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { Roles } from '../../../auth/interface/decorators/roles.decorator';
 import { UserRole } from '../../../roles/entities/role.entity';
@@ -32,8 +35,6 @@ import { CreatePatientDto } from '../../application/dto/create-patient.dto';
 import { UpdatePatientDto } from '../../application/dto/update-patient.dto';
 import { SearchPatientDto } from '../../application/dto/search-patient.dto';
 import { PatientResponseDto } from '../../application/dto/patient-response.dto';
-import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
-import { ThrottlerGuard } from '@nestjs/throttler';
 
 @ApiTags('Patients')
 @ApiBearerAuth('access-token')

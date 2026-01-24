@@ -2,6 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
+
 import { MedicalRecordTreatment } from '../../../domains/entities/medical-record-treatments.entity';
 
 export interface TreatmentStatistics {

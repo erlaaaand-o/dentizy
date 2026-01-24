@@ -1,6 +1,7 @@
 // backend/src/medical-record-treatments/infrastructures/persistence/transaction/medical-record-treatment-transaction.service.ts
 import { Injectable } from '@nestjs/common';
 import { DataSource, QueryRunner } from 'typeorm';
+
 import { MedicalRecordTreatment } from '../../domains/entities/medical-record-treatments.entity';
 import { CreateMedicalRecordTreatmentDto } from '../../applications/dto/create-medical-record-treatment.dto';
 

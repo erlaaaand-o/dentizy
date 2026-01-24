@@ -7,6 +7,7 @@ import {
   ValidationOptions,
   registerDecorator,
 } from 'class-validator';
+
 import { TreatmentRepository } from '../../infrastructures/persistence/repositories/treatment.repository';
 
 interface ObjectWithId {

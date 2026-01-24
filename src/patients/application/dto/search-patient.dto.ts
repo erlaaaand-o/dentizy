@@ -11,6 +11,7 @@ import {
   MaxLength,
   IsBoolean,
 } from 'class-validator';
+
 import { Gender } from '../../domains/entities/patient.entity';
 
 export enum SortField {

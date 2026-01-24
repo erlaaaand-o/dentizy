@@ -1,6 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { AppointmentStatus } from '../../domains/entities/appointment.entity';
 import { IsString } from 'class-validator';
+
+import { AppointmentStatus } from '../../domains/entities/appointment.entity';
 
 // --- SUB-DTOs (Objek Kecil untuk Relasi) ---
 // Didefinisikan terpisah agar rapi dan bisa dipakai ulang

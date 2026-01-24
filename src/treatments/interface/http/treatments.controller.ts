@@ -24,16 +24,15 @@ import {
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+
 import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { Roles } from '../../../auth/interface/decorators/roles.decorator';
 import { UserRole } from '../../../roles/entities/role.entity';
-
 import { CreateTreatmentDto } from '../../applications/dto/create-treatment.dto';
 import { UpdateTreatmentDto } from '../../applications/dto/update-treatment.dto';
 import { QueryTreatmentDto } from '../../applications/dto/query-treatment.dto';
 import { TreatmentResponseDto } from '../../applications/dto/treatment-response.dto';
 import { PaginatedTreatmentResponseDto } from '../../applications/dto/paginated-treatment-response.dto';
-
 import { CreateTreatmentUseCase } from '../../applications/use-cases/create-treatment.use-case';
 import { UpdateTreatmentUseCase } from '../../applications/use-cases/update-treatment.use-case';
 import { DeleteTreatmentUseCase } from '../../applications/use-cases/delete-treatment.use-case';

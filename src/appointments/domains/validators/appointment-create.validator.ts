@@ -3,6 +3,7 @@ import {
   NotFoundException,
   ForbiddenException,
 } from '@nestjs/common';
+
 import { User } from '../../../users/domains/entities/user.entity';
 import { Patient } from '../../../patients/domains/entities/patient.entity';
 import { UserRole } from '../../../roles/entities/role.entity';

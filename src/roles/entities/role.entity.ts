@@ -1,5 +1,6 @@
-import { User } from '../../users/domains/entities/user.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
+
+import { User } from '../../users/domains/entities/user.entity';
 
 export enum UserRole {
   DOKTER = 'dokter',

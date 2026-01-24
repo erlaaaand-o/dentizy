@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
+
 import { PatientCreatedEvent } from '../events/patient-created.event';
 import { PatientUpdatedEvent } from '../events/patient-updated.event';
 import { PatientDeletedEvent } from '../events/patient-deleted.event';

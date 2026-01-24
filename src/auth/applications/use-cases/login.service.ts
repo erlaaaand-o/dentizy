@@ -1,5 +1,7 @@
 // application/use-cases/login.service.ts
 import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+
 import { UsersService } from '../../../users/applications/orchestrator/users.service';
 import { PasswordHasherService } from '../../infrastructures/security/password-hasher.service';
 import { TimingDefenseService } from '../../infrastructures/security/timing-defense.service';
@@ -8,7 +10,6 @@ import { SecurityGuardService } from '../../domains/services/security-guard.serv
 import { AuthMapper } from '../../domains/mappers/auth.mapper';
 import { LoginDto } from '../dto/login.dto';
 import { LoginResponseDto } from '../dto/login-response.dto';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { UserLoggedInEvent } from '../../infrastructures/events/user-logged-in.event';
 
 /**

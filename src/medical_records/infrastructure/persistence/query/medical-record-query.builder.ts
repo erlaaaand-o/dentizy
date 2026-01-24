@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { SelectQueryBuilder, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MedicalRecord } from './../../../domains/entities/medical-record.entity';
+
 import { User } from '../../../../users/domains/entities/user.entity';
 import { UserRole } from '../../../../roles/entities/role.entity';
 import { AppointmentStatus } from '../../../../appointments/domains/entities/appointment.entity';
+
+import { MedicalRecord } from './../../../domains/entities/medical-record.entity';
 
 /**
  * Query Builder for Medical Records

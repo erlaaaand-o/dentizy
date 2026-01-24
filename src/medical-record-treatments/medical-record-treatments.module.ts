@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
 // Controllers
+import { TreatmentsModule } from '../treatments/treatments.module';
+
 import { MedicalRecordTreatmentsController } from './interface/http/medical-record-treatments.controller';
 
 // Services & Orchestrators
@@ -41,7 +43,6 @@ import { MedicalRecordTreatmentQuery } from './infrastructures/persistence/query
 import { MedicalRecordTreatmentTransactionService } from './infrastructures/transactions/medical-record-treatment-transaction.service';
 
 // External Modules
-import { TreatmentsModule } from '../treatments/treatments.module';
 
 @Module({
   imports: [

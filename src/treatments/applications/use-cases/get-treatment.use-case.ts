@@ -1,5 +1,6 @@
 // backend/src/treatments/applications/use-cases/get-treatment.use-case.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
+
 import { TreatmentRepository } from '../../infrastructures/persistence/repositories/treatment.repository';
 import { TreatmentResponseDto } from '../dto/treatment-response.dto';
 import { TreatmentMapper } from '../../domains/mappers/treatment.mapper';

@@ -1,6 +1,7 @@
 // backend/src/users/infrastructures/listeners/user-created.listener.ts
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
+
 import { UserCreatedEvent } from '../events/user-created.event';
 
 /**

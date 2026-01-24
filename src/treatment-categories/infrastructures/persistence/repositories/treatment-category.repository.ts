@@ -2,6 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { TreatmentCategory } from '../../../domains/entities/treatment-categories.entity';
 import { CreateTreatmentCategoryDto } from '../../../applications/dto/create-treatment-category.dto';
 import { UpdateTreatmentCategoryDto } from '../../../applications/dto/update-treatment-category.dto';

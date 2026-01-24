@@ -1,6 +1,7 @@
 // domains/services/user-validation.service.ts
 import { Injectable, Logger } from '@nestjs/common';
 import { ConflictException, NotFoundException } from '@nestjs/common';
+
 import { UserRepository } from '../../infrastructures/repositories/user.repository';
 import { User } from '../entities/user.entity';
 import { Role } from '../../../roles/entities/role.entity';

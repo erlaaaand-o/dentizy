@@ -17,7 +17,6 @@ import {
 import {
   ApiTags,
   ApiOperation,
-  ApiResponse,
   ApiParam,
   ApiQuery,
   ApiBearerAuth,
@@ -29,13 +28,14 @@ import {
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from 'src/auth/interface/guards/roles.guard';
+
 import { PaymentsService } from '../../applications/orchestrator/payments.service';
 import { CreatePaymentDto } from '../../applications/dto/create-payment.dto';
 import { UpdatePaymentDto } from '../../applications/dto/update-payment.dto';
 import { QueryPaymentDto } from '../../applications/dto/query-payment.dto';
 import { PaymentResponseDto } from '../../applications/dto/payment-response.dto';
-import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from 'src/auth/interface/guards/roles.guard';
 import { Roles } from '../../../auth/interface/decorators/roles.decorator';
 import { UserRole } from '../../../roles/entities/role.entity';
 import { GetUser } from '../../../auth/interface/decorators/get-user.decorator';

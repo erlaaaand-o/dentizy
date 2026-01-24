@@ -1,5 +1,3 @@
-import { Appointment } from '../../../appointments/domains/entities/appointment.entity';
-import { MedicalRecord } from '../../../medical_records/domains/entities/medical-record.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -13,6 +11,9 @@ import {
   BeforeUpdate,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
+
+import { Appointment } from '../../../appointments/domains/entities/appointment.entity';
+import { MedicalRecord } from '../../../medical_records/domains/entities/medical-record.entity';
 
 export enum Gender {
   MALE = 'L',

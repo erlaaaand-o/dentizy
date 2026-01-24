@@ -1,7 +1,8 @@
 // domains/validators/medical-record.validator.ts
 import { Injectable, BadRequestException } from '@nestjs/common';
+import { isUUID } from 'class-validator';
+
 import { MedicalRecord } from '../entities/medical-record.entity';
-import { IsUUID, isUUID } from 'class-validator';
 
 @Injectable()
 export class MedicalRecordValidator {

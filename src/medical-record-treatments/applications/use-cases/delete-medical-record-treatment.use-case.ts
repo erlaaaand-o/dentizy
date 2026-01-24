@@ -1,6 +1,7 @@
 // backend/src/medical-record-treatments/applications/use-cases/delete-medical-record-treatment.use-case.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+
 import { MedicalRecordTreatmentRepository } from '../../infrastructures/persistence/repositories/medical-record-treatment.repository';
 import { MedicalRecordTreatmentDeletedEvent } from '../../infrastructures/events/medical-record-treatment-deleted.event';
 

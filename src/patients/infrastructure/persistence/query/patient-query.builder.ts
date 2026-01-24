@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SelectQueryBuilder, Brackets } from 'typeorm';
+
 import { Patient } from '../../../domains/entities/patient.entity';
 import {
   SearchPatientDto,

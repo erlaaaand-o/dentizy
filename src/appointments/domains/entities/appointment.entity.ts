@@ -1,6 +1,3 @@
-import { MedicalRecord } from '../../../medical_records/domains/entities/medical-record.entity';
-import { Patient } from '../../../patients/domains/entities/patient.entity';
-import { User } from '../../../users/domains/entities/user.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -12,6 +9,10 @@ import {
   OneToOne,
   Index,
 } from 'typeorm';
+
+import { MedicalRecord } from '../../../medical_records/domains/entities/medical-record.entity';
+import { Patient } from '../../../patients/domains/entities/patient.entity';
+import { User } from '../../../users/domains/entities/user.entity';
 
 export enum AppointmentStatus {
   DIJADWALKAN = 'dijadwalkan',

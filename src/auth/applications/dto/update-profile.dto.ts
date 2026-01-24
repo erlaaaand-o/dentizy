@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, MinLength, IsUrl } from 'class-validator';
+import { IsOptional, IsString, MinLength } from 'class-validator';
 
 /**
  * DTO untuk mengupdate profil pengguna yang sedang login.

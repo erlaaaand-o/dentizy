@@ -1,6 +1,7 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { Fingerprint } from '../../domains/entities/fingerprint.entity';
 import { FingerprintCacheService } from '../../infrastructure/cache/fingerprint-cache.service';
 

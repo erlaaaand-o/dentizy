@@ -8,6 +8,7 @@ import {
   JoinColumn,
   Index,
 } from 'typeorm';
+
 import { Patient } from '../../../patients/domains/entities/patient.entity';
 
 export enum FingerprintQuality {

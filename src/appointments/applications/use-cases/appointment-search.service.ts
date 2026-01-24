@@ -1,4 +1,5 @@
 import { Injectable, Logger, BadRequestException } from '@nestjs/common';
+
 import { User } from '../../../users/domains/entities/user.entity';
 import { Appointment } from '../../domains/entities/appointment.entity';
 import { FindAppointmentsQueryDto } from '../dto/find-appointments-query.dto';

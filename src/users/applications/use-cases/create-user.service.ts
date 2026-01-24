@@ -1,11 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UserRepository } from '../../infrastructures/repositories/user.repository';
 import { UserValidationService } from '../../domains/services/user-validation.service';
 import { PasswordHasherService } from '../../../auth/infrastructures/security/password-hasher.service';
 import { UserMapper } from '../../domains/mappers/user.mapper';
 import { UserResponseDto } from '../dto/user-response.dto';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { UserCreatedEvent } from '../../infrastructures/events/user-created.event';
 import { Role } from '../../../roles/entities/role.entity';
 

@@ -1,5 +1,6 @@
 // backend/src/treatments/applications/dto/paginated-treatment-response.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
+
 import { TreatmentResponseDto } from './treatment-response.dto';
 
 class PaginationMetaDto {

@@ -1,6 +1,7 @@
 import { Injectable, Inject, Logger } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import type { Cache } from 'cache-manager';
+
 import { PatientResponseDto } from '../../application/dto/patient-response.dto';
 import { SearchPatientDto } from '../../application/dto/search-patient.dto';
 

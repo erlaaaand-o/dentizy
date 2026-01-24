@@ -1,6 +1,7 @@
 // backend/src/treatment-categories/infrastructures/persistence/transactions/treatment-category-transaction.manager.ts
 import { Injectable } from '@nestjs/common';
 import { DataSource, QueryRunner } from 'typeorm';
+
 import { TreatmentCategory } from '../../domains/entities/treatment-categories.entity';
 
 @Injectable()

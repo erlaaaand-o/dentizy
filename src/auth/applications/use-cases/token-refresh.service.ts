@@ -1,11 +1,11 @@
 // application/use-cases/token-refresh.service.ts
 import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+
 import { UsersService } from '../../../users/applications/orchestrator/users.service';
 import { TokenService } from '../../domains/services/token.service';
 import { AuthMapper } from '../../domains/mappers/auth.mapper';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { TokenRefreshedEvent } from '../../infrastructures/events/token-refreshed.event';
-import { User } from '../../../users/domains/entities/user.entity';
 
 @Injectable()
 export class TokenRefreshService {

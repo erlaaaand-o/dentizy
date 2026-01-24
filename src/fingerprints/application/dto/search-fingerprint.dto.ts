@@ -7,6 +7,7 @@ import {
   IsDateString,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+
 import {
   FingerPosition,
   FingerprintQuality,

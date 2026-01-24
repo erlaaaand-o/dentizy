@@ -1,5 +1,6 @@
 // backend/src/auth/interface/decorators/get-user.decorator.ts
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+
 import { User } from '../../../users/domains/entities/user.entity';
 
 /**

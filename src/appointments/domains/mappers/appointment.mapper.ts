@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+
 import { Appointment } from '../entities/appointment.entity';
 import {
   AppointmentResponseDto,

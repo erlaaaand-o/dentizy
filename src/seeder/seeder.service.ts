@@ -1,14 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
+
 import { Role, UserRole } from '../roles/entities/role.entity';
 import { User } from '../users/domains/entities/user.entity';
 import { Patient, Gender } from '../patients/domains/entities/patient.entity';
-import {
-  Appointment,
-  AppointmentStatus,
-} from '../appointments/domains/entities/appointment.entity';
-import * as bcrypt from 'bcrypt';
+import { Appointment } from '../appointments/domains/entities/appointment.entity';
 import { MedicalRecord } from '../medical_records/domains/entities/medical-record.entity';
 
 @Injectable()

@@ -1,6 +1,7 @@
 // backend/src/treatments/applications/listeners/treatment-restored.listener.ts
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
+
 import { TreatmentRestoredEvent } from '../../infrastructures/events/treatment-restored.event';
 
 @Injectable()

@@ -9,6 +9,7 @@ import {
 } from 'class-validator';
 import { Type, Transform } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+
 import { UserRole } from '../../../roles/entities/role.entity';
 
 export class FindUsersQueryDto {

@@ -1,5 +1,6 @@
 // applications/orchestrator/medical_records.service.ts
 import { Injectable } from '@nestjs/common';
+
 import { CreateMedicalRecordDto } from '../dto/create-medical-record.dto';
 import { UpdateMedicalRecordDto } from '../dto/update-medical-record.dto';
 import { SearchMedicalRecordDto } from '../dto/search-medical-record.dto';

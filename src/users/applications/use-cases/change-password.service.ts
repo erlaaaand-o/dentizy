@@ -1,11 +1,12 @@
 // application/use-cases/change-password.service.ts
 import { Injectable, Logger, BadRequestException } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+
 import { UserRepository } from '../../infrastructures/repositories/user.repository';
 import { UserValidationService } from '../../domains/services/user-validation.service';
 import { PasswordHasherService } from '../../../auth/infrastructures/security/password-hasher.service';
 import { PasswordPolicyService } from '../../domains/services/password-policy.service';
 import { PasswordChangeResponseDto } from '../dto/password-change-response.dto';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { PasswordChangedEvent } from '../../infrastructures/events/password-changed.event';
 import { TimingDefenseService } from '../../../auth/infrastructures/security/timing-defense.service';
 

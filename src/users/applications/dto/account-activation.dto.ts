@@ -1,6 +1,7 @@
 // backend/src/users/applications/dto/account-activation.dto.ts
 import { IsNotEmpty, IsString, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+
 import {
   IsStrongPassword,
   PASSWORD_MIN_LENGTH,

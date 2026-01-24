@@ -1,4 +1,3 @@
-import { Role } from '../../../roles/entities/role.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -12,6 +11,8 @@ import {
   DeleteDateColumn,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
+
+import { Role } from '../../../roles/entities/role.entity';
 import { MedicalRecord } from '../../../medical_records/domains/entities/medical-record.entity';
 
 @Entity('users')

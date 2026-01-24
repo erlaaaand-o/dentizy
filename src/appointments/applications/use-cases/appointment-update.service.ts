@@ -1,5 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { QueryRunner } from 'typeorm';
+
 import { UpdateAppointmentDto } from '../dto/update-appointment.dto';
 import { Appointment } from '../../domains/entities/appointment.entity';
 import { AppointmentsRepository } from '../../infrastructures/persistence/repositories/appointments.repository';
@@ -9,7 +11,6 @@ import { AppointmentConflictValidator } from '../../domains/validators/appointme
 import { AppointmentDomainService } from '../../domains/services/appointment-domain.service';
 import { TransactionManager } from '../../infrastructures/transactions/transaction.manager';
 import { AppointmentUpdatedEvent } from '../../infrastructures/events';
-import { QueryRunner } from 'typeorm';
 
 /**
  * Use Case: Update Appointment

@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
+
 import { FingerprintEnrolledEvent } from '../events/fingerprint-enrolled.event';
 import { FingerprintVerifiedEvent } from '../events/fingerprint-verified.event';
 import { FingerprintFailedEvent } from '../events/fingerprint-failed.event';

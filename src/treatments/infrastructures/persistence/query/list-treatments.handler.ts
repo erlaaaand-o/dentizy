@@ -1,6 +1,7 @@
 // backend/src/treatments/infrastructures/persistence/query-handlers/list-treatments.handler.ts
 import { Injectable } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+
 import { ListTreatmentsQuery } from '../query/list-treatments.query';
 import { TreatmentRepository } from '../repositories/treatment.repository';
 import { TreatmentMapper } from '../../../domains/mappers/treatment.mapper';

@@ -1,7 +1,6 @@
 import {
   IsArray,
   IsNotEmpty,
-  IsNumber,
   IsString,
   MinLength,
   IsEmail,
@@ -9,6 +8,7 @@ import {
   IsUUID,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+
 import {
   IsStrongPassword,
   PASSWORD_MIN_LENGTH,

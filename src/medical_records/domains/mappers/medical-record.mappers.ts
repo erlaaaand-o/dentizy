@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+
 import { MedicalRecord } from '../entities/medical-record.entity';
 import { CreateMedicalRecordDto } from '../../applications/dto/create-medical-record.dto';
 import { UpdateMedicalRecordDto } from '../../applications/dto/update-medical-record.dto';

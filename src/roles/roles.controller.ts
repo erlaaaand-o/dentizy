@@ -7,17 +7,19 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
-import { RolesService } from './roles.service';
 import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from '../auth/interface/guards/roles.guard';
-import { Roles } from '../auth/interface/decorators/roles.decorator';
-import { UserRole } from './entities/role.entity';
 import {
   ApiBearerAuth,
   ApiForbiddenResponse,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+
+import { RolesGuard } from '../auth/interface/guards/roles.guard';
+import { Roles } from '../auth/interface/decorators/roles.decorator';
+
+import { RolesService } from './roles.service';
+import { UserRole } from './entities/role.entity';
 
 @ApiTags('Roles')
 @ApiBearerAuth('access-token')

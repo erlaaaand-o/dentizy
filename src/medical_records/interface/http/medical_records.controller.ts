@@ -25,19 +25,20 @@ import {
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
+import { ThrottlerGuard } from '@nestjs/throttler';
+
 import { MedicalRecordsService } from '../../applications/orchestrator/medical_records.service';
 import { CreateMedicalRecordDto } from '../../applications/dto/create-medical-record.dto';
 import { UpdateMedicalRecordDto } from '../../applications/dto/update-medical-record.dto';
 import { SearchMedicalRecordDto } from '../../applications/dto/search-medical-record.dto';
 import { MedicalRecordResponseDto } from '../../applications/dto/medical-record-response.dto';
-import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { Roles } from '../../../auth/interface/decorators/roles.decorator';
 import { UserRole } from '../../../roles/entities/role.entity';
 import { GetUser } from '../../../auth/interface/decorators/get-user.decorator';
 import { User } from '../../../users/domains/entities/user.entity';
-import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
-import { ThrottlerGuard } from '@nestjs/throttler';
 
 interface MessageResponse {
   message: string;

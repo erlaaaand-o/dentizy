@@ -7,6 +7,7 @@ import {
   Min,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+
 import { AppointmentStatus } from '../../domains/entities/appointment.entity';
 
 export class FindAppointmentsQueryDto {

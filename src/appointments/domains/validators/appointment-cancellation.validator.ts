@@ -3,6 +3,7 @@ import {
   ConflictException,
   ForbiddenException,
 } from '@nestjs/common';
+
 import { Appointment, AppointmentStatus } from '../entities/appointment.entity';
 import { User } from '../../../users/domains/entities/user.entity';
 import { UserRole } from '../../../roles/entities/role.entity';

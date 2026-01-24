@@ -1,11 +1,12 @@
 // backend/src/treatment-categories/applications/use-cases/create-treatment-category.usecase.ts
 import { Injectable, BadRequestException } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+
 import { TreatmentCategoryRepository } from '../../infrastructures/persistence/repositories/treatment-category.repository';
 import { CreateTreatmentCategoryDto } from '../dto/create-treatment-category.dto';
 import { TreatmentCategoryMapper } from '../../domains/mappers/treatment-category.mapper';
 import { TreatmentCategoryResponseDto } from '../dto/treatment-category-response.dto';
 import { TreatmentCategoryValidator } from '../../domains/validators/treatment-category.validator';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { TreatmentCategoryCreatedEvent } from '../../infrastructures/events/treatment-category-created.event';
 
 @Injectable()

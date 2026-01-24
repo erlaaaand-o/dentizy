@@ -1,15 +1,16 @@
+import { join } from 'path';
+
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { SeederService } from './seeder/seeder.service';
 import { ConfigService } from '@nestjs/config';
 import { DataSource } from 'typeorm';
-import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import helmet from 'helmet';
-import { writeFileSync } from 'fs';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { join } from 'path';
+
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { SeederService } from './seeder/seeder.service';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');

@@ -3,6 +3,7 @@ import {
   ForbiddenException,
   UnauthorizedException,
 } from '@nestjs/common';
+
 import { User } from '../../../users/domains/entities/user.entity';
 import { MedicalRecord } from '../entities/medical-record.entity';
 import { Appointment } from '../../../appointments/domains/entities/appointment.entity';

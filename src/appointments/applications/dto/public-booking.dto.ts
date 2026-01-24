@@ -5,12 +5,12 @@ import {
   IsDateString,
   IsEnum,
   Matches,
-  IsNumber,
   MaxLength,
   IsOptional,
 } from 'class-validator';
-import { Type } from 'class-transformer'; // <--- TAMBAHKAN INI
+// <--- TAMBAHKAN INI
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+
 import { Gender } from '../../../patients/domains/entities/patient.entity';
 
 export class PublicBookingDto {

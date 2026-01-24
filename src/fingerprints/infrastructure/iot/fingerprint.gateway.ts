@@ -9,6 +9,7 @@ import {
 import { Logger } from '@nestjs/common';
 import { Server, Socket } from 'socket.io';
 import { OnEvent } from '@nestjs/event-emitter';
+
 import { FingerprintEnrolledEvent } from '../events/fingerprint-enrolled.event';
 import { FingerprintVerifiedEvent } from '../events/fingerprint-verified.event';
 import { FingerprintFailedEvent } from '../events/fingerprint-failed.event';
