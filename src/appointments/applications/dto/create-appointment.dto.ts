@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import {
   IsDateString,
   IsEnum,
@@ -7,7 +8,6 @@ import {
   Matches,
   MaxLength,
 } from 'class-validator';
-import { Transform } from 'class-transformer';
 
 import { AppointmentStatus } from '../../domains/entities/appointment.entity';
 

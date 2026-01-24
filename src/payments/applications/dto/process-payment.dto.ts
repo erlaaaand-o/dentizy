@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsNumber,
   Min,
@@ -7,7 +8,6 @@ import {
   IsOptional,
   IsEnum,
 } from 'class-validator';
-import { Type } from 'class-transformer';
 
 import { MetodePembayaran } from '../../../payments/domains/entities/payments.entity';
 

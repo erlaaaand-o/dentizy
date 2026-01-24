@@ -5,14 +5,14 @@ import {
   BadRequestException,
   Logger,
 } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 
 import { Patient } from '../../domains/entities/patient.entity';
-import { PatientRepository } from '../../infrastructure/persistence/repositories/patients.repository';
 import { PatientCacheService } from '../../infrastructure/cache/patient-cache.service';
 import { PatientDeletedEvent } from '../../infrastructure/events/patient-deleted.event';
+import { PatientRepository } from '../../infrastructure/persistence/repositories/patients.repository';
 
 @Injectable()
 export class PatientDeletionService {

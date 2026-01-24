@@ -1,3 +1,4 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsString,
   IsNotEmpty,
@@ -9,7 +10,6 @@ import {
   IsOptional,
 } from 'class-validator';
 // <--- TAMBAHKAN INI
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 import { Gender } from '../../../patients/domains/entities/patient.entity';
 

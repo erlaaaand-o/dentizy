@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { SelectQueryBuilder } from 'typeorm';
 
+import { User } from '../../../../users/domains/entities/user.entity';
+import { FindAppointmentsQueryDto } from '../../../applications/dto/find-appointments-query.dto';
 import {
   Appointment,
   AppointmentStatus,
 } from '../../../domains/entities/appointment.entity';
-import { User } from '../../../../users/domains/entities/user.entity';
-import { FindAppointmentsQueryDto } from '../../../applications/dto/find-appointments-query.dto';
 import { AppointmentValidator } from '../../../domains/validators/appointment.validator';
 
 /**

@@ -3,19 +3,19 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Fingerprint } from '../../domains/entities/fingerprint.entity';
+import { FingerprintMapper } from '../../domains/mappers/fingerprint.mapper';
+import { FingerprintCacheService } from '../../infrastructure/cache/fingerprint-cache.service';
+import { FingerprintDeviceFactory } from '../../infrastructure/devices/fingerprint-device-factory';
 import { CreateFingerprintDto } from '../dto/create-fingerprint.dto';
-import { VerifyFingerprintDto } from '../dto/verify-fingerprint.dto';
 import {
   FingerprintResponseDto,
   VerifyFingerprintResponseDto,
 } from '../dto/fingerprint-response.dto';
-import { FingerprintEnrollmentService } from '../use-cases/fingerprint-enrollment.service';
-import { FingerprintVerificationService } from '../use-cases/fingerprint-verification.service';
+import { VerifyFingerprintDto } from '../dto/verify-fingerprint.dto';
 import { FingerprintDeletionService } from '../use-cases/fingerprint-deletion.service';
+import { FingerprintEnrollmentService } from '../use-cases/fingerprint-enrollment.service';
 import { FingerprintSyncService } from '../use-cases/fingerprint-sync.service';
-import { FingerprintMapper } from '../../domains/mappers/fingerprint.mapper';
-import { FingerprintCacheService } from '../../infrastructure/cache/fingerprint-cache.service';
-import { FingerprintDeviceFactory } from '../../infrastructure/devices/fingerprint-device-factory';
+import { FingerprintVerificationService } from '../use-cases/fingerprint-verification.service';
 
 @Injectable()
 export class FingerprintsService {

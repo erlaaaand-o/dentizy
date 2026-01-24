@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 
+import { EmailService } from '../../../notifications/services/email.service';
 import {
   AppointmentCreatedEvent,
   AppointmentCancelledEvent,
@@ -8,7 +9,6 @@ import {
   AppointmentUpdatedEvent,
   AppointmentDeletedEvent,
 } from '../events';
-import { EmailService } from '../../../notifications/services/email.service';
 
 /**
  * Event listener untuk appointment events

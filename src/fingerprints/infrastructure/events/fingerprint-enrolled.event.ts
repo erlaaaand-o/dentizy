@@ -1,5 +1,5 @@
-import { Fingerprint } from '../../domains/entities/fingerprint.entity';
 import { Patient } from '../../../patients/domains/entities/patient.entity';
+import { Fingerprint } from '../../domains/entities/fingerprint.entity';
 
 export class FingerprintEnrolledEvent {
   constructor(

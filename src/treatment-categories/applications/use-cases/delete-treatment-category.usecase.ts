@@ -2,9 +2,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { TreatmentCategoryRepository } from '../../infrastructures/persistence/repositories/treatment-category.repository';
 import { TreatmentCategoryValidator } from '../../domains/validators/treatment-category.validator';
 import { TreatmentCategoryDeletedEvent } from '../../infrastructures/events/treatment-category-deleted.event';
+import { TreatmentCategoryRepository } from '../../infrastructures/persistence/repositories/treatment-category.repository';
 
 @Injectable()
 export class DeleteTreatmentCategoryUseCase {

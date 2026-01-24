@@ -3,9 +3,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 
-import { TreatmentCategory } from '../../../domains/entities/treatment-categories.entity';
-import { QueryTreatmentCategoryDto } from '../../../applications/dto/query-treatment-category.dto';
 import { CategoryWithTreatmentCountDto } from '../../../../treatment-categories/applications/dto/category-with-treatment-count.dto';
+import { QueryTreatmentCategoryDto } from '../../../applications/dto/query-treatment-category.dto';
+import { TreatmentCategory } from '../../../domains/entities/treatment-categories.entity';
 
 @Injectable()
 export class TreatmentCategoryQueries {

@@ -7,9 +7,9 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { UserRepository } from '../../infrastructures/repositories/user.repository';
-import { EmailService } from '../../../notifications/services/email.service';
 import { EmailTemplateService } from '../../../notifications/services/email-template.service';
+import { EmailService } from '../../../notifications/services/email.service';
+import { UserRepository } from '../../infrastructures/repositories/user.repository';
 
 /**
  * Service untuk handle aktivasi akun user

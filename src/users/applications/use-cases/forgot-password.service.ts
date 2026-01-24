@@ -1,5 +1,6 @@
 // backend/src/users/applications/use-cases/forgot-password.service.ts
 
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import {
   Injectable,
   Logger,
@@ -7,13 +8,12 @@ import {
   BadRequestException,
   Inject,
 } from '@nestjs/common';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import type { Cache } from 'cache-manager'; // ✅ FIX: Gunakan 'import type' untuk menghindari error TS1272
 
-import { UserRepository } from '../../infrastructures/repositories/user.repository';
-import { EmailService } from '../../../notifications/services/email.service';
-import { EmailTemplateService } from '../../../notifications/services/email-template.service';
 import { PasswordHasherService } from '../../../auth/infrastructures/security/password-hasher.service';
+import { EmailTemplateService } from '../../../notifications/services/email-template.service';
+import { EmailService } from '../../../notifications/services/email.service';
+import { UserRepository } from '../../infrastructures/repositories/user.repository';
 
 interface OtpCacheData {
   otp: string;

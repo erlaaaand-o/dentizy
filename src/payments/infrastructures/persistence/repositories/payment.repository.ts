@@ -8,10 +8,10 @@ import {
   EntityManager,
 } from 'typeorm';
 
-import { Payment } from '../../../domains/entities/payments.entity';
 import { CreatePaymentDto } from '../../../applications/dto/create-payment.dto';
-import { UpdatePaymentDto } from '../../../applications/dto/update-payment.dto';
 import { QueryPaymentDto } from '../../../applications/dto/query-payment.dto';
+import { UpdatePaymentDto } from '../../../applications/dto/update-payment.dto';
+import { Payment } from '../../../domains/entities/payments.entity';
 import { InvoiceGeneratorService } from '../../../domains/services/invoice-generator.service';
 
 interface PaginatedResult {

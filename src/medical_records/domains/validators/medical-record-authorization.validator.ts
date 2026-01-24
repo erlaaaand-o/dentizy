@@ -4,10 +4,10 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import { User } from '../../../users/domains/entities/user.entity';
-import { MedicalRecord } from '../entities/medical-record.entity';
 import { Appointment } from '../../../appointments/domains/entities/appointment.entity';
 import { UserRole } from '../../../roles/entities/role.entity';
+import { User } from '../../../users/domains/entities/user.entity';
+import { MedicalRecord } from '../entities/medical-record.entity';
 
 /**
  * Authorization Validator for Medical Records

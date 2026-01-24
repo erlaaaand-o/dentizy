@@ -1,3 +1,4 @@
+import { Transform, Type } from 'class-transformer';
 import {
   IsEnum,
   IsOptional,
@@ -9,7 +10,6 @@ import {
   ValidateNested, // [BARU]
   IsArray, // [BARU]
 } from 'class-validator';
-import { Transform, Type } from 'class-transformer';
 
 import { AppointmentStatus } from '../../domains/entities/appointment.entity';
 

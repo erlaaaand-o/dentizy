@@ -2,9 +2,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 
-import { PasswordChangedEvent } from '../events/password-changed.event';
-import { EmailService } from '../../../notifications/services/email.service';
 import { EmailTemplateService } from '../../../notifications/services/email-template.service';
+import { EmailService } from '../../../notifications/services/email.service';
+import { PasswordChangedEvent } from '../events/password-changed.event';
 import { UserRepository } from '../repositories/user.repository';
 
 /**

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { SelectQueryBuilder, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { SelectQueryBuilder, Repository } from 'typeorm';
 
-import { User } from '../../../../users/domains/entities/user.entity';
-import { UserRole } from '../../../../roles/entities/role.entity';
 import { AppointmentStatus } from '../../../../appointments/domains/entities/appointment.entity';
+import { UserRole } from '../../../../roles/entities/role.entity';
+import { User } from '../../../../users/domains/entities/user.entity';
 
 import { MedicalRecord } from './../../../domains/entities/medical-record.entity';
 

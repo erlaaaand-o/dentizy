@@ -2,9 +2,9 @@
 import { Injectable } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
+import { TreatmentMapper } from '../../../domains/mappers/treatment.mapper';
 import { GetActiveTreatmentsQuery } from '../query/get-active-treatments.query';
 import { TreatmentRepository } from '../repositories/treatment.repository';
-import { TreatmentMapper } from '../../../domains/mappers/treatment.mapper';
 
 @Injectable()
 @QueryHandler(GetActiveTreatmentsQuery)

@@ -1,8 +1,8 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 
+import { AppointmentStatus } from '../../../appointments/domains/entities/appointment.entity';
 import { UpdateMedicalRecordDto } from '../../applications/dto/update-medical-record.dto';
 import { MedicalRecord } from '../entities/medical-record.entity';
-import { AppointmentStatus } from '../../../appointments/domains/entities/appointment.entity';
 
 /**
  * Validator for Medical Record Update

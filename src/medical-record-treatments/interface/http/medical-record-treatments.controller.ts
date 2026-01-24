@@ -14,6 +14,7 @@ import {
   ClassSerializerInterceptor,
   UseInterceptors,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiTags,
   ApiOperation,
@@ -24,16 +25,15 @@ import {
   ApiForbiddenResponse,
   ApiQuery,
 } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 
-import { MedicalRecordTreatmentsService } from '../../applications/orchestrator/medical-record-treatments.service';
-import { CreateMedicalRecordTreatmentDto } from '../../applications/dto/create-medical-record-treatment.dto';
-import { UpdateMedicalRecordTreatmentDto } from '../../applications/dto/update-medical-record-treatment.dto';
-import { QueryMedicalRecordTreatmentDto } from '../../applications/dto/query-medical-record-treatment.dto';
-import { MedicalRecordTreatmentResponseDto } from '../../applications/dto/medical-record-treatment-response.dto';
-import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { Roles } from '../../../auth/interface/decorators/roles.decorator';
+import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { UserRole } from '../../../roles/entities/role.entity';
+import { CreateMedicalRecordTreatmentDto } from '../../applications/dto/create-medical-record-treatment.dto';
+import { MedicalRecordTreatmentResponseDto } from '../../applications/dto/medical-record-treatment-response.dto';
+import { QueryMedicalRecordTreatmentDto } from '../../applications/dto/query-medical-record-treatment.dto';
+import { UpdateMedicalRecordTreatmentDto } from '../../applications/dto/update-medical-record-treatment.dto';
+import { MedicalRecordTreatmentsService } from '../../applications/orchestrator/medical-record-treatments.service';
 
 @ApiTags('Medical Record Treatments')
 @ApiBearerAuth('access-token')

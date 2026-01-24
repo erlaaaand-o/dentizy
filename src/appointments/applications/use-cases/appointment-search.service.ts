@@ -2,9 +2,9 @@ import { Injectable, Logger, BadRequestException } from '@nestjs/common';
 
 import { User } from '../../../users/domains/entities/user.entity';
 import { Appointment } from '../../domains/entities/appointment.entity';
-import { FindAppointmentsQueryDto } from '../dto/find-appointments-query.dto';
-import { AppointmentsRepository } from '../../infrastructures/persistence/repositories/appointments.repository';
 import { AppointmentQueryBuilder } from '../../infrastructures/persistence/query/appointment-query.builder';
+import { AppointmentsRepository } from '../../infrastructures/persistence/repositories/appointments.repository';
+import { FindAppointmentsQueryDto } from '../dto/find-appointments-query.dto';
 
 /**
  * Interface untuk search result

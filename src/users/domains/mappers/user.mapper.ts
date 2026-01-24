@@ -1,6 +1,6 @@
 // domains/mappers/user.mapper.ts
-import { User } from '../entities/user.entity';
 import { UserResponseDto } from '../../applications/dto/user-response.dto';
+import { User } from '../entities/user.entity';
 
 export class UserMapper {
   /**

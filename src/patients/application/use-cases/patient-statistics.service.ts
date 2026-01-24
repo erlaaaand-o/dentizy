@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { PatientRepository } from '../../infrastructure/persistence/repositories/patients.repository';
 import { PatientCacheService } from '../../infrastructure/cache/patient-cache.service';
+import { PatientRepository } from '../../infrastructure/persistence/repositories/patients.repository';
 
 @Injectable()
 export class PatientStatisticsService {

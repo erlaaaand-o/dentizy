@@ -2,13 +2,13 @@ import { Injectable, BadRequestException, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
+import { PaginatedPatients } from '../../application/dto/patient-response.dto';
 import { Patient } from '../../domains/entities/patient.entity';
-import { SearchPatientDto } from '../dto/search-patient.dto';
-import { PatientQueryBuilder } from '../../infrastructure/persistence/query/patient-query.builder';
+import { PatientMapper } from '../../domains/mappers/patient.mapper';
 import { PatientValidator } from '../../domains/validators/patient.validator';
 import { PatientCacheService } from '../../infrastructure/cache/patient-cache.service';
-import { PatientMapper } from '../../domains/mappers/patient.mapper';
-import { PaginatedPatients } from '../../application/dto/patient-response.dto';
+import { PatientQueryBuilder } from '../../infrastructure/persistence/query/patient-query.builder';
+import { SearchPatientDto } from '../dto/search-patient.dto';
 
 @Injectable()
 export class PatientSearchService {

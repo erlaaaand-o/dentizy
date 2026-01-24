@@ -1,17 +1,17 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 
 import { Patient } from '../../domains/entities/patient.entity';
+import { PatientMapper } from '../../domains/mappers/patient.mapper';
+import { PatientValidator } from '../../domains/validators/patient.validator';
+import { PatientCacheService } from '../../infrastructure/cache/patient-cache.service';
+import { PatientCreatedEvent } from '../../infrastructure/events/patient-created.event';
+import { MedicalRecordNumberGenerator } from '../../infrastructure/generator/medical-record-number.generator';
+import { TransactionManager } from '../../infrastructure/transactions/transaction.manager';
 import { CreatePatientDto } from '../dto/create-patient.dto';
 import { PatientResponseDto } from '../dto/patient-response.dto';
-import { MedicalRecordNumberGenerator } from '../../infrastructure/generator/medical-record-number.generator';
-import { PatientValidator } from '../../domains/validators/patient.validator';
-import { TransactionManager } from '../../infrastructure/transactions/transaction.manager';
-import { PatientCacheService } from '../../infrastructure/cache/patient-cache.service';
-import { PatientMapper } from '../../domains/mappers/patient.mapper';
-import { PatientCreatedEvent } from '../../infrastructure/events/patient-created.event';
 
 @Injectable()
 export class PatientCreationService {

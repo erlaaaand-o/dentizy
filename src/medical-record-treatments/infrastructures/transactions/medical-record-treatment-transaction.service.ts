@@ -2,8 +2,8 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, QueryRunner } from 'typeorm';
 
-import { MedicalRecordTreatment } from '../../domains/entities/medical-record-treatments.entity';
 import { CreateMedicalRecordTreatmentDto } from '../../applications/dto/create-medical-record-treatment.dto';
+import { MedicalRecordTreatment } from '../../domains/entities/medical-record-treatments.entity';
 
 export interface BulkCreateResult {
   success: boolean;

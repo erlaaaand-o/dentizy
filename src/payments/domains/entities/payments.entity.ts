@@ -13,8 +13,8 @@ import {
 } from 'typeorm';
 
 // Import Entity Relasi
-import { Patient } from '../../../patients/domains/entities/patient.entity';
 import { MedicalRecord } from '../../../medical_records/domains/entities/medical-record.entity';
+import { Patient } from '../../../patients/domains/entities/patient.entity';
 import { User } from '../../../users/domains/entities/user.entity';
 
 // Helper untuk mengubah string decimal dari DB menjadi number di JS

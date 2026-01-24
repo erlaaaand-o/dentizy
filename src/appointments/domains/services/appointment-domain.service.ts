@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { Appointment, AppointmentStatus } from '../entities/appointment.entity';
-import { User } from '../../../users/domains/entities/user.entity';
 import { Patient } from '../../../patients/domains/entities/patient.entity';
+import { User } from '../../../users/domains/entities/user.entity';
 import { CreateAppointmentDto } from '../../applications/dto/create-appointment.dto';
 import { UpdateAppointmentDto } from '../../applications/dto/update-appointment.dto';
+import { Appointment, AppointmentStatus } from '../entities/appointment.entity';
 
 /**
  * Domain service untuk business logic appointment

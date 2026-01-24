@@ -1,14 +1,14 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { CreateUserDto } from '../dto/create-user.dto';
-import { UserRepository } from '../../infrastructures/repositories/user.repository';
-import { UserValidationService } from '../../domains/services/user-validation.service';
 import { PasswordHasherService } from '../../../auth/infrastructures/security/password-hasher.service';
-import { UserMapper } from '../../domains/mappers/user.mapper';
-import { UserResponseDto } from '../dto/user-response.dto';
-import { UserCreatedEvent } from '../../infrastructures/events/user-created.event';
 import { Role } from '../../../roles/entities/role.entity';
+import { UserMapper } from '../../domains/mappers/user.mapper';
+import { UserValidationService } from '../../domains/services/user-validation.service';
+import { UserCreatedEvent } from '../../infrastructures/events/user-created.event';
+import { UserRepository } from '../../infrastructures/repositories/user.repository';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UserResponseDto } from '../dto/user-response.dto';
 
 // Interface payload tetap sama, karena Role[] adalah array object
 interface CreateUserPayload {

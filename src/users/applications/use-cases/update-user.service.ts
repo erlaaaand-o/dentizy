@@ -1,18 +1,18 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { UpdateUserDto } from '../dto/update-user.dto';
-import { UserRepository } from '../../infrastructures/repositories/user.repository';
-import { UserValidationService } from '../../domains/services/user-validation.service';
+import { PasswordHasherService } from '../../../auth/infrastructures/security/password-hasher.service';
 import { UserMapper } from '../../domains/mappers/user.mapper';
-import { UserResponseDto } from '../dto/user-response.dto';
+import { UserValidationService } from '../../domains/services/user-validation.service';
+import { UserDataValidator } from '../../domains/validators/user-data.validator';
+import { UsernameValidator } from '../../domains/validators/username.validator';
 import {
   UserUpdatedEvent,
   UserChangeValue,
 } from '../../infrastructures/events/user-updated.event';
-import { UsernameValidator } from '../../domains/validators/username.validator';
-import { UserDataValidator } from '../../domains/validators/user-data.validator';
-import { PasswordHasherService } from '../../../auth/infrastructures/security/password-hasher.service';
+import { UserRepository } from '../../infrastructures/repositories/user.repository';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { UserResponseDto } from '../dto/user-response.dto';
 
 @Injectable()
 export class UpdateUserService {

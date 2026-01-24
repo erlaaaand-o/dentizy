@@ -10,31 +10,31 @@ import {
   HttpStatus,
   Patch,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiTags,
   ApiOperation,
   ApiResponse,
   ApiBearerAuth,
 } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 import { ThrottlerGuard } from '@nestjs/throttler';
 import type { Request } from 'express';
 
-import { AuthService } from '../../applications/orchestrator/auth.service';
-import { LoginDto } from '../../applications/dto/login.dto';
-import { VerifyTokenDto } from '../../applications/dto/verify-token.dto';
-import { GetUser } from '../decorators/get-user.decorator';
-import { User } from '../../../users/domains/entities/user.entity';
-import { UsersService } from '../../../users/applications/orchestrator/users.service';
-import { UpdateProfileDto } from '../../applications/dto/update-profile.dto';
-import { UserResponseDto } from '../../../users/applications/dto/user-response.dto';
-import { TokenService } from '../../domains/services/token.service';
-import { Public } from '../decorators/public.decorator'; //
 import {
   ForgotPasswordRequestDto, // Perhatikan nama DTO-nya (sesuai file users dto)
   VerifyOTPDto,
   ResetPasswordWithTokenDto,
 } from '../../../users/applications/dto/forgot-password.dto';
+import { UserResponseDto } from '../../../users/applications/dto/user-response.dto';
+import { UsersService } from '../../../users/applications/orchestrator/users.service';
+import { User } from '../../../users/domains/entities/user.entity';
+import { LoginDto } from '../../applications/dto/login.dto';
+import { UpdateProfileDto } from '../../applications/dto/update-profile.dto';
+import { VerifyTokenDto } from '../../applications/dto/verify-token.dto';
+import { AuthService } from '../../applications/orchestrator/auth.service';
+import { TokenService } from '../../domains/services/token.service';
+import { GetUser } from '../decorators/get-user.decorator';
+import { Public } from '../decorators/public.decorator'; //
 
 /**
  * Interface untuk response update profile yang include token

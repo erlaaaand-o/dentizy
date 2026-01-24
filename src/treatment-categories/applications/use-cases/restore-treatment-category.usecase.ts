@@ -2,10 +2,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { TreatmentCategoryRepository } from '../../infrastructures/persistence/repositories/treatment-category.repository';
 import { TreatmentCategoryMapper } from '../../domains/mappers/treatment-category.mapper';
-import { TreatmentCategoryResponseDto } from '../dto/treatment-category-response.dto';
 import { TreatmentCategoryRestoredEvent } from '../../infrastructures/events/treatment-category-restored.event';
+import { TreatmentCategoryRepository } from '../../infrastructures/persistence/repositories/treatment-category.repository';
+import { TreatmentCategoryResponseDto } from '../dto/treatment-category-response.dto';
 
 @Injectable()
 export class RestoreTreatmentCategoryUseCase {

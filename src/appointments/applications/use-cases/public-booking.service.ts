@@ -1,15 +1,15 @@
 import { Injectable, ConflictException, Logger } from '@nestjs/common';
 
-import { TransactionManager } from '../../infrastructures/transactions/transaction.manager';
-import { PublicBookingDto } from '../dto/public-booking.dto';
-import { PatientRepository } from '../../../patients/infrastructure/persistence/repositories/patients.repository';
-import { PatientCreationService } from '../../../patients/application/use-cases/patient-creation.service';
-import { CreateAppointmentDto } from '../dto/create-appointment.dto';
 import { CreatePatientDto } from '../../../patients/application/dto/create-patient.dto';
+import { PatientCreationService } from '../../../patients/application/use-cases/patient-creation.service';
+import { PatientRepository } from '../../../patients/infrastructure/persistence/repositories/patients.repository';
 import {
   Appointment,
   AppointmentStatus,
 } from '../../domains/entities/appointment.entity';
+import { TransactionManager } from '../../infrastructures/transactions/transaction.manager';
+import { CreateAppointmentDto } from '../dto/create-appointment.dto';
+import { PublicBookingDto } from '../dto/public-booking.dto';
 
 import { AppointmentCreationService } from './appointment-creation.service';
 

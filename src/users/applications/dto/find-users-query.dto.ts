@@ -1,3 +1,5 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { Type, Transform } from 'class-transformer';
 import {
   IsEnum,
   IsOptional,
@@ -7,8 +9,6 @@ import {
   IsBoolean,
   Max,
 } from 'class-validator';
-import { Type, Transform } from 'class-transformer';
-import { ApiProperty } from '@nestjs/swagger';
 
 import { UserRole } from '../../../roles/entities/role.entity';
 

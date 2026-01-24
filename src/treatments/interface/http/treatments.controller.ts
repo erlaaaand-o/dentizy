@@ -14,6 +14,7 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiTags,
   ApiOperation,
@@ -23,23 +24,22 @@ import {
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 
-import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { Roles } from '../../../auth/interface/decorators/roles.decorator';
+import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { UserRole } from '../../../roles/entities/role.entity';
 import { CreateTreatmentDto } from '../../applications/dto/create-treatment.dto';
-import { UpdateTreatmentDto } from '../../applications/dto/update-treatment.dto';
+import { PaginatedTreatmentResponseDto } from '../../applications/dto/paginated-treatment-response.dto';
 import { QueryTreatmentDto } from '../../applications/dto/query-treatment.dto';
 import { TreatmentResponseDto } from '../../applications/dto/treatment-response.dto';
-import { PaginatedTreatmentResponseDto } from '../../applications/dto/paginated-treatment-response.dto';
+import { UpdateTreatmentDto } from '../../applications/dto/update-treatment.dto';
 import { CreateTreatmentUseCase } from '../../applications/use-cases/create-treatment.use-case';
-import { UpdateTreatmentUseCase } from '../../applications/use-cases/update-treatment.use-case';
 import { DeleteTreatmentUseCase } from '../../applications/use-cases/delete-treatment.use-case';
-import { RestoreTreatmentUseCase } from '../../applications/use-cases/restore-treatment.use-case';
+import { GetTreatmentByCodeUseCase } from '../../applications/use-cases/get-treatment-by-code.use-case';
 import { GetTreatmentUseCase } from '../../applications/use-cases/get-treatment.use-case';
 import { ListTreatmentsUseCase } from '../../applications/use-cases/list-treatments.use-case';
-import { GetTreatmentByCodeUseCase } from '../../applications/use-cases/get-treatment-by-code.use-case';
+import { RestoreTreatmentUseCase } from '../../applications/use-cases/restore-treatment.use-case';
+import { UpdateTreatmentUseCase } from '../../applications/use-cases/update-treatment.use-case';
 
 interface MessageResponse {
   message: string;

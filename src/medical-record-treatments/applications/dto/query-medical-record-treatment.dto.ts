@@ -1,7 +1,7 @@
 // backend/src/medical-record-treatments/interface/http/dto/query-medical-record-treatment.dto.ts
-import { IsOptional, IsInt, Min, IsString } from 'class-validator';
-import { Type } from 'class-transformer';
 import { ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { IsOptional, IsInt, Min, IsString } from 'class-validator';
 
 export class QueryMedicalRecordTreatmentDto {
   @ApiPropertyOptional({

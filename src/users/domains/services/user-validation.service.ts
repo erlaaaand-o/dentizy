@@ -2,9 +2,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConflictException, NotFoundException } from '@nestjs/common';
 
+import { Role } from '../../../roles/entities/role.entity';
 import { UserRepository } from '../../infrastructures/repositories/user.repository';
 import { User } from '../entities/user.entity';
-import { Role } from '../../../roles/entities/role.entity';
 
 interface CanDeleteResult {
   canDelete: boolean;

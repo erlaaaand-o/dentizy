@@ -1,4 +1,5 @@
 // backend/src/treatment-categories/applications/dto/create-treatment-category.dto.ts
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsString,
   IsOptional,
@@ -6,7 +7,6 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateTreatmentCategoryDto {
   @ApiProperty({

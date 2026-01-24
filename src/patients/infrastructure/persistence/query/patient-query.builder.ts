@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { SelectQueryBuilder, Brackets } from 'typeorm';
 
-import { Patient } from '../../../domains/entities/patient.entity';
 import {
   SearchPatientDto,
   SortField,
   SortOrder,
 } from '../../../application/dto/search-patient.dto';
+import { Patient } from '../../../domains/entities/patient.entity';
 
 @Injectable()
 export class PatientQueryBuilder {

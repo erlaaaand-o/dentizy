@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Fingerprint } from '../../domains/entities/fingerprint.entity';
-import { FingerprintDeviceFactory } from '../../infrastructure/devices/fingerprint-device-factory';
 import { FingerprintCacheService } from '../../infrastructure/cache/fingerprint-cache.service';
+import { FingerprintDeviceFactory } from '../../infrastructure/devices/fingerprint-device-factory';
 
 export interface SyncResult {
   success: boolean;

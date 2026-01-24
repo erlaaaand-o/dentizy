@@ -2,8 +2,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { MedicalRecordTreatmentRepository } from '../../infrastructures/persistence/repositories/medical-record-treatment.repository';
 import { MedicalRecordTreatmentDeletedEvent } from '../../infrastructures/events/medical-record-treatment-deleted.event';
+import { MedicalRecordTreatmentRepository } from '../../infrastructures/persistence/repositories/medical-record-treatment.repository';
 
 @Injectable()
 export class DeleteMedicalRecordTreatmentUseCase {

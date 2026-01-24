@@ -9,24 +9,24 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiTags,
   ApiOperation,
   ApiResponse,
   ApiBearerAuth,
 } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 
-import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { Roles } from '../../../auth/interface/decorators/roles.decorator';
+import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { UserRole } from '../../../roles/entities/role.entity';
-import { FingerprintsService } from '../../application/orchestrator/fingerprints.service';
 import { CreateFingerprintDto } from '../../application/dto/create-fingerprint.dto';
-import { VerifyFingerprintDto } from '../../application/dto/verify-fingerprint.dto';
 import {
   FingerprintResponseDto,
   VerifyFingerprintResponseDto,
 } from '../../application/dto/fingerprint-response.dto';
+import { VerifyFingerprintDto } from '../../application/dto/verify-fingerprint.dto';
+import { FingerprintsService } from '../../application/orchestrator/fingerprints.service';
 
 @ApiTags('Fingerprints')
 @ApiBearerAuth('access-token')

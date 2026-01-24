@@ -1,7 +1,7 @@
 // backend/src/treatment-categories/applications/dto/query-treatment-category.dto.ts
-import { IsOptional, IsString, IsBoolean, IsInt, Min } from 'class-validator';
-import { Type } from 'class-transformer';
 import { ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { IsOptional, IsString, IsBoolean, IsInt, Min } from 'class-validator';
 
 export class QueryTreatmentCategoryDto {
   @ApiPropertyOptional({

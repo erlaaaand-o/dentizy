@@ -14,6 +14,7 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiTags,
   ApiOperation,
@@ -28,19 +29,18 @@ import {
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'src/auth/interface/guards/roles.guard';
 
-import { PaymentsService } from '../../applications/orchestrator/payments.service';
-import { CreatePaymentDto } from '../../applications/dto/create-payment.dto';
-import { UpdatePaymentDto } from '../../applications/dto/update-payment.dto';
-import { QueryPaymentDto } from '../../applications/dto/query-payment.dto';
-import { PaymentResponseDto } from '../../applications/dto/payment-response.dto';
-import { Roles } from '../../../auth/interface/decorators/roles.decorator';
-import { UserRole } from '../../../roles/entities/role.entity';
 import { GetUser } from '../../../auth/interface/decorators/get-user.decorator';
-import { User } from '../../../users/domains/entities/user.entity';
+import { Roles } from '../../../auth/interface/decorators/roles.decorator';
 import { ProcessPaymentDto } from '../../../payments/applications/dto/process-payment.dto';
+import { UserRole } from '../../../roles/entities/role.entity';
+import { User } from '../../../users/domains/entities/user.entity';
+import { CreatePaymentDto } from '../../applications/dto/create-payment.dto';
+import { PaymentResponseDto } from '../../applications/dto/payment-response.dto';
+import { QueryPaymentDto } from '../../applications/dto/query-payment.dto';
+import { UpdatePaymentDto } from '../../applications/dto/update-payment.dto';
+import { PaymentsService } from '../../applications/orchestrator/payments.service';
 
 interface StandardResponse<T = unknown> {
   statusCode: number;

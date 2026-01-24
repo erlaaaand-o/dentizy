@@ -2,9 +2,9 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource, QueryRunner } from 'typeorm';
 
-import { Appointment } from '../../../domains/entities/appointment.entity';
 import { Patient } from '../../../../patients/domains/entities/patient.entity';
 import { User } from '../../../../users/domains/entities/user.entity';
+import { Appointment } from '../../../domains/entities/appointment.entity';
 
 /**
  * Repository wrapper untuk Appointment

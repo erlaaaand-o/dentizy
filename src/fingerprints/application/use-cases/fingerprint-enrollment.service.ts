@@ -4,17 +4,17 @@ import {
   ConflictException,
   NotFoundException,
 } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { Fingerprint } from '../../domains/entities/fingerprint.entity';
 import { Patient } from '../../../patients/domains/entities/patient.entity';
+import { Fingerprint } from '../../domains/entities/fingerprint.entity';
+import { FingerprintMapper } from '../../domains/mappers/fingerprint.mapper';
+import { FingerprintValidator } from '../../domains/validators/fingerprint.validator';
+import { FingerprintEnrolledEvent } from '../../infrastructure/events/fingerprint-enrolled.event';
 import { CreateFingerprintDto } from '../dto/create-fingerprint.dto';
 import { FingerprintResponseDto } from '../dto/fingerprint-response.dto';
-import { FingerprintValidator } from '../../domains/validators/fingerprint.validator';
-import { FingerprintMapper } from '../../domains/mappers/fingerprint.mapper';
-import { FingerprintEnrolledEvent } from '../../infrastructure/events/fingerprint-enrolled.event';
 
 @Injectable()
 export class FingerprintEnrollmentService {

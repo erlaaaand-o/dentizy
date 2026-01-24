@@ -1,11 +1,11 @@
 // backend/src/treatments/domains/mappers/treatment.mapper.ts
 import { Injectable } from '@nestjs/common';
 
-import { Treatment } from '../entities/treatments.entity';
-import { TreatmentResponseDto } from '../../applications/dto/treatment-response.dto';
 import { CreateTreatmentDto } from '../../applications/dto/create-treatment.dto';
-import { UpdateTreatmentDto } from '../../applications/dto/update-treatment.dto';
 import { TreatmentListResponseDto } from '../../applications/dto/treatment-list-response.dto';
+import { TreatmentResponseDto } from '../../applications/dto/treatment-response.dto';
+import { UpdateTreatmentDto } from '../../applications/dto/update-treatment.dto';
+import { Treatment } from '../entities/treatments.entity';
 
 @Injectable()
 export class TreatmentMapper {

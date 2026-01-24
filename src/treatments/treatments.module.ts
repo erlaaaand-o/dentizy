@@ -1,40 +1,38 @@
 // backend/src/treatments/treatments.module.ts
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { CqrsModule } from '@nestjs/cqrs';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Entities
 import { TreatmentCategoriesModule } from '../treatment-categories/treatment-categories.module';
 
-import { Treatment } from './domains/entities/treatments.entity';
+import { TreatmentsService } from './applications/orchestrator/treatments.service';
+import { CreateTreatmentUseCase } from './applications/use-cases/create-treatment.use-case';
 
 // Controller
-import { TreatmentsController } from './interface/http/treatments.controller';
 
 // Repositories
-import { TreatmentRepository } from './infrastructures/persistence/repositories/treatment.repository';
 
 // Transaction Services
-import { TreatmentTransactionService } from './infrastructures/transactions/treatment-transaction.service';
 
 // Use Cases
-import { CreateTreatmentUseCase } from './applications/use-cases/create-treatment.use-case';
-import { UpdateTreatmentUseCase } from './applications/use-cases/update-treatment.use-case';
 import { DeleteTreatmentUseCase } from './applications/use-cases/delete-treatment.use-case';
-import { RestoreTreatmentUseCase } from './applications/use-cases/restore-treatment.use-case';
+import { GetTreatmentByCodeUseCase } from './applications/use-cases/get-treatment-by-code.use-case';
 import { GetTreatmentUseCase } from './applications/use-cases/get-treatment.use-case';
+import { RestoreTreatmentUseCase } from './applications/use-cases/restore-treatment.use-case';
+import { UpdateTreatmentUseCase } from './applications/use-cases/update-treatment.use-case';
 import { ListTreatmentsUseCase } from './applications/use-cases/list-treatments.use-case';
 
 // Query Handlers
-import { GetTreatmentHandler } from './infrastructures/persistence/query/get-treatment.handler';
-import { GetTreatmentByCodeHandler } from './infrastructures/persistence/query/get-treatment-by-code.handler';
-import { ListTreatmentsHandler } from './infrastructures/persistence/query/list-treatments.handler';
+import { TreatmentMapper } from './domains/mappers/treatment.mapper';
 import { GetActiveTreatmentsHandler } from './infrastructures/persistence/query/get-active-treatments.handler';
+import { GetTreatmentByCodeHandler } from './infrastructures/persistence/query/get-treatment-by-code.handler';
+import { GetTreatmentHandler } from './infrastructures/persistence/query/get-treatment.handler';
+import { ListTreatmentsHandler } from './infrastructures/persistence/query/list-treatments.handler';
 import { SearchTreatmentsHandler } from './infrastructures/persistence/query/search-treatments.handler';
 
 // Mappers
-import { TreatmentMapper } from './domains/mappers/treatment.mapper';
 import { TreatmentCategoryMapper } from './domains/mappers/treatment-category.mapper';
 
 // Domain Services
@@ -55,9 +53,11 @@ import { IsTreatmentCodeUniqueConstraint } from './domains/validators/is-treatme
 import { IsCategoryExistsConstraint } from './domains/validators/is-category-exists.validator';
 
 // External Modules
-import { GetTreatmentByCodeUseCase } from './applications/use-cases/get-treatment-by-code.use-case';
+import { Treatment } from './domains/entities/treatments.entity';
 import { TreatmentsIdGenerator } from './infrastructures/generator/treatments-id.generator'; // Sesuaikan path
-import { TreatmentsService } from './applications/orchestrator/treatments.service';
+import { TreatmentRepository } from './infrastructures/persistence/repositories/treatment.repository';
+import { TreatmentTransactionService } from './infrastructures/transactions/treatment-transaction.service';
+import { TreatmentsController } from './interface/http/treatments.controller';
 
 const QueryHandlers = [
   GetTreatmentHandler,

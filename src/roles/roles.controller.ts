@@ -15,11 +15,11 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
-import { RolesGuard } from '../auth/interface/guards/roles.guard';
 import { Roles } from '../auth/interface/decorators/roles.decorator';
+import { RolesGuard } from '../auth/interface/guards/roles.guard';
 
-import { RolesService } from './roles.service';
 import { UserRole } from './entities/role.entity';
+import { RolesService } from './roles.service';
 
 @ApiTags('Roles')
 @ApiBearerAuth('access-token')

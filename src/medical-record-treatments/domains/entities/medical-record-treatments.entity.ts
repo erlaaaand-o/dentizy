@@ -11,8 +11,8 @@ import {
   Index,
 } from 'typeorm';
 
-import { Treatment } from '../../../treatments/domains/entities/treatments.entity';
 import { MedicalRecord } from '../../../medical_records/domains/entities/medical-record.entity'; // Sesuaikan path
+import { Treatment } from '../../../treatments/domains/entities/treatments.entity';
 
 @Entity('medical_record_treatments')
 export class MedicalRecordTreatment {

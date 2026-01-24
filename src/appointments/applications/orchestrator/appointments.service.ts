@@ -8,41 +8,41 @@ import {
 import { DataSource, DeepPartial, QueryRunner, In } from 'typeorm';
 
 // DTOs
-import { CreateAppointmentDto } from '../dto/create-appointment.dto';
-import { UpdateAppointmentDto } from '../dto/update-appointment.dto';
-import { FindAppointmentsQueryDto } from '../dto/find-appointments-query.dto';
-import {
-  AppointmentResponseDto,
-  PaginatedAppointmentResponseDto,
-} from '../dto/appointment-response.dto';
-
-// Entities
-import { User } from '../../../users/domains/entities/user.entity';
-import {
-  Appointment,
-  AppointmentStatus,
-} from '../../domains/entities/appointment.entity';
-import { MedicalRecord } from '../../../medical_records/domains/entities/medical-record.entity';
 import { MedicalRecordTreatment } from '../../../medical-record-treatments/domains/entities/medical-record-treatments.entity';
+import { MedicalRecord } from '../../../medical_records/domains/entities/medical-record.entity';
 import {
   Payment,
   MetodePembayaran,
   StatusPembayaran,
 } from '../../../payments/domains/entities/payments.entity';
+import { TreatmentsService } from '../../../treatments/applications/orchestrator/treatments.service';
 import { Treatment } from '../../../treatments/domains/entities/treatments.entity';
+import { User } from '../../../users/domains/entities/user.entity';
+import {
+  Appointment,
+  AppointmentStatus,
+} from '../../domains/entities/appointment.entity';
+import { AppointmentMapper } from '../../domains/mappers/appointment.mapper';
+import {
+  AppointmentResponseDto,
+  PaginatedAppointmentResponseDto,
+} from '../dto/appointment-response.dto';
+import { CreateAppointmentDto } from '../dto/create-appointment.dto';
+import { FindAppointmentsQueryDto } from '../dto/find-appointments-query.dto';
+import { UpdateAppointmentDto } from '../dto/update-appointment.dto';
+
+// Entities
 
 // Use Cases
-import { AppointmentCreationService } from '../use-cases/appointment-creation.service';
-import { AppointmentCompletionService } from '../use-cases/appointment-completion.service';
 import { AppointmentCancellationService } from '../use-cases/appointment-cancellation.service';
+import { AppointmentCompletionService } from '../use-cases/appointment-completion.service';
+import { AppointmentCreationService } from '../use-cases/appointment-creation.service';
+import { AppointmentDeletionService } from '../use-cases/appointment-deletion.service';
 import { AppointmentFindService } from '../use-cases/appointment-find.service';
 import { AppointmentSearchService } from '../use-cases/appointment-search.service';
 import { AppointmentUpdateService } from '../use-cases/appointment-update.service';
-import { AppointmentDeletionService } from '../use-cases/appointment-deletion.service';
-import { AppointmentMapper } from '../../domains/mappers/appointment.mapper';
 
 // Service External
-import { TreatmentsService } from '../../../treatments/applications/orchestrator/treatments.service';
 
 @Injectable()
 export class AppointmentsService {

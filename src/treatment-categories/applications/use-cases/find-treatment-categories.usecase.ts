@@ -1,11 +1,11 @@
 // backend/src/treatment-categories/applications/use-cases/find-treatment-categories.usecase.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 
+import { PaginatedResponseDto } from '../../applications/dto/paginated-response.dto';
+import { TreatmentCategoryMapper } from '../../domains/mappers/treatment-category.mapper';
 import { TreatmentCategoryRepository } from '../../infrastructures/persistence/repositories/treatment-category.repository';
 import { QueryTreatmentCategoryDto } from '../dto/query-treatment-category.dto';
-import { TreatmentCategoryMapper } from '../../domains/mappers/treatment-category.mapper';
 import { TreatmentCategoryResponseDto } from '../dto/treatment-category-response.dto';
-import { PaginatedResponseDto } from '../../applications/dto/paginated-response.dto';
 
 @Injectable()
 export class FindTreatmentCategoriesUseCase {

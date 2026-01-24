@@ -8,11 +8,11 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 
-import { FindUsersQueryDto } from '../dto/find-users-query.dto';
-import { UserRepository } from '../../infrastructures/repositories/user.repository';
-import { UserMapper } from '../../domains/mappers/user.mapper';
-import { UserResponseDto } from '../dto/user-response.dto';
 import { User } from '../../domains/entities/user.entity';
+import { UserMapper } from '../../domains/mappers/user.mapper';
+import { UserRepository } from '../../infrastructures/repositories/user.repository';
+import { FindUsersQueryDto } from '../dto/find-users-query.dto';
+import { UserResponseDto } from '../dto/user-response.dto';
 
 interface PaginationMeta {
   total: number;

@@ -6,9 +6,9 @@ import {
   Logger,
   HttpException,
 } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 
 interface UserData {

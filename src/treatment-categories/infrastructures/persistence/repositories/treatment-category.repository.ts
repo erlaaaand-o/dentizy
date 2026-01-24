@@ -3,12 +3,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { TreatmentCategory } from '../../../domains/entities/treatment-categories.entity';
-import { CreateTreatmentCategoryDto } from '../../../applications/dto/create-treatment-category.dto';
-import { UpdateTreatmentCategoryDto } from '../../../applications/dto/update-treatment-category.dto';
-import { QueryTreatmentCategoryDto } from '../../../applications/dto/query-treatment-category.dto';
-import { TreatmentCategoryQueries } from '../query/treatment-category.queries';
 import { CategoryWithTreatmentCountDto } from '../../../../treatment-categories/applications/dto/category-with-treatment-count.dto';
+import { CreateTreatmentCategoryDto } from '../../../applications/dto/create-treatment-category.dto';
+import { QueryTreatmentCategoryDto } from '../../../applications/dto/query-treatment-category.dto';
+import { UpdateTreatmentCategoryDto } from '../../../applications/dto/update-treatment-category.dto';
+import { TreatmentCategory } from '../../../domains/entities/treatment-categories.entity';
+import { TreatmentCategoryQueries } from '../query/treatment-category.queries';
 
 @Injectable()
 export class TreatmentCategoryRepository {

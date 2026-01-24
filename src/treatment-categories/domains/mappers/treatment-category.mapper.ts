@@ -1,9 +1,9 @@
 // backend/src/treatment-categories/applications/mappers/treatment-category.mapper.ts
 import { Injectable } from '@nestjs/common';
 
-import { TreatmentCategory } from '../../domains/entities/treatment-categories.entity';
-import { TreatmentCategoryResponseDto } from '../../applications/dto/treatment-category-response.dto';
 import { CreateTreatmentCategoryDto } from '../../applications/dto/create-treatment-category.dto';
+import { TreatmentCategoryResponseDto } from '../../applications/dto/treatment-category-response.dto';
+import { TreatmentCategory } from '../../domains/entities/treatment-categories.entity';
 
 @Injectable()
 export class TreatmentCategoryMapper {

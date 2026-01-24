@@ -3,11 +3,11 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 
-import { MedicalRecord } from '../../domains/entities/medical-record.entity';
-import { User } from '../../../users/domains/entities/user.entity';
-import { SearchMedicalRecordDto } from '../dto/search-medical-record.dto';
-import { MedicalRecordAuthorizationService } from '../../domains/services/medical-record-authorization.service';
 import { AppointmentStatus } from '../../../appointments/domains/entities/appointment.entity';
+import { User } from '../../../users/domains/entities/user.entity';
+import { MedicalRecord } from '../../domains/entities/medical-record.entity';
+import { MedicalRecordAuthorizationService } from '../../domains/services/medical-record-authorization.service';
+import { SearchMedicalRecordDto } from '../dto/search-medical-record.dto';
 
 @Injectable()
 export class MedicalRecordSearchService {

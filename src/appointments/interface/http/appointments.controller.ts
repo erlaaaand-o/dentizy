@@ -1,3 +1,4 @@
+import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 import {
   Controller,
   Get,
@@ -14,6 +15,7 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiTags,
   ApiOperation,
@@ -24,22 +26,20 @@ import {
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 
-import { AppointmentsService } from '../../applications/orchestrator/appointments.service';
-import { CreateAppointmentDto } from '../../applications/dto/create-appointment.dto';
-import { UpdateAppointmentDto } from '../../applications/dto/update-appointment.dto';
-import { FindAppointmentsQueryDto } from '../../applications/dto/find-appointments-query.dto';
+import { GetUser } from '../../../auth/interface/decorators/get-user.decorator';
+import { Roles } from '../../../auth/interface/decorators/roles.decorator';
+import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
+import { UserRole } from '../../../roles/entities/role.entity';
+import { User } from '../../../users/domains/entities/user.entity';
 import {
   AppointmentResponseDto,
   PaginatedAppointmentResponseDto,
 } from '../../applications/dto/appointment-response.dto';
-import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
-import { Roles } from '../../../auth/interface/decorators/roles.decorator';
-import { UserRole } from '../../../roles/entities/role.entity';
-import { GetUser } from '../../../auth/interface/decorators/get-user.decorator';
-import { User } from '../../../users/domains/entities/user.entity';
+import { CreateAppointmentDto } from '../../applications/dto/create-appointment.dto';
+import { FindAppointmentsQueryDto } from '../../applications/dto/find-appointments-query.dto';
+import { UpdateAppointmentDto } from '../../applications/dto/update-appointment.dto';
+import { AppointmentsService } from '../../applications/orchestrator/appointments.service';
 
 @ApiTags('Appointments')
 @ApiBearerAuth('access-token')

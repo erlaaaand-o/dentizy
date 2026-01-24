@@ -1,4 +1,5 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsOptional,
   IsNumber,
@@ -6,7 +7,6 @@ import {
   IsBoolean,
   IsDateString,
 } from 'class-validator';
-import { Type } from 'class-transformer';
 
 import {
   FingerPosition,

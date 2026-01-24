@@ -2,8 +2,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { PaymentRepository } from '../../infrastructures/persistence/repositories/payment.repository';
 import { PaymentDeletedEvent } from '../../infrastructures/events/payment-deleted.event';
+import { PaymentRepository } from '../../infrastructures/persistence/repositories/payment.repository';
 
 @Injectable()
 export class DeletePaymentUseCase {

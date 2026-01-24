@@ -1,5 +1,5 @@
-import { extname } from 'path';
 import { existsSync, mkdirSync } from 'fs';
+import { extname } from 'path';
 
 import {
   Controller,
@@ -11,9 +11,8 @@ import {
   FileTypeValidator,
   UseGuards,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
 import { AuthGuard } from '@nestjs/passport';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiTags,
   ApiOperation,
@@ -21,6 +20,7 @@ import {
   ApiBody,
   ApiConsumes,
 } from '@nestjs/swagger';
+import { diskStorage } from 'multer';
 
 @ApiTags('Uploads')
 @Controller('uploads')

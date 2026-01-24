@@ -1,22 +1,22 @@
 // applications/orchestrator/medical_records.service.ts
 import { Injectable } from '@nestjs/common';
 
-import { CreateMedicalRecordDto } from '../dto/create-medical-record.dto';
-import { UpdateMedicalRecordDto } from '../dto/update-medical-record.dto';
-import { SearchMedicalRecordDto } from '../dto/search-medical-record.dto';
-import { MedicalRecordResponseDto } from '../dto/medical-record-response.dto';
+import { MedicalRecordsRepository } from '../../../medical_records/infrastructure/persistence/repositories/medical-records.repository';
 import { User } from '../../../users/domains/entities/user.entity';
 import { MedicalRecordMapper } from '../../domains/mappers/medical-record.mappers';
+import { MedicalRecordQueryBuilder } from '../../infrastructure/persistence/query/medical-record-query.builder';
+import { DoctorPerformance } from '../../infrastructure/persistence/repositories/medical-records.repository';
+import { CreateMedicalRecordDto } from '../dto/create-medical-record.dto';
+import { FindAllMedicalRecordQueryDto } from '../dto/find-all-medical-record.dto';
+import { MedicalRecordResponseDto } from '../dto/medical-record-response.dto';
+import { SearchMedicalRecordDto } from '../dto/search-medical-record.dto';
+import { UpdateMedicalRecordDto } from '../dto/update-medical-record.dto';
+import { MedicalRecordAppointmentFinderService } from '../use-cases/medical-record-appointment-finder.service';
 import { MedicalRecordCreationService } from '../use-cases/medical-record-creation.service';
-import { MedicalRecordUpdateService } from '../use-cases/medical-record-update.service';
+import { MedicalRecordDeletionService } from '../use-cases/medical-record-deletion.service';
 import { MedicalRecordFindService } from '../use-cases/medical-record-find.service';
 import { MedicalRecordSearchService } from '../use-cases/medical-record-search.service';
-import { MedicalRecordAppointmentFinderService } from '../use-cases/medical-record-appointment-finder.service';
-import { MedicalRecordDeletionService } from '../use-cases/medical-record-deletion.service';
-import { FindAllMedicalRecordQueryDto } from '../dto/find-all-medical-record.dto';
-import { MedicalRecordQueryBuilder } from '../../infrastructure/persistence/query/medical-record-query.builder';
-import { MedicalRecordsRepository } from '../../../medical_records/infrastructure/persistence/repositories/medical-records.repository';
-import { DoctorPerformance } from '../../infrastructure/persistence/repositories/medical-records.repository';
+import { MedicalRecordUpdateService } from '../use-cases/medical-record-update.service';
 
 /**
  * Orchestrator Service

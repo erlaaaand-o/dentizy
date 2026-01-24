@@ -6,9 +6,9 @@ import {
 } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { TreatmentRepository } from '../../infrastructures/persistence/repositories/treatment.repository';
 import { TreatmentBusinessService } from '../../domains/services/treatment-business.service';
 import { TreatmentDeletedEvent } from '../../infrastructures/events/treatment-deleted.event';
+import { TreatmentRepository } from '../../infrastructures/persistence/repositories/treatment.repository';
 
 @Injectable()
 export class DeleteTreatmentUseCase {

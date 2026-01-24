@@ -1,6 +1,6 @@
 // backend/src/treatments/domains/entities/treatment.interface.ts
-import { TreatmentCategory } from '../../../treatment-categories/domains/entities/treatment-categories.entity';
 import { MedicalRecordTreatment } from '../../../medical-record-treatments/domains/entities/medical-record-treatments.entity';
+import { TreatmentCategory } from '../../../treatment-categories/domains/entities/treatment-categories.entity';
 
 export interface ITreatment {
   id: number;

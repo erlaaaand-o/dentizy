@@ -3,8 +3,8 @@ import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
 import { UsersService } from '../../../users/applications/orchestrator/users.service';
-import { TokenService } from '../../domains/services/token.service';
 import { AuthMapper } from '../../domains/mappers/auth.mapper';
+import { TokenService } from '../../domains/services/token.service';
 import { TokenRefreshedEvent } from '../../infrastructures/events/token-refreshed.event';
 
 @Injectable()

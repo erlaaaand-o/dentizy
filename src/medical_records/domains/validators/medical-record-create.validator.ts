@@ -4,12 +4,12 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import { CreateMedicalRecordDto } from '../../applications/dto/create-medical-record.dto';
 import {
   Appointment,
   AppointmentStatus,
 } from '../../../appointments/domains/entities/appointment.entity';
 import { User } from '../../../users/domains/entities/user.entity';
+import { CreateMedicalRecordDto } from '../../applications/dto/create-medical-record.dto';
 
 /**
  * Validator for Medical Record Creation

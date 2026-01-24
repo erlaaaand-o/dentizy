@@ -3,8 +3,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 
 import { MedicalRecordTreatmentCreatedEvent } from '../events/medical-record-treatment-created.event';
-import { MedicalRecordTreatmentUpdatedEvent } from '../events/medical-record-treatment-updated.event';
 import { MedicalRecordTreatmentDeletedEvent } from '../events/medical-record-treatment-deleted.event';
+import { MedicalRecordTreatmentUpdatedEvent } from '../events/medical-record-treatment-updated.event';
 
 @Injectable()
 export class MedicalRecordTreatmentListener {

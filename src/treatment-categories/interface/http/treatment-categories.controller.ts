@@ -14,6 +14,7 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiTags,
   ApiOperation,
@@ -23,16 +24,15 @@ import {
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 
-import { TreatmentCategoriesService } from '../../applications/orchestrator/treatment-categories.service';
+import { Roles } from '../../../auth/interface/decorators/roles.decorator';
+import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
+import { UserRole } from '../../../roles/entities/role.entity';
 import { CreateTreatmentCategoryDto } from '../../applications/dto/create-treatment-category.dto';
-import { UpdateTreatmentCategoryDto } from '../../applications/dto/update-treatment-category.dto';
 import { QueryTreatmentCategoryDto } from '../../applications/dto/query-treatment-category.dto';
 import { TreatmentCategoryResponseDto } from '../../applications/dto/treatment-category-response.dto';
-import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
-import { Roles } from '../../../auth/interface/decorators/roles.decorator';
-import { UserRole } from '../../../roles/entities/role.entity';
+import { UpdateTreatmentCategoryDto } from '../../applications/dto/update-treatment-category.dto';
+import { TreatmentCategoriesService } from '../../applications/orchestrator/treatment-categories.service';
 
 @ApiTags('Treatment Categories')
 @ApiBearerAuth('access-token')

@@ -2,12 +2,12 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { UserRepository } from '../../infrastructures/repositories/user.repository';
-import { UserValidationService } from '../../domains/services/user-validation.service';
 import { PasswordHasherService } from '../../../auth/infrastructures/security/password-hasher.service';
 import { PasswordPolicyService } from '../../domains/services/password-policy.service';
-import { PasswordChangeResponseDto } from '../dto/password-change-response.dto';
+import { UserValidationService } from '../../domains/services/user-validation.service';
 import { PasswordChangedEvent } from '../../infrastructures/events/password-changed.event';
+import { UserRepository } from '../../infrastructures/repositories/user.repository';
+import { PasswordChangeResponseDto } from '../dto/password-change-response.dto';
 
 @Injectable()
 export class ResetPasswordService {

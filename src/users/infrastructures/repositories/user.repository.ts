@@ -3,9 +3,9 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In, SelectQueryBuilder } from 'typeorm';
 
-import { User } from '../../domains/entities/user.entity';
 import { Role } from '../../../roles/entities/role.entity';
 import { UserRole } from '../../../roles/entities/role.entity';
+import { User } from '../../domains/entities/user.entity';
 
 interface CreateUserData {
   username: string;

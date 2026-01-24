@@ -15,10 +15,10 @@ import {
 } from 'typeorm';
 
 import { Appointment } from '../../../appointments/domains/entities/appointment.entity';
-import { User } from '../../../users/domains/entities/user.entity';
-import { Patient } from '../../../patients/domains/entities/patient.entity';
-// [1] Tambahkan Import ini
 import { MedicalRecordTreatment } from '../../../medical-record-treatments/domains/entities/medical-record-treatments.entity';
+import { Patient } from '../../../patients/domains/entities/patient.entity';
+import { User } from '../../../users/domains/entities/user.entity';
+// [1] Tambahkan Import ini
 
 @Entity('medical_records')
 @Index('idx_medical_records_appointment_id', ['appointment_id'])

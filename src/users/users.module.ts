@@ -1,51 +1,32 @@
-// users.module.ts
 import { Module, forwardRef } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { EventEmitterModule } from '@nestjs/event-emitter';
 import { APP_FILTER } from '@nestjs/core';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthModule } from '../auth/auth.module';
-
-// Entities
-import { Role } from '../roles/entities/role.entity';
 import { PasswordHasherService } from '../auth/infrastructures/security/password-hasher.service';
 import { TimingDefenseService } from '../auth/infrastructures/security/timing-defense.service';
 import { NotificationsModule } from '../notifications/notifications.module';
+import { Role } from '../roles/entities/role.entity';
 
-import { User } from './domains/entities/user.entity';
-
-// Controllers
-import { UsersController } from './interface/http/users.controller';
-
-// Orchestrator
 import { UsersService } from './applications/orchestrator/users.service';
-
-// Use Cases
+import { AccountActivationService } from './applications/use-cases/account-activation.service';
+import { ChangePasswordService } from './applications/use-cases/change-password.service';
 import { CreateUserService } from './applications/use-cases/create-user.service';
-import { UpdateUserService } from './applications/use-cases/update-user.service';
 import { DeleteUserService } from './applications/use-cases/delete-user.service';
 import { FindUsersService } from './applications/use-cases/find-users.service';
-import { ChangePasswordService } from './applications/use-cases/change-password.service';
-import { ResetPasswordService } from './applications/use-cases/reset-password.service';
 import { ForgotPasswordService } from './applications/use-cases/forgot-password.service';
-import { AccountActivationService } from './applications/use-cases/account-activation.service';
-
-// Domain Services
-import { UserValidationService } from './domains/services/user-validation.service';
+import { ResetPasswordService } from './applications/use-cases/reset-password.service';
+import { UpdateUserService } from './applications/use-cases/update-user.service';
+import { User } from './domains/entities/user.entity';
 import { PasswordPolicyService } from './domains/services/password-policy.service';
-
-// Infrastructure
+import { UserValidationService } from './domains/services/user-validation.service';
+import { PasswordChangedListener } from './infrastructures/listeners/password-changed.listener';
+import { UserCreatedListener } from './infrastructures/listeners/user-created.listener';
 import { UserRepository } from './infrastructures/repositories/user.repository';
-
-// Import from Auth module
-
 import { UserExceptionFilter } from './interface/filters/user-exception.filter';
 import { ValidationExceptionFilter } from './interface/filters/validation-exception.filter';
-
-// import notification module
-
-import { UserCreatedListener } from './infrastructures/listeners/user-created.listener';
-import { PasswordChangedListener } from './infrastructures/listeners/password-changed.listener';
+import { UsersController } from './interface/http/users.controller';
 
 @Module({
   imports: [

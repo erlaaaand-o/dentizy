@@ -2,9 +2,9 @@
 import { Injectable, Logger, BadRequestException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { UserRepository } from '../../infrastructures/repositories/user.repository';
 import { UserValidationService } from '../../domains/services/user-validation.service';
 import { UserDeletedEvent } from '../../infrastructures/events/user-deleted.event';
+import { UserRepository } from '../../infrastructures/repositories/user.repository';
 
 @Injectable()
 export class DeleteUserService {

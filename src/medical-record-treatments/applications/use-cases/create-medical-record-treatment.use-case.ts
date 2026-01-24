@@ -6,14 +6,14 @@ import {
 } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { MedicalRecordTreatmentRepository } from '../../infrastructures/persistence/repositories/medical-record-treatment.repository';
 import { TreatmentRepository } from '../../../treatments/infrastructures/persistence/repositories/treatment.repository';
+import { MedicalRecordTreatmentMapper } from '../../domains/mappers/medical-record-treatment.mapper';
 import { MedicalRecordTreatmentCalculatorService } from '../../domains/services/medical-record-treatment-calculator.service';
 import { MedicalRecordTreatmentValidatorService } from '../../domains/services/medical-record-treatment-validator.service';
-import { MedicalRecordTreatmentMapper } from '../../domains/mappers/medical-record-treatment.mapper';
+import { MedicalRecordTreatmentCreatedEvent } from '../../infrastructures/events/medical-record-treatment-created.event';
+import { MedicalRecordTreatmentRepository } from '../../infrastructures/persistence/repositories/medical-record-treatment.repository';
 import { CreateMedicalRecordTreatmentDto } from '../dto/create-medical-record-treatment.dto';
 import { MedicalRecordTreatmentResponseDto } from '../dto/medical-record-treatment-response.dto';
-import { MedicalRecordTreatmentCreatedEvent } from '../../infrastructures/events/medical-record-treatment-created.event';
 
 @Injectable()
 export class CreateMedicalRecordTreatmentUseCase {

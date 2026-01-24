@@ -1,4 +1,6 @@
 // backend/src/treatments/applications/dto/create-treatment.dto.ts
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsString,
   IsInt,
@@ -9,8 +11,6 @@ import {
   Min,
   IsUUID,
 } from 'class-validator';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
 
 export class CreateTreatmentDto {
   @ApiProperty({

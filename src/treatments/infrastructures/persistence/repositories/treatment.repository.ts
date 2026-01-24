@@ -3,9 +3,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOptionsWhere, In, Between } from 'typeorm';
 
-import { Treatment } from '../../../domains/entities/treatments.entity';
-import { UpdateTreatmentDto } from '../../../applications/dto/update-treatment.dto';
 import { QueryTreatmentDto } from '../../../applications/dto/query-treatment.dto';
+import { UpdateTreatmentDto } from '../../../applications/dto/update-treatment.dto';
+import { Treatment } from '../../../domains/entities/treatments.entity';
 
 export interface TreatmentFindAllResult {
   data: Treatment[];

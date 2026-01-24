@@ -6,14 +6,14 @@ import {
 } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { TreatmentRepository } from '../../infrastructures/persistence/repositories/treatment.repository';
 import { TreatmentCategoryRepository } from '../../../treatment-categories/infrastructures/persistence/repositories/treatment-category.repository';
-import { CreateTreatmentDto } from '../dto/create-treatment.dto';
-import { TreatmentResponseDto } from '../dto/treatment-response.dto';
 import { TreatmentMapper } from '../../domains/mappers/treatment.mapper';
 import { TreatmentValidationService } from '../../domains/services/treatment-validation.service';
 import { TreatmentCreatedEvent } from '../../infrastructures/events/treatment-created.event';
 import { TreatmentsIdGenerator } from '../../infrastructures/generator/treatments-id.generator';
+import { TreatmentRepository } from '../../infrastructures/persistence/repositories/treatment.repository';
+import { CreateTreatmentDto } from '../dto/create-treatment.dto';
+import { TreatmentResponseDto } from '../dto/treatment-response.dto';
 
 @Injectable()
 export class CreateTreatmentUseCase {

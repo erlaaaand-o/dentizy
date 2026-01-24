@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -10,7 +11,6 @@ import {
   BeforeInsert,
   BeforeUpdate,
 } from 'typeorm';
-import { Exclude } from 'class-transformer';
 
 import { Appointment } from '../../../appointments/domains/entities/appointment.entity';
 import { MedicalRecord } from '../../../medical_records/domains/entities/medical-record.entity';

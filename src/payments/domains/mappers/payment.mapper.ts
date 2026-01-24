@@ -1,9 +1,9 @@
 // backend/src/payments/applications/mappers/payment.mapper.ts
 import { Injectable } from '@nestjs/common';
 
-import { Payment } from '../entities/payments.entity';
-import { PaymentResponseDto } from '../../applications/dto/payment-response.dto';
 import { CreatePaymentDto } from '../../applications/dto/create-payment.dto';
+import { PaymentResponseDto } from '../../applications/dto/payment-response.dto';
+import { Payment } from '../entities/payments.entity';
 
 @Injectable()
 export class PaymentMapper {

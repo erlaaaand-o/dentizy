@@ -1,12 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { Appointment } from '../../domains/entities/appointment.entity';
 import { User } from '../../../users/domains/entities/user.entity';
-import { AppointmentsRepository } from '../../infrastructures/persistence/repositories/appointments.repository';
-import { AppointmentValidator } from '../../domains/validators/appointment.validator';
+import { Appointment } from '../../domains/entities/appointment.entity';
 import { AppointmentDomainService } from '../../domains/services/appointment-domain.service';
+import { AppointmentValidator } from '../../domains/validators/appointment.validator';
 import { AppointmentCompletedEvent } from '../../infrastructures/events/';
+import { AppointmentsRepository } from '../../infrastructures/persistence/repositories/appointments.repository';
 
 /**
  * Use Case: Complete Appointment

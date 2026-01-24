@@ -1,4 +1,6 @@
 // backend/src/treatments/applications/dto/query-treatment.dto.ts
+import { ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsOptional,
   IsString,
@@ -8,8 +10,6 @@ import {
   IsIn,
   IsUUID,
 } from 'class-validator';
-import { Type } from 'class-transformer';
-import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class QueryTreatmentDto {
   @ApiPropertyOptional({

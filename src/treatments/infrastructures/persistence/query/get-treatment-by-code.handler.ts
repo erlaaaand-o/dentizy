@@ -2,10 +2,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
+import { TreatmentResponseDto } from '../../../applications/dto/treatment-response.dto';
+import { TreatmentMapper } from '../../../domains/mappers/treatment.mapper';
 import { GetTreatmentByCodeQuery } from '../query/get-treatment-by-code.query';
 import { TreatmentRepository } from '../repositories/treatment.repository';
-import { TreatmentMapper } from '../../../domains/mappers/treatment.mapper';
-import { TreatmentResponseDto } from '../../../applications/dto/treatment-response.dto';
 
 @Injectable()
 @QueryHandler(GetTreatmentByCodeQuery)

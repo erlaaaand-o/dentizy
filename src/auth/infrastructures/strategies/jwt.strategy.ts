@@ -1,8 +1,8 @@
 // backend/src/auth/infrastructures/strategies/jwt.strategy.ts
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { ConfigService } from '@nestjs/config';
 
 import { UsersService } from '../../../users/applications/orchestrator/users.service';
 import { User } from '../../../users/domains/entities/user.entity';

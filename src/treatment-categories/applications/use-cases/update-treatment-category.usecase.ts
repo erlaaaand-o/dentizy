@@ -6,12 +6,12 @@ import {
 } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { TreatmentCategoryRepository } from '../../infrastructures/persistence/repositories/treatment-category.repository';
-import { UpdateTreatmentCategoryDto } from '../dto/update-treatment-category.dto';
 import { TreatmentCategoryMapper } from '../../domains/mappers/treatment-category.mapper';
-import { TreatmentCategoryResponseDto } from '../dto/treatment-category-response.dto';
 import { TreatmentCategoryValidator } from '../../domains/validators/treatment-category.validator';
 import { TreatmentCategoryUpdatedEvent } from '../../infrastructures/events/treatment-category-updated.event';
+import { TreatmentCategoryRepository } from '../../infrastructures/persistence/repositories/treatment-category.repository';
+import { TreatmentCategoryResponseDto } from '../dto/treatment-category-response.dto';
+import { UpdateTreatmentCategoryDto } from '../dto/update-treatment-category.dto';
 
 @Injectable()
 export class UpdateTreatmentCategoryUseCase {

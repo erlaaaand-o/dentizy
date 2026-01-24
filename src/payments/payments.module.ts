@@ -1,35 +1,25 @@
 // backend/src/payments/payments.module.ts
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Entity
-import { Payment } from './domains/entities/payments.entity';
 
 // Controller
-import { PaymentsController } from './interface/http/payments.controller';
 
 // Service & Use Cases
 import { PaymentsService } from './applications/orchestrator/payments.service';
-import { CreatePaymentUseCase } from './applications/use-cases/create-payment.use-case';
-import { UpdatePaymentUseCase } from './applications/use-cases/update-payment.use-case';
 import { CancelPaymentUseCase } from './applications/use-cases/cancel-payment.use-case';
+import { CreatePaymentUseCase } from './applications/use-cases/create-payment.use-case';
 import { DeletePaymentUseCase } from './applications/use-cases/delete-payment.use-case';
-import { GetPaymentListUseCase } from './applications/use-cases/get-payment-list.use-case';
 import { GetPaymentDetailUseCase } from './applications/use-cases/get-payment-detail.use-case';
+import { GetPaymentListUseCase } from './applications/use-cases/get-payment-list.use-case';
+import { UpdatePaymentUseCase } from './applications/use-cases/update-payment.use-case';
+import { Payment } from './domains/entities/payments.entity';
 
 // Domain Services
-import { InvoiceGeneratorService } from './domains/services/invoice-generator.service';
-import { PaymentCalculatorService } from './domains/services/payment-calculator.service';
-import { PaymentValidatorService } from './domains/services/payment-validator.service';
 
 // Repository & Queries
-import { PaymentRepository } from './infrastructures/persistence/repositories/payment.repository';
-import { GetPaymentByInvoiceQuery } from './infrastructures/persistence/query/get-payment-by-invoice.query';
-import { GetPaymentByMedicalRecordQuery } from './infrastructures/persistence/query/get-payment-by-medical-record.query';
-import { GetPaymentStatisticsQuery } from './infrastructures/persistence/query/get-payment-statistics.query';
-import { GetRevenueByPeriodQuery } from './infrastructures/persistence/query/get-revenue-by-period.query';
-import { GetPaymentsByPatientQuery } from './infrastructures/persistence/query/get-payments-by-patient.query';
 
 // Transaction Service
 import { PaymentTransactionService } from './infrastructures/transactions/payment-transaction.service';
@@ -37,13 +27,23 @@ import { PaymentTransactionService } from './infrastructures/transactions/paymen
 // Mappers
 import { PaymentMapper } from './domains/mappers/payment.mapper';
 import { PaymentSummaryMapper } from './domains/mappers/payment-summary.mapper';
+import { InvoiceGeneratorService } from './domains/services/invoice-generator.service';
+import { PaymentCalculatorService } from './domains/services/payment-calculator.service';
+import { PaymentValidatorService } from './domains/services/payment-validator.service';
 
 // Event Listeners
-import { PaymentCreatedListener } from './infrastructures/listeners/payment-created.listener';
-import { PaymentUpdatedListener } from './infrastructures/listeners/payment-updated.listener';
 import { PaymentCancelledListener } from './infrastructures/listeners/payment-cancelled.listener';
 import { PaymentCompletedListener } from './infrastructures/listeners/payment-completed.listener';
+import { PaymentCreatedListener } from './infrastructures/listeners/payment-created.listener';
 import { PaymentDeletedListener } from './infrastructures/listeners/payment-deleted.listener';
+import { PaymentUpdatedListener } from './infrastructures/listeners/payment-updated.listener';
+import { GetPaymentByInvoiceQuery } from './infrastructures/persistence/query/get-payment-by-invoice.query';
+import { GetPaymentByMedicalRecordQuery } from './infrastructures/persistence/query/get-payment-by-medical-record.query';
+import { GetPaymentStatisticsQuery } from './infrastructures/persistence/query/get-payment-statistics.query';
+import { GetPaymentsByPatientQuery } from './infrastructures/persistence/query/get-payments-by-patient.query';
+import { GetRevenueByPeriodQuery } from './infrastructures/persistence/query/get-revenue-by-period.query';
+import { PaymentRepository } from './infrastructures/persistence/repositories/payment.repository';
+import { PaymentsController } from './interface/http/payments.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Payment]), EventEmitterModule.forRoot()],

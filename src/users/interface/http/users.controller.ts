@@ -1,3 +1,4 @@
+import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 import {
   Controller,
   Get,
@@ -15,6 +16,7 @@ import {
   DefaultValuePipe,
   BadRequestException,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiTags,
   ApiOperation,
@@ -25,37 +27,35 @@ import {
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 import { ThrottlerGuard } from '@nestjs/throttler';
 
-import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
-import { Roles } from '../../../auth/interface/decorators/roles.decorator';
 import { GetUser } from '../../../auth/interface/decorators/get-user.decorator';
+import { Roles } from '../../../auth/interface/decorators/roles.decorator';
+import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { UserRole } from '../../../roles/entities/role.entity';
-import { UsersService } from '../../applications/orchestrator/users.service';
-import { CreateUserDto } from '../../applications/dto/create-user.dto';
-import { UpdateUserDto } from '../../applications/dto/update-user.dto';
-import { ChangePasswordDto } from '../../applications/dto/change-password.dto';
-import { ResetPasswordDto } from '../../applications/dto/reset-password.dto';
-import { FindUsersQueryDto } from '../../applications/dto/find-users-query.dto';
-import { UserResponseDto } from '../../applications/dto/user-response.dto';
-import { PasswordChangeResponseDto } from '../../applications/dto/password-change-response.dto';
-import { User } from '../../domains/entities/user.entity';
-import { AccountActivationService } from '../../applications/use-cases/account-activation.service';
-import {
-  RequestActivationDto,
-  VerifyActivationTokenDto,
-  ActivateAccountDto,
-  CheckActivationStatusDto,
-} from '../../applications/dto/account-activation.dto';
 import {
   RequestActivationResponseDto,
   VerifyActivationTokenResponseDto,
   ActivateAccountResponseDto,
   CheckActivationStatusResponseDto,
 } from '../../applications/dto/account-activation-response.dto';
+import {
+  RequestActivationDto,
+  VerifyActivationTokenDto,
+  ActivateAccountDto,
+  CheckActivationStatusDto,
+} from '../../applications/dto/account-activation.dto';
+import { ChangePasswordDto } from '../../applications/dto/change-password.dto';
+import { CreateUserDto } from '../../applications/dto/create-user.dto';
+import { FindUsersQueryDto } from '../../applications/dto/find-users-query.dto';
+import { PasswordChangeResponseDto } from '../../applications/dto/password-change-response.dto';
+import { ResetPasswordDto } from '../../applications/dto/reset-password.dto';
+import { UpdateUserDto } from '../../applications/dto/update-user.dto';
+import { UserResponseDto } from '../../applications/dto/user-response.dto';
+import { UsersService } from '../../applications/orchestrator/users.service';
+import { AccountActivationService } from '../../applications/use-cases/account-activation.service';
 import { ForgotPasswordService } from '../../applications/use-cases/forgot-password.service';
+import { User } from '../../domains/entities/user.entity';
 
 interface PaginationMeta {
   total: number;

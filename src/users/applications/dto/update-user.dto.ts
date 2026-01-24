@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsArray,
   IsEmail,
@@ -5,7 +6,6 @@ import {
   IsString,
   MinLength,
 } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
 
 // Pastikan path import validator ini sesuai dengan struktur project Anda
 import {

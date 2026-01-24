@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { Appointment } from '../entities/appointment.entity';
 import {
   AppointmentResponseDto,
   PaginatedAppointmentResponseDto,
 } from '../../applications/dto/appointment-response.dto';
+import { Appointment } from '../entities/appointment.entity';
 
 /**
  * Mapper untuk konversi Entity ↔ DTO

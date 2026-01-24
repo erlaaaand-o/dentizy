@@ -1,13 +1,13 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { Appointment } from '../../domains/entities/appointment.entity';
 import { User } from '../../../users/domains/entities/user.entity';
-import { AppointmentsRepository } from '../../infrastructures/persistence/repositories/appointments.repository';
-import { AppointmentCancellationValidator } from '../../domains/validators/appointment-cancellation.validator';
+import { Appointment } from '../../domains/entities/appointment.entity';
 import { AppointmentDomainService } from '../../domains/services/appointment-domain.service';
-import { TransactionManager } from '../../infrastructures/transactions/transaction.manager';
+import { AppointmentCancellationValidator } from '../../domains/validators/appointment-cancellation.validator';
 import { AppointmentCancelledEvent } from '../../infrastructures/events/';
+import { AppointmentsRepository } from '../../infrastructures/persistence/repositories/appointments.repository';
+import { TransactionManager } from '../../infrastructures/transactions/transaction.manager';
 
 /**
  * Use Case: Cancel Appointment

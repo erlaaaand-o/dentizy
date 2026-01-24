@@ -1,4 +1,6 @@
 // backend/src/payments/applications/dto/query-payment.dto.ts
+import { ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsOptional,
   IsInt,
@@ -7,8 +9,6 @@ import {
   Min,
   IsString,
 } from 'class-validator';
-import { Type } from 'class-transformer';
-import { ApiPropertyOptional } from '@nestjs/swagger';
 
 import {
   MetodePembayaran,

@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -10,10 +11,9 @@ import {
   Index,
   DeleteDateColumn,
 } from 'typeorm';
-import { Exclude } from 'class-transformer';
 
-import { Role } from '../../../roles/entities/role.entity';
 import { MedicalRecord } from '../../../medical_records/domains/entities/medical-record.entity';
+import { Role } from '../../../roles/entities/role.entity';
 
 @Entity('users')
 export class User {

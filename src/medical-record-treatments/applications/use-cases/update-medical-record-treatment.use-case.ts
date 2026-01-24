@@ -6,13 +6,13 @@ import {
 } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { MedicalRecordTreatmentRepository } from '../../infrastructures/persistence/repositories/medical-record-treatment.repository';
 import { TreatmentRepository } from '../../../treatments/infrastructures/persistence/repositories/treatment.repository';
-import { MedicalRecordTreatmentValidatorService } from '../../domains/services/medical-record-treatment-validator.service';
 import { MedicalRecordTreatmentMapper } from '../../domains/mappers/medical-record-treatment.mapper';
-import { UpdateMedicalRecordTreatmentDto } from '../dto/update-medical-record-treatment.dto';
-import { MedicalRecordTreatmentResponseDto } from '../dto/medical-record-treatment-response.dto';
+import { MedicalRecordTreatmentValidatorService } from '../../domains/services/medical-record-treatment-validator.service';
 import { MedicalRecordTreatmentUpdatedEvent } from '../../infrastructures/events/medical-record-treatment-updated.event';
+import { MedicalRecordTreatmentRepository } from '../../infrastructures/persistence/repositories/medical-record-treatment.repository';
+import { MedicalRecordTreatmentResponseDto } from '../dto/medical-record-treatment-response.dto';
+import { UpdateMedicalRecordTreatmentDto } from '../dto/update-medical-record-treatment.dto';
 
 @Injectable()
 export class UpdateMedicalRecordTreatmentUseCase {

@@ -5,17 +5,17 @@ import {
   BadRequestException,
   Logger,
 } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 
 import { Patient } from '../../domains/entities/patient.entity';
-import { UpdatePatientDto } from '../dto/update-patient.dto';
-import { PatientResponseDto } from '../dto/patient-response.dto';
+import { PatientMapper } from '../../domains/mappers/patient.mapper';
 import { PatientValidator } from '../../domains/validators/patient.validator';
 import { PatientCacheService } from '../../infrastructure/cache/patient-cache.service';
-import { PatientMapper } from '../../domains/mappers/patient.mapper';
 import { PatientUpdatedEvent } from '../../infrastructure/events/patient-updated.event';
+import { PatientResponseDto } from '../dto/patient-response.dto';
+import { UpdatePatientDto } from '../dto/update-patient.dto';
 
 @Injectable()
 export class PatientUpdateService {

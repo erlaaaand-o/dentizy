@@ -3,8 +3,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 
 import { MedicalRecordCreatedEvent } from '../events/medical-record-created.event';
-import { MedicalRecordUpdatedEvent } from '../events/medical-record-updated.event';
 import { MedicalRecordDeletedEvent } from '../events/medical-record-deleted.event';
+import { MedicalRecordUpdatedEvent } from '../events/medical-record-updated.event';
 
 // Interface untuk event restore (jika belum ada file event fisiknya)
 export interface RestoredEvent {

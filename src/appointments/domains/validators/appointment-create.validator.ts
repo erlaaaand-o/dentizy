@@ -4,9 +4,9 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 
-import { User } from '../../../users/domains/entities/user.entity';
 import { Patient } from '../../../patients/domains/entities/patient.entity';
 import { UserRole } from '../../../roles/entities/role.entity';
+import { User } from '../../../users/domains/entities/user.entity';
 
 /**
  * Validator untuk pembuatan appointment

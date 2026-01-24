@@ -1,3 +1,5 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import {
   IsNotEmpty,
   IsNumber,
@@ -5,8 +7,6 @@ import {
   IsString,
   MaxLength,
 } from 'class-validator';
-import { Transform } from 'class-transformer';
-import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateMedicalRecordDto {
   @ApiProperty({

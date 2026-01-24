@@ -3,10 +3,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOptionsWhere } from 'typeorm';
 
-import { MedicalRecordTreatment } from '../../../domains/entities/medical-record-treatments.entity';
 import { CreateMedicalRecordTreatmentDto } from '../../../applications/dto/create-medical-record-treatment.dto';
-import { UpdateMedicalRecordTreatmentDto } from '../../../applications/dto/update-medical-record-treatment.dto';
 import { QueryMedicalRecordTreatmentDto } from '../../../applications/dto/query-medical-record-treatment.dto';
+import { UpdateMedicalRecordTreatmentDto } from '../../../applications/dto/update-medical-record-treatment.dto';
+import { MedicalRecordTreatment } from '../../../domains/entities/medical-record-treatments.entity';
 
 // Interface untuk return value method getTopTreatments
 export interface TopTreatmentStatistics {

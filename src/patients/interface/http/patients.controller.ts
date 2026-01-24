@@ -1,3 +1,4 @@
+import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 import {
   Controller,
   Get,
@@ -13,6 +14,7 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiTags,
   ApiOperation,
@@ -23,18 +25,16 @@ import {
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
 } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
-import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 import { ThrottlerGuard } from '@nestjs/throttler';
 
-import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { Roles } from '../../../auth/interface/decorators/roles.decorator';
+import { RolesGuard } from '../../../auth/interface/guards/roles.guard';
 import { UserRole } from '../../../roles/entities/role.entity';
-import { PatientsService } from '../../application/orchestrator/patients.service';
 import { CreatePatientDto } from '../../application/dto/create-patient.dto';
-import { UpdatePatientDto } from '../../application/dto/update-patient.dto';
-import { SearchPatientDto } from '../../application/dto/search-patient.dto';
 import { PatientResponseDto } from '../../application/dto/patient-response.dto';
+import { SearchPatientDto } from '../../application/dto/search-patient.dto';
+import { UpdatePatientDto } from '../../application/dto/update-patient.dto';
+import { PatientsService } from '../../application/orchestrator/patients.service';
 
 @ApiTags('Patients')
 @ApiBearerAuth('access-token')

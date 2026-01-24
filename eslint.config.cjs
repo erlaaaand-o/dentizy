@@ -48,6 +48,10 @@ module.exports = [
             'index',
           ],
           'newlines-between': 'always',
+          "alphabetize":{
+            "order": "asc",
+            "caseInsensitive": true
+          },
         },
       ],
       'sonarjs/cognitive-complexity': ['warn', 15],

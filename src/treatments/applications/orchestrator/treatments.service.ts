@@ -5,14 +5,14 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 
-import { TreatmentRepository } from '../../infrastructures/persistence/repositories/treatment.repository';
 import { TreatmentCategoryRepository } from '../../../treatment-categories/infrastructures/persistence/repositories/treatment-category.repository';
+import { Treatment } from '../../domains/entities/treatments.entity';
+import { TreatmentRepository } from '../../infrastructures/persistence/repositories/treatment.repository';
 import { CreateTreatmentDto } from '../dto/create-treatment.dto';
-import { UpdateTreatmentDto } from '../dto/update-treatment.dto';
+import { PaginatedTreatmentResponseDto } from '../dto/paginated-treatment-response.dto';
 import { QueryTreatmentDto } from '../dto/query-treatment.dto';
 import { TreatmentResponseDto } from '../dto/treatment-response.dto';
-import { PaginatedTreatmentResponseDto } from '../dto/paginated-treatment-response.dto';
-import { Treatment } from '../../domains/entities/treatments.entity';
+import { UpdateTreatmentDto } from '../dto/update-treatment.dto';
 
 interface PaginationMeta {
   page: number;

@@ -1,15 +1,15 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
-import { CreateAppointmentDto } from '../dto/create-appointment.dto';
 import { Appointment } from '../../domains/entities/appointment.entity';
-import { AppointmentsRepository } from '../../infrastructures/persistence/repositories/appointments.repository';
+import { AppointmentDomainService } from '../../domains/services/appointment-domain.service';
+import { AppointmentConflictValidator } from '../../domains/validators/appointment-conflict.validator';
 import { AppointmentCreateValidator } from '../../domains/validators/appointment-create.validator';
 import { AppointmentTimeValidator } from '../../domains/validators/appointment-time.validator';
-import { AppointmentConflictValidator } from '../../domains/validators/appointment-conflict.validator';
-import { AppointmentDomainService } from '../../domains/services/appointment-domain.service';
-import { TransactionManager } from '../../infrastructures/transactions/transaction.manager';
 import { AppointmentCreatedEvent } from '../../infrastructures/events';
+import { AppointmentsRepository } from '../../infrastructures/persistence/repositories/appointments.repository';
+import { TransactionManager } from '../../infrastructures/transactions/transaction.manager';
+import { CreateAppointmentDto } from '../dto/create-appointment.dto';
 
 @Injectable()
 export class AppointmentCreationService {
