@@ -1,0 +1,48 @@
+name: Backend Code Quality Pipeline
+
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+    branches: ["main", "develop"]
+
+jobs:
+  backend-quality:
+    name: Backend Lint, Quality & Safety
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    strategy:
+      fail-fast: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - run: npm ci
+
+      - run: npx tsc --noEmit
+
+      - run: |
+          npx eslint \
+            "src/**/*.{ts,js}" \
+            "test/**/*.{ts,js}" \
+            --max-warnings=0
+
+      - run: npx ts-prune
+
+      - run: npx madge --circular src
+
+      - run: |
+          npx eslint src \
+            --rule "complexity: [error, 15]"
+
+      - run: npm audit --audit-level=high
