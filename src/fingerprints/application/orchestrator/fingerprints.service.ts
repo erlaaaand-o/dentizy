@@ -62,6 +62,13 @@ interface RawDeviceData {
   [key: string]: unknown;
 }
 
+interface SyncServiceResult {
+  success: boolean;
+  synced: number;
+  details?: { status: 'success' | 'failed'; error?: string }[];
+  message?: string;
+}
+
 @Injectable()
 export class FingerprintsService {
   private readonly logger = new Logger(FingerprintsService.name);
@@ -119,8 +126,9 @@ export class FingerprintsService {
     });
 
     if (!fingerprint) {
-      throw new NotFoundException(`
-        Sidik jari dengan ID #${id} tidak ditemukan`);
+      throw new NotFoundException(
+        `Sidik jari dengan ID #${id} tidak ditemukan`,
+      );
     }
 
     return this.mapper.toResponseDto(fingerprint);
@@ -150,10 +158,14 @@ export class FingerprintsService {
 
     const result = await this.syncService.verifyDeviceConnection();
 
+    // Perbaikan: Mengonversi result ke Record<string, unknown> agar kompatibel
+    // Menggunakan casting aman via 'unknown' karena strukturnya kompatibel secara runtime
+    const details = result as unknown as Record<string, unknown>;
+
     const deviceStatus: DeviceStatus = {
       isConnected: result.connected,
       message: result.connected ? 'Device connected' : 'Device not connected',
-      details: result,
+      details,
     };
 
     return deviceStatus;
@@ -163,16 +175,28 @@ export class FingerprintsService {
    * Sync fingerprints to device
    */
   async syncToDevice(patientId?: string): Promise<SyncResult> {
+    let result: SyncServiceResult;
     if (patientId) {
-      this.logger.log(`
-        🔄 Syncing fingerprints for patient #${patientId} to device`);
-      const result = await this.syncService.syncPatientToDevice(patientId);
-      return { ...result, message: 'Sync patient to device completed' };
+      this.logger.log(
+        `🔄 Syncing fingerprints for patient #${patientId} to device`,
+      );
+      result = await this.syncService.syncPatientToDevice(patientId);
+    } else {
+      this.logger.log('🔄 Syncing all fingerprints to device');
+      result = await this.syncService.syncAllToDevice();
     }
 
-    this.logger.log('🔄 Syncing all fingerprints to device');
-    const result = await this.syncService.syncAllToDevice();
-    return { ...result, message: 'Sync all fingerprints to device completed' };
+    // Mapping result dari SyncService ke format local SyncResult
+    return {
+      success: result.success,
+      message: patientId
+        ? 'Sync patient to device completed'
+        : 'Sync all fingerprints to device completed',
+      syncedCount: result.synced,
+      errors: result.details
+        ?.filter((d) => d.status === 'failed')
+        .map((d) => d.error ?? 'Unknown error'),
+    };
   }
 
   /**
@@ -181,7 +205,15 @@ export class FingerprintsService {
   async syncFromDevice(): Promise<SyncResult> {
     this.logger.log('🔄 Syncing fingerprints from device');
     const result = await this.syncService.syncFromDevice();
-    return { ...result, message: 'Sync from device completed' };
+
+    return {
+      success: result.success,
+      message: 'Sync from device completed',
+      syncedCount: result.synced,
+      errors: result.details
+        ?.filter((d) => d.status === 'failed')
+        .map((d) => d.error || 'Unknown error'),
+    };
   }
 
   /**
@@ -189,7 +221,12 @@ export class FingerprintsService {
    */
   async clearDevice(): Promise<SyncResult> {
     this.logger.log('🧹 Clearing device memory');
-    return this.syncService.clearDevice();
+    const result = await this.syncService.clearDevice();
+
+    return {
+      success: result.success,
+      message: result.message,
+    };
   }
 
   /**
