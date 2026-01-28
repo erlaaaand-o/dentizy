@@ -32,14 +32,6 @@ export class UserMapper {
   }
 
   /**
-   * Remove sensitive data from user
-   */
-  static sanitize(user: User): Omit<User, 'password'> {
-    const { password, ...sanitized } = user;
-    return sanitized;
-  }
-
-  /**
    * Map user to summary (minimal info)
    */
   static toSummary(user: User): {

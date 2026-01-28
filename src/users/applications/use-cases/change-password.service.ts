@@ -78,7 +78,7 @@ export class ChangePasswordService {
           },
         };
       } catch (error) {
-        this.logger.error('Error changing password:', error.message);
+        this.logger.error('Error changing password:', error);
         throw error;
       }
     });

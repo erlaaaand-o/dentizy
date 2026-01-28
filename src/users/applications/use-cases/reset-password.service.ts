@@ -75,7 +75,7 @@ export class ResetPasswordService {
         },
       };
     } catch (error) {
-      this.logger.error('Error resetting password:', error.message);
+      this.logger.error('Error resetting password:', error);
       throw error;
     }
   }
@@ -120,7 +120,7 @@ export class ResetPasswordService {
         message: `Password sementara berhasil dibuat untuk ${user.username}`,
       };
     } catch (error) {
-      this.logger.error('Error generating temporary password:', error.message);
+      this.logger.error('Error generating temporary password:', error);
       throw error;
     }
   }

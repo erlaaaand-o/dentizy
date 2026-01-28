@@ -45,7 +45,7 @@ export class DeleteUserService {
       this.logger.log(`🗑️ User deleted: ${user.username} (ID: ${userId})`);
       return { message: `User ${user.username} berhasil dihapus` };
     } catch (error) {
-      this.logger.error(`Error deleting user ID ${userId}:`, error.message);
+      this.logger.error(`Error deleting user ID ${userId}:`, error);
       throw error;
     }
   }

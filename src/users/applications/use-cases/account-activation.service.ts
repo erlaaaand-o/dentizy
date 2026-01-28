@@ -172,7 +172,6 @@ export class AccountActivationService {
    */
   async activateAccount(
     token: string,
-    newPassword: string,
   ): Promise<{ message: string; username: string }> {
     try {
       // 1. Verify token

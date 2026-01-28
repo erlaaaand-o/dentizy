@@ -4,17 +4,6 @@ import { OnEvent } from '@nestjs/event-emitter';
 
 import { UserCreatedEvent } from '../events/user-created.event';
 
-/**
- * Listener untuk event user.created
- *
- * TIDAK MENGIRIM EMAIL OTOMATIS!
- * Email aktivasi hanya dikirim ketika user klik tombol "Aktivasi Akun"
- *
- * Listener ini hanya untuk:
- * - Logging
- * - Audit trail
- * - Trigger proses lain jika diperlukan (misal: notifikasi ke admin)
- */
 @Injectable()
 export class UserCreatedListener {
   private readonly logger = new Logger(UserCreatedListener.name);

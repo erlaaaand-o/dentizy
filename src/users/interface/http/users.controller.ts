@@ -491,9 +491,6 @@ export class UsersController {
   async activateAccount(
     @Body() dto: ActivateAccountDto,
   ): Promise<ActivateAccountResponseDto> {
-    return this.accountActivationService.activateAccount(
-      dto.token,
-      dto.newPassword,
-    );
+    return this.accountActivationService.activateAccount(dto.token);
   }
 }
