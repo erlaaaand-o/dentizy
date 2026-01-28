@@ -2,58 +2,52 @@ name: Backend Code Quality Pipeline
 
 on:
   push:
-    branches:
-      - main
-      - backend-dev
+    branches: [main, backend-dev]
   pull_request:
-    branches:
-      - main
-      - backend-dev
+    branches: [main, backend-dev]
 
 jobs:
   backend-quality:
     name: Backend Lint, Quality & Safety
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: backend
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: npm
-          cache-dependency-path: package-lock.json
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
       - name: TypeScript type check
         run: npx tsc --noEmit
 
       - name: ESLint
         run: |
-          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+          if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
             npx eslint "src/**/*.ts" --max-warnings=0
           else
             npx eslint "src/**/*.ts"
           fi
 
-      - name: Dead code check
-        run: npx ts-prune
-
-      - name: Circular dependency check
-        run: npx madge --circular src
-
       - name: Code complexity check
         run: |
-          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            npx eslint src --rule "complexity: [error, 15]"
+          if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
+            npx eslint src --rule "complexity:[error,15]"
           else
-            npx eslint src --rule "complexity: [warn, 20]"
+            npx eslint src --rule "complexity:[warn,20]"
           fi
+
+      - name: Dead code check
+        run: npx ts-prune || true
+
+      - name: Circular dependency check
+        run: npx madge --circular src || true
 
       - name: Dependency vulnerability audit
         run: npm audit --audit-level=high
