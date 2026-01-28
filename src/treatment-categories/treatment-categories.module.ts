@@ -3,29 +3,16 @@ import { Module } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-// Entities
-
-// Controllers
-
-// Services
 import { TreatmentCategoriesService } from './applications/orchestrator/treatment-categories.service';
-
-// Use Cases
 import { CreateTreatmentCategoryUseCase } from './applications/use-cases/create-treatment-category.usecase';
 import { DeleteTreatmentCategoryUseCase } from './applications/use-cases/delete-treatment-category.usecase';
 import { FindTreatmentCategoriesUseCase } from './applications/use-cases/find-treatment-categories.usecase';
 import { RestoreTreatmentCategoryUseCase } from './applications/use-cases/restore-treatment-category.usecase';
 import { UpdateTreatmentCategoryUseCase } from './applications/use-cases/update-treatment-category.usecase';
 import { TreatmentCategory } from './domains/entities/treatment-categories.entity';
-
-// Repositories & Queries
-
-// Mappers & Validators
 import { TreatmentCategoryMapper } from './domains/mappers/treatment-category.mapper';
 import { TreatmentCategoryDomainService } from './domains/services/treatment-category.domain-service';
 import { TreatmentCategoryValidator } from './domains/validators/treatment-category.validator';
-
-// Event Listeners
 import { TreatmentCategoryCreatedListener } from './infrastructures/listeners/treatment-category-created.listener';
 import { TreatmentCategoryDeletedListener } from './infrastructures/listeners/treatment-category-deleted.listener';
 import { TreatmentCategoryRestoredListener } from './infrastructures/listeners/treatment-category-restored.listener';

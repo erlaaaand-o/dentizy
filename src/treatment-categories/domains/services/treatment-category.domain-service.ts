@@ -52,8 +52,12 @@ export class TreatmentCategoryDomainService {
   }
 
   async canBeDeactivated(categoryId: string): Promise<boolean> {
-    // Business rule: Can deactivate even if has treatments
-    // Treatments will remain but new ones cannot be assigned
+    const category = await this.repository.findOne(categoryId);
+
+    if (!category) {
+      return false;
+    }
+
     return true;
   }
 }

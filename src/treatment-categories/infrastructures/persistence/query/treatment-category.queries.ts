@@ -78,14 +78,14 @@ export class TreatmentCategoryQueries {
   }
 
   async countTreatmentsByCategory(categoryId: string): Promise<number> {
-    const result = await this.repository
+    type CountResult = { count: string };
+    const result: CountResult | undefined = await this.repository
       .createQueryBuilder('category')
       .leftJoin('category.treatments', 'treatments')
       .where('category.id = :categoryId', { categoryId })
       .andWhere('treatments.deletedAt IS NULL')
       .select('COUNT(treatments.id)', 'count')
       .getRawOne();
-
     return parseInt(result?.count || '0', 10);
   }
 
