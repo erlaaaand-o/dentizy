@@ -10,6 +10,7 @@ import {
 @ValidatorConstraint({ name: 'IsValidDuration' })
 export class IsValidDurationConstraint implements ValidatorConstraintInterface {
   validate(duration: number, args: ValidationArguments): boolean {
+    if (args.value === null || args.value === undefined) return true;
     if (duration === null || duration === undefined) return true;
     if (typeof duration !== 'number') return false;
     if (duration < 0) return false;
@@ -18,7 +19,7 @@ export class IsValidDurationConstraint implements ValidatorConstraintInterface {
   }
 
   defaultMessage(args: ValidationArguments): string {
-    return 'Duration must be an integer between 0 and 1440 minutes (24 hours)';
+    return `${args.property} must be an integer between 0 and 1440 minutes (24 hours)`;
   }
 }
 

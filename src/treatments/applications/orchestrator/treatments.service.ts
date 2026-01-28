@@ -14,13 +14,6 @@ import { QueryTreatmentDto } from '../dto/query-treatment.dto';
 import { TreatmentResponseDto } from '../dto/treatment-response.dto';
 import { UpdateTreatmentDto } from '../dto/update-treatment.dto';
 
-interface PaginationMeta {
-  page: number;
-  limit: number;
-  total: number;
-  totalPages: number;
-}
-
 @Injectable()
 export class TreatmentsService {
   constructor(

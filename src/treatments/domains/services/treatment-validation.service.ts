@@ -23,14 +23,22 @@ export class TreatmentValidationService {
 
     try {
       this.validateTreatmentCode(data.kodePerawatan);
-    } catch (error) {
-      errors.push(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        errors.push(error.message);
+      } else {
+        errors.push(String(error));
+      }
     }
 
     try {
       this.validateTreatmentPrice(data.harga);
-    } catch (error) {
-      errors.push(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        errors.push(error.message);
+      } else {
+        errors.push(String(error));
+      }
     }
 
     if (!data.namaPerawatan || data.namaPerawatan.trim().length === 0) {

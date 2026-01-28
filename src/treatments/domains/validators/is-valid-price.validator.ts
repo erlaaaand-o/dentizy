@@ -9,18 +9,16 @@ import {
 
 @ValidatorConstraint({ name: 'IsValidPrice' })
 export class IsValidPriceConstraint implements ValidatorConstraintInterface {
-  validate(price: number, args: ValidationArguments): boolean {
+  validate(price: number, _args: ValidationArguments): boolean {
     if (typeof price !== 'number') return false;
     if (price < 0) return false;
     if (price > 999999999999.99) return false;
-
-    // Check decimal places (max 2)
     const decimalPlaces = (price.toString().split('.')[1] || '').length;
     return decimalPlaces <= 2;
   }
 
   defaultMessage(args: ValidationArguments): string {
-    return 'Price must be a valid positive number with maximum 2 decimal places';
+    return `${args.property} must be a positive number ≤ 999999999999.99 with max 2 decimal places`;
   }
 }
 
