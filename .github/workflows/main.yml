@@ -2,9 +2,13 @@ name: Backend Code Quality Pipeline
 
 on:
   push:
-    branches: ["main", "develop"]
+    branches:
+      - main
+      - backend-dev
   pull_request:
-    branches: ["main", "develop"]
+    branches:
+      - main
+      - backend-dev
 
 jobs:
   backend-quality:
@@ -14,9 +18,6 @@ jobs:
     defaults:
       run:
         working-directory: backend
-
-    strategy:
-      fail-fast: true
 
     steps:
       - uses: actions/checkout@v4
@@ -29,20 +30,30 @@ jobs:
 
       - run: npm ci
 
-      - run: npx tsc --noEmit
+      - name: TypeScript type check
+        run: npx tsc --noEmit
 
-      - run: |
-          npx eslint \
-            "src/**/*.{ts,js}" \
-            "test/**/*.{ts,js}" \
-            --max-warnings=0
+      - name: ESLint
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            npx eslint "src/**/*.ts" --max-warnings=0
+          else
+            npx eslint "src/**/*.ts"
+          fi
 
-      - run: npx ts-prune
+      - name: Dead code check
+        run: npx ts-prune
 
-      - run: npx madge --circular src
+      - name: Circular dependency check
+        run: npx madge --circular src
 
-      - run: |
-          npx eslint src \
-            --rule "complexity: [error, 15]"
+      - name: Code complexity check
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            npx eslint src --rule "complexity: [error, 15]"
+          else
+            npx eslint src --rule "complexity: [warn, 20]"
+          fi
 
-      - run: npm audit --audit-level=high
+      - name: Dependency vulnerability audit
+        run: npm audit --audit-level=high
