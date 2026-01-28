@@ -17,19 +17,15 @@ import { GetPaymentsByPatientQuery } from '../../infrastructures/persistence/que
 import { GetRevenueByPeriodQuery } from '../../infrastructures/persistence/query/get-revenue-by-period.query';
 import { PaymentRepository } from '../../infrastructures/persistence/repositories/payment.repository';
 import { CreatePaymentDto } from '../dto/create-payment.dto';
-import { QueryPaymentDto } from '../dto/query-payment.dto';
 import { PaymentResponseDto } from '../dto/payment-response.dto';
+import { QueryPaymentDto } from '../dto/query-payment.dto';
 import { UpdatePaymentDto } from '../dto/update-payment.dto';
-
-// Use Cases
 import { CancelPaymentUseCase } from '../use-cases/cancel-payment.use-case';
 import { CreatePaymentUseCase } from '../use-cases/create-payment.use-case';
 import { DeletePaymentUseCase } from '../use-cases/delete-payment.use-case';
-import { GetPaymentListUseCase } from '../use-cases/get-payment-list.use-case';
 import { GetPaymentDetailUseCase } from '../use-cases/get-payment-detail.use-case';
+import { GetPaymentListUseCase } from '../use-cases/get-payment-list.use-case';
 import { UpdatePaymentUseCase } from '../use-cases/update-payment.use-case';
-
-// Queries & Mappers
 
 interface PaginatedPaymentResponse {
   data: PaymentResponseDto[];
@@ -39,12 +35,6 @@ interface PaginatedPaymentResponse {
     total: number;
     totalPages: number;
   };
-}
-
-interface RevenueData {
-  total: number;
-  startDate?: Date;
-  endDate?: Date;
 }
 
 @Injectable()

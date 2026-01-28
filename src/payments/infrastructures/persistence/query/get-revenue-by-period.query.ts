@@ -1,4 +1,3 @@
-// backend/src/payments/infrastructures/persistence/queries/get-revenue-by-period.query.ts
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -13,6 +12,12 @@ export interface RevenuePeriod {
   revenue: number;
   count: number;
 }
+
+type RawRevenuePeriod = {
+  period: string;
+  revenue: string | null;
+  count: string | null;
+};
 
 @Injectable()
 export class GetRevenueByPeriodQuery {
@@ -41,7 +46,7 @@ export class GetRevenueByPeriodQuery {
         break;
     }
 
-    const result = await this.repository
+    const result: RawRevenuePeriod[] = await this.repository
       .createQueryBuilder('payment')
       .select(
         `DATE_FORMAT(payment.tanggalPembayaran, '${dateFormat}')`,
@@ -59,12 +64,12 @@ export class GetRevenueByPeriodQuery {
       .andWhere('payment.deletedAt IS NULL')
       .groupBy('period')
       .orderBy('period', 'ASC')
-      .getRawMany();
+      .getRawMany<RawRevenuePeriod>();
 
     return result.map((r) => ({
       period: r.period,
-      revenue: parseFloat(r.revenue || 0),
-      count: parseInt(r.count || 0),
+      revenue: parseFloat(r.revenue ?? '0'),
+      count: parseInt(r.count ?? '0', 10),
     }));
   }
 }
