@@ -39,7 +39,7 @@ export class CreateMedicalRecordDto {
   @IsOptional()
   @IsString()
   @MaxLength(5000, { message: 'Subjektif maksimal 5000 karakter' })
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   subjektif?: string;
 
   @ApiProperty({
@@ -52,7 +52,7 @@ export class CreateMedicalRecordDto {
   @IsOptional()
   @IsString()
   @MaxLength(5000, { message: 'Objektif maksimal 5000 karakter' })
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   objektif?: string;
 
   @ApiProperty({
@@ -65,7 +65,7 @@ export class CreateMedicalRecordDto {
   @IsOptional()
   @IsString()
   @MaxLength(5000, { message: 'Assessment maksimal 5000 karakter' })
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   assessment?: string;
 
   @ApiProperty({
@@ -78,6 +78,6 @@ export class CreateMedicalRecordDto {
   @IsOptional()
   @IsString()
   @MaxLength(5000, { message: 'Plan maksimal 5000 karakter' })
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   plan?: string;
 }

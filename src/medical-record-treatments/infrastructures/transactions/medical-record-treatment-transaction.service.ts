@@ -45,7 +45,7 @@ export class MedicalRecordTreatmentTransactionService {
         } catch (error) {
           errors.push({
             index: i,
-            error: error.message || 'Unknown error',
+            error: error instanceof Error ? error.message : 'Unknown error',
           });
         }
       }

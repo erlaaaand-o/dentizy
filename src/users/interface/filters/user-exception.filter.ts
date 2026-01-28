@@ -81,7 +81,7 @@ export class UserExceptionFilter implements ExceptionFilter {
       }
     } else if (exception instanceof QueryFailedError) {
       status = HttpStatus.BAD_REQUEST;
-      const dbError = this.handleDatabaseError(exception);
+      const dbError = this.handleDatabaseError(exception as QueryFailedError);
       message = dbError.message;
       error = dbError.error;
       details = dbError.details;

@@ -3,7 +3,7 @@ import {
   Logger,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { DataSource } from 'typeorm';
+import { DataSource, QueryRunner } from 'typeorm';
 
 import { Patient } from '../../domains/entities/patient.entity';
 
@@ -37,22 +37,23 @@ export class MedicalRecordNumberGenerator {
     while (attempt < this.MAX_RETRIES) {
       attempt++;
 
-      const queryRunner = this.dataSource.createQueryRunner();
+      const queryRunner: QueryRunner = this.dataSource.createQueryRunner();
       await queryRunner.connect();
       await queryRunner.startTransaction();
 
       try {
         // Lock table untuk generate sequence yang unik
-        const result = await queryRunner.manager
-          .createQueryBuilder(Patient, 'patient')
-          .select('patient.nomor_rekam_medis', 'nomor_rekam_medis')
-          .where('patient.nomor_rekam_medis LIKE :pattern', {
-            pattern: `${datePrefix}-%`,
-          })
-          .orderBy('patient.nomor_rekam_medis', 'DESC')
-          .limit(1)
-          .setLock('pessimistic_write') // Lock untuk concurrency
-          .getRawOne();
+        const result: MedicalRecordResult | undefined =
+          await queryRunner.manager
+            .createQueryBuilder(Patient, 'patient')
+            .select('patient.nomor_rekam_medis', 'nomor_rekam_medis')
+            .where('patient.nomor_rekam_medis LIKE :pattern', {
+              pattern: `${datePrefix}-%`,
+            })
+            .orderBy('patient.nomor_rekam_medis', 'DESC')
+            .limit(1)
+            .setLock('pessimistic_write')
+            .getRawOne<MedicalRecordResult>();
 
         const nextSequence = this.calculateNextSequence(result, datePrefix);
 
@@ -75,10 +76,9 @@ export class MedicalRecordNumberGenerator {
         );
 
         return nomorRekamMedis;
-      } catch (error) {
+      } catch (error: unknown) {
         await queryRunner.rollbackTransaction();
 
-        // Retry on deadlock or lock timeout
         if (this.isRetryableError(error) && attempt < this.MAX_RETRIES) {
           const backoffMs = Math.min(100 * Math.pow(2, attempt - 1), 1000);
           this.logger.warn(
@@ -117,7 +117,7 @@ export class MedicalRecordNumberGenerator {
    * Calculate next sequence number
    */
   private calculateNextSequence(
-    result: MedicalRecordResult | null,
+    result: MedicalRecordResult | undefined,
     datePrefix: string,
   ): number {
     if (!result?.nomor_rekam_medis) {
@@ -152,18 +152,22 @@ export class MedicalRecordNumberGenerator {
   /**
    * Check if error is retryable
    */
-  private isRetryableError(error: DatabaseError): boolean {
+  private isRetryableError(error: unknown): boolean {
     const retryableCodes = [1213, 1205];
 
-    const errorCode: number =
-      typeof error.errno === 'number' ? error.errno : -1;
-    const errorMessage = error.message?.toLowerCase() || '';
+    if (typeof error === 'object' && error !== null) {
+      const dbError = error as DatabaseError;
+      const errorCode: number =
+        typeof dbError.errno === 'number' ? dbError.errno : -1;
+      const errorMessage = dbError.message?.toLowerCase() || '';
 
-    return (
-      retryableCodes.includes(errorCode) ||
-      errorMessage.includes('deadlock') ||
-      errorMessage.includes('lock wait timeout')
-    );
+      return (
+        retryableCodes.includes(errorCode) ||
+        errorMessage.includes('deadlock') ||
+        errorMessage.includes('lock wait timeout')
+      );
+    }
+    return false;
   }
 
   /**

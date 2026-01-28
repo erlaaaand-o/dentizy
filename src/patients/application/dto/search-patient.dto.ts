@@ -34,7 +34,7 @@ export class SearchPatientDto {
   @IsOptional()
   @IsString()
   @MaxLength(255, { message: 'Pencarian maksimal 255 karakter' })
-  @Transform(({ value }) => {
+  @Transform(({ value }: { value?: string }) => {
     if (!value) return undefined;
     return value
       .trim()
@@ -103,7 +103,7 @@ export class SearchPatientDto {
   @IsOptional()
   @IsString()
   @MaxLength(100, { message: 'Doctor ID maksimal 100 karakter' })
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   doctor_id?: string;
 
   @ApiPropertyOptional({ description: 'Hanya pasien aktif' })

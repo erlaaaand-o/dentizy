@@ -77,7 +77,7 @@ export class TokenService {
    */
   decodeToken(token: string): DecodedToken | null {
     try {
-      const decoded = this.jwtService.decode(token);
+      const decoded: string | object | null = this.jwtService.decode(token);
 
       // Validate that decoded is a proper object with expected structure
       if (!decoded || typeof decoded !== 'object' || !('sub' in decoded)) {
@@ -102,7 +102,12 @@ export class TokenService {
     try {
       this.jwtService.verify(token);
       return false;
-    } catch (error) {
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        this.logger.warn(`Operation failed: ${error.message}`);
+      } else {
+        this.logger.warn('Operation failed: Unknown error');
+      }
       return true;
     }
   }

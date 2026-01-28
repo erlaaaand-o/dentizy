@@ -4,15 +4,8 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-// Entities
-
-// Controllers
-
-// Orchestrator Service
 import { PatientsService } from './application/orchestrator/patients.service';
-
-// Use Cases
-import { PatientCleanupService } from './application/use-cases/patient-cleanup.service'; // IMPORT INI
+import { PatientCleanupService } from './application/use-cases/patient-cleanup.service';
 import { PatientCreationService } from './application/use-cases/patient-creation.service';
 import { PatientDeletionService } from './application/use-cases/patient-deletion.service';
 import { PatientFindService } from './application/use-cases/patient-find.service';
@@ -21,15 +14,11 @@ import { PatientSearchService } from './application/use-cases/patient-search.ser
 import { PatientStatisticsService } from './application/use-cases/patient-statistics.service';
 import { PatientUpdateService } from './application/use-cases/patient-update.service';
 import { Patient } from './domains/entities/patient.entity';
-
-// Validators
 import { PatientMapper } from './domains/mappers/patient.mapper';
 import { PatientCreateValidator } from './domains/validators/patient-create.validator';
 import { PatientFieldValidator } from './domains/validators/patient-field.validator';
 import { PatientSearchValidator } from './domains/validators/patient-search.validator';
 import { PatientUpdateValidator } from './domains/validators/patient-update.validator';
-
-// Infrastructure
 import { PatientValidator } from './domains/validators/patient.validator';
 import { PatientCacheService } from './infrastructure/cache/patient-cache.service';
 import { MedicalRecordNumberGenerator } from './infrastructure/generator/medical-record-number.generator';
@@ -37,8 +26,6 @@ import { PatientEventListener } from './infrastructure/listeners/patient.event-l
 import { PatientQueryBuilder } from './infrastructure/persistence/query/patient-query.builder';
 import { PatientRepository } from './infrastructure/persistence/repositories/patients.repository';
 import { TransactionManager } from './infrastructure/transactions/transaction.manager';
-
-// Domain
 import { PatientsController } from './interface/http/patients.controller';
 
 @Module({

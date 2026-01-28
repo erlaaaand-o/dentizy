@@ -60,7 +60,7 @@ export class PatientSearchService {
         };
       } catch (error) {
         if (error instanceof BadRequestException) throw error;
-        this.logger.error('❌ Error searching patients:', error.stack);
+        this.logger.error('❌ Error searching patients:', error);
         throw new BadRequestException(
           'Gagal mencari pasien. Silakan coba lagi.',
         );

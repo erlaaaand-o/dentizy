@@ -1,18 +1,59 @@
-import { Injectable, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  Logger,
+  OnModuleDestroy,
+  OnModuleInit,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as mqtt from 'mqtt';
-import { MqttClient } from 'mqtt';
+import { MqttClient, IClientOptions } from 'mqtt';
 
-export interface IoTMessage {
+// --- Interfaces & Types ---
+
+export interface IoTMessage<T = Record<string, unknown>> {
   type: 'enrollment' | 'verification' | 'failure' | 'status';
   timestamp: Date;
-  data: any;
+  data: T;
+}
+
+export interface CommandMessage {
+  command: string;
+  params?: Record<string, unknown>;
+  timestamp: Date;
+}
+
+// Interface untuk data payload spesifik (bisa disesuaikan dengan kebutuhan domain)
+export interface EnrollmentPayload {
+  patientId: string;
+  fingerPosition?: string;
+  status: string;
+  [key: string]: unknown;
+}
+
+export interface VerificationPayload {
+  patientId: string;
+  score?: number;
+  match?: boolean;
+  [key: string]: unknown;
+}
+
+export interface FailurePayload {
+  errorCode: string;
+  message: string;
+  [key: string]: unknown;
+}
+
+export interface DeviceStatusPayload {
+  deviceId: string;
+  status: 'online' | 'offline' | 'busy' | 'error';
+  batteryLevel?: number;
+  [key: string]: unknown;
 }
 
 @Injectable()
-export class FingerprintIoTService {
+export class FingerprintIoTService implements OnModuleInit, OnModuleDestroy {
   private readonly logger = new Logger(FingerprintIoTService.name);
-  private mqttClient: MqttClient;
+  private mqttClient: MqttClient | null = null;
   private connected = false;
 
   // MQTT Topics
@@ -25,18 +66,25 @@ export class FingerprintIoTService {
     COMMAND: 'fingerprint/command',
   };
 
-  constructor(private readonly configService: ConfigService) {
+  constructor(private readonly configService: ConfigService) {}
+
+  onModuleInit() {
     this.initializeMqttClient();
   }
 
-  private async initializeMqttClient(): Promise<void> {
+  onModuleDestroy() {
+    void this.disconnect();
+  }
+
+  private initializeMqttClient(): void {
     try {
       const mqttUrl =
         this.configService.get<string>('MQTT_BROKER_URL') ||
         'mqtt://localhost:1883';
+
       const clientId = `fingerprint-service-${Math.random().toString(16).slice(2, 10)}`;
 
-      const options = {
+      const options: IClientOptions = {
         clientId,
         clean: true,
         connectTimeout: 4000,
@@ -53,8 +101,8 @@ export class FingerprintIoTService {
         this.subscribeToTopics();
       });
 
-      this.mqttClient.on('error', (error) => {
-        this.logger.error(`❌ MQTT Connection error:`, error);
+      this.mqttClient.on('error', (error: Error) => {
+        this.logger.error(`❌ MQTT Connection error:`, error.message);
         this.connected = false;
       });
 
@@ -67,42 +115,43 @@ export class FingerprintIoTService {
         this.connected = false;
       });
 
-      this.mqttClient.on('message', (topic, message) => {
+      this.mqttClient.on('message', (topic: string, message: Buffer) => {
         this.handleIncomingMessage(topic, message);
       });
     } catch (error) {
-      this.logger.error(`Failed to initialize MQTT client:`, error);
+      const errMsg = error instanceof Error ? error.message : String(error);
+      this.logger.error(`Failed to initialize MQTT client:`, errMsg);
     }
   }
 
   private subscribeToTopics(): void {
-    // Subscribe to command topics for receiving commands from devices
-    this.mqttClient.subscribe(this.TOPICS.COMMAND, (err) => {
-      if (err) {
-        this.logger.error(
-          `Failed to subscribe to ${this.TOPICS.COMMAND}:`,
-          err,
-        );
-      } else {
-        this.logger.log(`✅ Subscribed to ${this.TOPICS.COMMAND}`);
-      }
-    });
+    if (!this.mqttClient) return;
 
-    this.mqttClient.subscribe(this.TOPICS.DEVICE_STATUS, (err) => {
+    // Helper to handle subscription callbacks
+    const subCallback = (topicName: string) => (err: Error | null) => {
       if (err) {
-        this.logger.error(
-          `Failed to subscribe to ${this.TOPICS.DEVICE_STATUS}:`,
-          err,
-        );
+        this.logger.error(`Failed to subscribe to ${topicName}:`, err.message);
       } else {
-        this.logger.log(`✅ Subscribed to ${this.TOPICS.DEVICE_STATUS}`);
+        this.logger.log(`✅ Subscribed to ${topicName}`);
       }
-    });
+    };
+
+    this.mqttClient.subscribe(
+      this.TOPICS.COMMAND,
+      subCallback(this.TOPICS.COMMAND),
+    );
+    this.mqttClient.subscribe(
+      this.TOPICS.DEVICE_STATUS,
+      subCallback(this.TOPICS.DEVICE_STATUS),
+    );
   }
 
   private handleIncomingMessage(topic: string, message: Buffer): void {
     try {
-      const payload = JSON.parse(message.toString());
+      // JSON.parse returns 'any', we assign to 'unknown' immediately for safety
+      const payloadString = message.toString();
+      const payload: unknown = JSON.parse(payloadString);
+
       this.logger.debug(`📨 Received message on ${topic}:`, payload);
 
       switch (topic) {
@@ -116,26 +165,35 @@ export class FingerprintIoTService {
           this.logger.warn(`Unknown topic: ${topic}`);
       }
     } catch (error) {
-      this.logger.error(`Failed to parse message from ${topic}:`, error);
+      const errMsg = error instanceof Error ? error.message : String(error);
+      this.logger.error(`Failed to parse message from ${topic}:`, errMsg);
     }
   }
 
-  private handleCommand(payload: any): void {
-    this.logger.log(`📋 Command received:`, payload);
-    // Handle commands from devices (e.g., enroll, verify, reset)
-    // This can be extended based on your requirements
+  private handleCommand(payload: unknown): void {
+    // Type Guard or validation logic usually goes here
+    if (this.isValidCommandPayload(payload)) {
+      this.logger.log(`📋 Command received:`, payload);
+      // Implementation logic...
+    } else {
+      this.logger.warn('Received invalid command payload structure');
+    }
   }
 
-  private handleDeviceStatus(payload: any): void {
-    this.logger.log(`📊 Device status update:`, payload);
-    // Handle device status updates
+  private handleDeviceStatus(payload: unknown): void {
+    if (typeof payload === 'object' && payload !== null) {
+      this.logger.log(`📊 Device status update:`, payload);
+      // Implementation logic...
+    } else {
+      this.logger.warn('Received invalid device status payload');
+    }
   }
 
   /**
    * Notify enrollment success
    */
-  async notifyEnrollment(data: any): Promise<void> {
-    const message: IoTMessage = {
+  async notifyEnrollment(data: EnrollmentPayload): Promise<void> {
+    const message: IoTMessage<EnrollmentPayload> = {
       type: 'enrollment',
       timestamp: new Date(),
       data,
@@ -147,8 +205,8 @@ export class FingerprintIoTService {
   /**
    * Notify verification success
    */
-  async notifyVerification(data: any): Promise<void> {
-    const message: IoTMessage = {
+  async notifyVerification(data: VerificationPayload): Promise<void> {
+    const message: IoTMessage<VerificationPayload> = {
       type: 'verification',
       timestamp: new Date(),
       data,
@@ -160,8 +218,8 @@ export class FingerprintIoTService {
   /**
    * Notify verification failure
    */
-  async notifyFailure(data: any): Promise<void> {
-    const message: IoTMessage = {
+  async notifyFailure(data: FailurePayload): Promise<void> {
+    const message: IoTMessage<FailurePayload> = {
       type: 'failure',
       timestamp: new Date(),
       data,
@@ -173,8 +231,11 @@ export class FingerprintIoTService {
   /**
    * Send device command
    */
-  async sendDeviceCommand(command: string, params?: any): Promise<void> {
-    const message = {
+  async sendDeviceCommand(
+    command: string,
+    params?: Record<string, unknown>,
+  ): Promise<void> {
+    const message: CommandMessage = {
       command,
       params,
       timestamp: new Date(),
@@ -186,8 +247,8 @@ export class FingerprintIoTService {
   /**
    * Publish status update
    */
-  async publishStatus(status: any): Promise<void> {
-    const message: IoTMessage = {
+  async publishStatus(status: Record<string, unknown>): Promise<void> {
+    const message: IoTMessage<Record<string, unknown>> = {
       type: 'status',
       timestamp: new Date(),
       data: status,
@@ -197,26 +258,34 @@ export class FingerprintIoTService {
   }
 
   /**
-   * Generic publish method
+   * Generic publish method wrapped in Promise
    */
-  private async publish(topic: string, message: any): Promise<void> {
-    if (!this.connected) {
-      this.logger.warn(`MQTT not connected, skipping publish to ${topic}`);
-      return;
-    }
+  private publish(topic: string, message: object): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (!this.mqttClient || !this.connected) {
+        this.logger.warn(`MQTT not connected, skipping publish to ${topic}`);
+        // Kita resolve saja agar tidak crash flow aplikasi, tapi log warning
+        resolve();
+        return;
+      }
 
-    try {
-      const payload = JSON.stringify(message);
-      this.mqttClient.publish(topic, payload, { qos: 1 }, (error) => {
-        if (error) {
-          this.logger.error(`Failed to publish to ${topic}:`, error);
-        } else {
-          this.logger.debug(`✅ Published to ${topic}`);
-        }
-      });
-    } catch (error) {
-      this.logger.error(`Error publishing to ${topic}:`, error);
-    }
+      try {
+        const payload = JSON.stringify(message);
+        this.mqttClient.publish(topic, payload, { qos: 1 }, (error) => {
+          if (error) {
+            this.logger.error(`Failed to publish to ${topic}:`, error.message);
+            reject(error);
+          } else {
+            this.logger.debug(`✅ Published to ${topic}`);
+            resolve();
+          }
+        });
+      } catch (error) {
+        const errMsg = error instanceof Error ? error.message : String(error);
+        this.logger.error(`Error publishing to ${topic}:`, errMsg);
+        reject(error);
+      }
+    });
   }
 
   /**
@@ -230,9 +299,23 @@ export class FingerprintIoTService {
    * Disconnect from MQTT broker
    */
   async disconnect(): Promise<void> {
-    if (this.mqttClient) {
-      this.mqttClient.end();
-      this.logger.log('MQTT client disconnected');
-    }
+    return new Promise((resolve) => {
+      if (this.mqttClient) {
+        this.mqttClient.end(false, {}, () => {
+          this.logger.log('MQTT client disconnected');
+          this.connected = false;
+          resolve();
+        });
+      } else {
+        resolve();
+      }
+    });
+  }
+
+  // --- Helper Guards ---
+  private isValidCommandPayload(payload: unknown): payload is CommandMessage {
+    return (
+      typeof payload === 'object' && payload !== null && 'command' in payload
+    );
   }
 }

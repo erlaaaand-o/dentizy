@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -16,6 +16,51 @@ import { FingerprintDeletionService } from '../use-cases/fingerprint-deletion.se
 import { FingerprintEnrollmentService } from '../use-cases/fingerprint-enrollment.service';
 import { FingerprintSyncService } from '../use-cases/fingerprint-sync.service';
 import { FingerprintVerificationService } from '../use-cases/fingerprint-verification.service';
+
+// --- Interfaces & Types ---
+
+export interface DeviceInfo {
+  serialNumber?: string;
+  firmwareVersion?: string;
+  model?: string;
+  isConnected: boolean;
+  extraData?: Record<string, unknown>;
+}
+
+export interface SyncResult {
+  success: boolean;
+  message: string;
+  syncedCount?: number;
+  errors?: string[];
+}
+
+export interface CaptureResponse {
+  templateData: string;
+  deviceInfo: DeviceInfo;
+}
+
+export interface DeviceStatus {
+  isConnected: boolean;
+  message: string;
+  details?: Record<string, unknown>;
+}
+
+export interface FingerprintStatistics {
+  total: number;
+  active: number;
+  byQuality: Record<string, number>;
+  byPosition: Record<string, number>;
+  totalVerifications: number;
+}
+
+// Interface helper untuk menangani raw data dari library eksternal device
+interface RawDeviceData {
+  serialNumber?: string;
+  firmwareVersion?: string;
+  model?: string;
+  isConnected?: boolean;
+  [key: string]: unknown;
+}
 
 @Injectable()
 export class FingerprintsService {
@@ -74,7 +119,8 @@ export class FingerprintsService {
     });
 
     if (!fingerprint) {
-      throw new Error(`Sidik jari dengan ID #${id} tidak ditemukan`);
+      throw new NotFoundException(`
+        Sidik jari dengan ID #${id} tidak ditemukan`);
     }
 
     return this.mapper.toResponseDto(fingerprint);
@@ -99,38 +145,49 @@ export class FingerprintsService {
   /**
    * Get device status
    */
-  async getDeviceStatus(): Promise<any> {
+  async getDeviceStatus(): Promise<DeviceStatus> {
     this.logger.log('📱 Getting device status');
-    return this.syncService.verifyDeviceConnection();
+
+    const result = await this.syncService.verifyDeviceConnection();
+
+    const deviceStatus: DeviceStatus = {
+      isConnected: result.connected,
+      message: result.connected ? 'Device connected' : 'Device not connected',
+      details: result,
+    };
+
+    return deviceStatus;
   }
 
   /**
    * Sync fingerprints to device
    */
-  async syncToDevice(patientId?: string): Promise<any> {
+  async syncToDevice(patientId?: string): Promise<SyncResult> {
     if (patientId) {
-      this.logger.log(
-        `🔄 Syncing fingerprints for patient #${patientId} to device`,
-      );
-      return this.syncService.syncPatientToDevice(patientId);
+      this.logger.log(`
+        🔄 Syncing fingerprints for patient #${patientId} to device`);
+      const result = await this.syncService.syncPatientToDevice(patientId);
+      return { ...result, message: 'Sync patient to device completed' };
     }
 
     this.logger.log('🔄 Syncing all fingerprints to device');
-    return this.syncService.syncAllToDevice();
+    const result = await this.syncService.syncAllToDevice();
+    return { ...result, message: 'Sync all fingerprints to device completed' };
   }
 
   /**
    * Sync fingerprints from device
    */
-  async syncFromDevice(): Promise<any> {
+  async syncFromDevice(): Promise<SyncResult> {
     this.logger.log('🔄 Syncing fingerprints from device');
-    return this.syncService.syncFromDevice();
+    const result = await this.syncService.syncFromDevice();
+    return { ...result, message: 'Sync from device completed' };
   }
 
   /**
    * Clear device memory
    */
-  async clearDevice(): Promise<any> {
+  async clearDevice(): Promise<SyncResult> {
     this.logger.log('🧹 Clearing device memory');
     return this.syncService.clearDevice();
   }
@@ -138,13 +195,7 @@ export class FingerprintsService {
   /**
    * Get statistics
    */
-  async getStatistics(): Promise<{
-    total: number;
-    active: number;
-    byQuality: Record<string, number>;
-    byPosition: Record<string, number>;
-    totalVerifications: number;
-  }> {
+  async getStatistics(): Promise<FingerprintStatistics> {
     const [total, active] = await Promise.all([
       this.fingerprintRepository.count(),
       this.fingerprintRepository.count({ where: { is_active: true } }),
@@ -160,11 +211,14 @@ export class FingerprintsService {
 
     fingerprints.forEach((fp) => {
       // Count by quality
-      byQuality[fp.quality] = (byQuality[fp.quality] || 0) + 1;
+      // Konversi ke string jika fp.quality bukan string
+      const qualityKey = String(fp.quality);
+      byQuality[qualityKey] = (byQuality[qualityKey] || 0) + 1;
 
       // Count by position
-      byPosition[fp.finger_position] =
-        (byPosition[fp.finger_position] || 0) + 1;
+      // fp.finger_position kemungkinan Enum, kita ubah ke string untuk key object
+      const positionKey = String(fp.finger_position);
+      byPosition[positionKey] = (byPosition[positionKey] || 0) + 1;
 
       // Sum verifications
       totalVerifications += fp.verification_count;
@@ -182,10 +236,7 @@ export class FingerprintsService {
   /**
    * Capture fingerprint from device
    */
-  async captureFromDevice(): Promise<{
-    templateData: string;
-    deviceInfo: any;
-  }> {
+  async captureFromDevice(): Promise<CaptureResponse> {
     this.logger.log('📸 Capturing fingerprint from device');
 
     const device = this.deviceFactory.getDevice();
@@ -194,8 +245,25 @@ export class FingerprintsService {
       await device.connect();
     }
 
-    const templateData = await device.capture();
-    const deviceInfo = await device.getDeviceInfo();
+    const templateData: string = await device.capture();
+
+    // Ambil raw info sebagai unknown terlebih dahulu
+    const rawInfo: unknown = await device.getDeviceInfo();
+
+    // Cast ke helper interface untuk akses properti yang aman
+    const safeRawInfo = rawInfo as RawDeviceData;
+
+    const deviceInfo: DeviceInfo = {
+      serialNumber: safeRawInfo?.serialNumber,
+      firmwareVersion: safeRawInfo?.firmwareVersion,
+      model: safeRawInfo?.model,
+      isConnected: safeRawInfo?.isConnected ?? true,
+      // Mapping sisa data ke Record<string, unknown> jika perlu
+      extraData:
+        typeof rawInfo === 'object' && rawInfo !== null
+          ? (rawInfo as Record<string, unknown>)
+          : undefined,
+    };
 
     return {
       templateData,

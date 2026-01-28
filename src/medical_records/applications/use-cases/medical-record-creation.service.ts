@@ -97,13 +97,20 @@ export class MedicalRecordCreationService {
 
       // 12. Load relations and return
       return await this.loadRecordWithRelations(savedRecord.id);
-    } catch (error) {
+    } catch (error: unknown) {
       await queryRunner.rollbackTransaction();
 
-      this.logger.error(
-        `Failed to create medical record: ${error.message}`,
-        error.stack,
-      );
+      if (error instanceof Error) {
+        this.logger.error(
+          `Failed to create medical record: ${error.message}`,
+          error.stack,
+        );
+      } else {
+        this.logger.log(
+          'Failed to create medical record: Unknown error',
+          String(error),
+        );
+      }
 
       throw error;
     } finally {

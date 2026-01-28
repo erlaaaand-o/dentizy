@@ -30,7 +30,7 @@ export class FindUsersQueryDto {
   })
   @IsOptional()
   @IsString()
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   search?: string;
 
   @ApiProperty({

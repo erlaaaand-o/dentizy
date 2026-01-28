@@ -21,7 +21,7 @@ export class CreatePatientDto {
   @IsString({ message: 'Nama lengkap harus berupa text' })
   @MinLength(3, { message: 'Nama lengkap minimal 3 karakter' })
   @MaxLength(250, { message: 'Nama lengkap maksimal 250 karakter' })
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   nama_lengkap: string;
 
   @ApiPropertyOptional({
@@ -32,14 +32,14 @@ export class CreatePatientDto {
   @IsString({ message: 'NIK harus berupa text' })
   @Length(16, 16, { message: 'NIK harus 16 digit' })
   @Matches(/^\d{16}$/, { message: 'NIK harus berupa 16 digit angka' })
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   nik?: string;
 
   @ApiPropertyOptional({ example: 'john.doe@email.com' })
   @IsOptional()
   @IsEmail({}, { message: 'Format email tidak valid' })
   @MaxLength(250, { message: 'Email maksimal 250 karakter' })
-  @Transform(({ value }) => value?.toLowerCase().trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   email?: string;
 
   @ApiPropertyOptional({ example: '081234567890' })
@@ -48,7 +48,10 @@ export class CreatePatientDto {
   @Matches(/^(\+62|62|0)[0-9]{9,13}$/, {
     message: 'Format nomor HP tidak valid (contoh: 081234567890)',
   })
-  @Transform(({ value }) => value?.trim().replace(/\s+/g, ''))
+  @Transform(({ value }) => {
+    if (typeof value !== 'string') return value;
+    return value.trim().replace(/\s+/g, '');
+  })
   no_hp?: string;
 
   @ApiPropertyOptional({ example: '1990-01-15' })
@@ -65,6 +68,6 @@ export class CreatePatientDto {
   @IsOptional()
   @IsString({ message: 'Alamat harus berupa text' })
   @MaxLength(500, { message: 'Alamat maksimal 500 karakter' })
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   alamat?: string;
 }

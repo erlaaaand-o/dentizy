@@ -30,10 +30,6 @@ import {
 import { CreateAppointmentDto } from '../dto/create-appointment.dto';
 import { FindAppointmentsQueryDto } from '../dto/find-appointments-query.dto';
 import { UpdateAppointmentDto } from '../dto/update-appointment.dto';
-
-// Entities
-
-// Use Cases
 import { AppointmentCancellationService } from '../use-cases/appointment-cancellation.service';
 import { AppointmentCompletionService } from '../use-cases/appointment-completion.service';
 import { AppointmentCreationService } from '../use-cases/appointment-creation.service';

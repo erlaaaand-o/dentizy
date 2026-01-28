@@ -5,31 +5,19 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
-// Controllers
 import { UsersModule } from '../users/users.module';
 
-// Strategies
-
-// Orchestrator
 import { AuthService } from './applications/orchestrator/auth.service';
-
-// Use Cases
 import { LoginService } from './applications/use-cases/login.service';
 import { LogoutService } from './applications/use-cases/logout.service';
 import { TokenRefreshService } from './applications/use-cases/token-refresh.service';
 import { TokenVerificationService } from './applications/use-cases/token-verification.service';
-
-// Domain Services
 import { CredentialValidationService } from './domains/services/credential-validation.service';
 import { SecurityGuardService } from './domains/services/security-guard.service';
 import { TokenService } from './domains/services/token.service';
-
-// Infrastructure Services
 import { PasswordHasherService } from './infrastructures/security/password-hasher.service';
 import { TimingDefenseService } from './infrastructures/security/timing-defense.service';
 import { JwtStrategy } from './infrastructures/strategies/jwt.strategy';
-
-// Guards
 import { JwtAuthGuard } from './interface/guards/jwt-auth.guard';
 import { RolesGuard } from './interface/guards/roles.guard';
 import { AuthController } from './interface/http/auth.controller';

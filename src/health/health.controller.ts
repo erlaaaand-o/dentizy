@@ -62,7 +62,7 @@ export class HealthController {
       dbStatus = 'up';
       dbMessage = 'Database connection successful';
     } catch (error) {
-      dbMessage = `Database error: ${error.message}`;
+      dbMessage = `Database error: ${error}`;
     }
 
     const totalResponseTime = Date.now() - startTime;
@@ -125,11 +125,14 @@ export class HealthController {
         status: 'ready',
         timestamp: new Date().toISOString(),
       };
-    } catch (error) {
-      // Throw HTTP Exception agar status code jadi 503
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error ? error.message : 'Unknown database error';
+      const stack = error instanceof Error ? error.stack : undefined;
       throw new ServiceUnavailableException({
         status: 'not_ready',
-        reason: 'Database connection failed',
+        reason: `Database connection failed: ${message}`,
+        stack,
         timestamp: new Date().toISOString(),
       });
     }

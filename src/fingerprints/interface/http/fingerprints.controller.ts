@@ -15,6 +15,7 @@ import {
   ApiOperation,
   ApiResponse,
   ApiBearerAuth,
+  ApiProperty,
 } from '@nestjs/swagger';
 
 import { Roles } from '../../../auth/interface/decorators/roles.decorator';
@@ -27,6 +28,26 @@ import {
 } from '../../application/dto/fingerprint-response.dto';
 import { VerifyFingerprintDto } from '../../application/dto/verify-fingerprint.dto';
 import { FingerprintsService } from '../../application/orchestrator/fingerprints.service';
+
+// --- DTO Helper (Local) untuk Strict Typing ---
+
+export class DeleteResponseDto {
+  @ApiProperty()
+  message: string;
+}
+
+export class DeviceStatusDto {
+  @ApiProperty()
+  isConnected: boolean;
+
+  @ApiProperty()
+  message: string;
+
+  @ApiProperty({ required: false })
+  details?: Record<string, unknown>;
+}
+
+// --- Controller ---
 
 @ApiTags('Fingerprints')
 @ApiBearerAuth('access-token')
@@ -93,8 +114,9 @@ export class FingerprintsController {
   @ApiResponse({
     status: 200,
     description: 'Sidik jari berhasil dihapus',
+    type: DeleteResponseDto, // Tipe jelas untuk Swagger
   })
-  async remove(@Param('id') id: string): Promise<{ message: string }> {
+  async remove(@Param('id') id: string): Promise<DeleteResponseDto> {
     return this.fingerprintsService.remove(id);
   }
 
@@ -104,8 +126,9 @@ export class FingerprintsController {
   @ApiResponse({
     status: 200,
     description: 'Informasi perangkat',
+    type: DeviceStatusDto, // Tipe jelas, pengganti any
   })
-  async getDeviceStatus(): Promise<any> {
+  async getDeviceStatus(): Promise<DeviceStatusDto> {
     return this.fingerprintsService.getDeviceStatus();
   }
 }

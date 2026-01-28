@@ -3,13 +3,9 @@ import { Module } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-// Controllers
 import { TreatmentsModule } from '../treatments/treatments.module';
 
-// Services & Orchestrators
 import { MedicalRecordTreatmentsService } from './applications/orchestrator/medical-record-treatments.service';
-
-// Use Cases
 import { CreateMedicalRecordTreatmentUseCase } from './applications/use-cases/create-medical-record-treatment.use-case';
 import { DeleteMedicalRecordTreatmentUseCase } from './applications/use-cases/delete-medical-record-treatment.use-case';
 import { FindAllMedicalRecordTreatmentsUseCase } from './applications/use-cases/find-all-medical-record-treatments.use-case';
@@ -17,31 +13,15 @@ import { FindByMedicalRecordIdUseCase } from './applications/use-cases/find-by-m
 import { FindOneMedicalRecordTreatmentUseCase } from './applications/use-cases/find-one-medical-record-treatment.use-case';
 import { GetTotalByMedicalRecordIdUseCase } from './applications/use-cases/get-total-by-medical-record-id.use-case';
 import { UpdateMedicalRecordTreatmentUseCase } from './applications/use-cases/update-medical-record-treatment.use-case';
-
-// Mappers
 import { MedicalRecordTreatment } from './domains/entities/medical-record-treatments.entity';
 import { MedicalRecordTreatmentMapper } from './domains/mappers/medical-record-treatment.mapper';
-
-// Domain Services
 import { MedicalRecordTreatmentCalculatorService } from './domains/services/medical-record-treatment-calculator.service';
 import { MedicalRecordTreatmentValidatorService } from './domains/services/medical-record-treatment-validator.service';
-
-// Listeners
 import { MedicalRecordTreatmentListener } from './infrastructures/listeners/medical-record-treatment.listener';
-
-// Entities
-
-// Repositories
 import { MedicalRecordTreatmentQuery } from './infrastructures/persistence/query/medical-record-treatment.query';
 import { MedicalRecordTreatmentRepository } from './infrastructures/persistence/repositories/medical-record-treatment.repository';
-
-// Queries
-
-// Transactions
 import { MedicalRecordTreatmentTransactionService } from './infrastructures/transactions/medical-record-treatment-transaction.service';
 import { MedicalRecordTreatmentsController } from './interface/http/medical-record-treatments.controller';
-
-// External Modules
 
 @Module({
   imports: [

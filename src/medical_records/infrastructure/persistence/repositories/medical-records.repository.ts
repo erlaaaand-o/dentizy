@@ -198,7 +198,8 @@ export class MedicalRecordsRepository {
 
     const byDoctor: Record<number, number> = {};
     records.forEach((record) => {
-      byDoctor[record.doctor_id] = (byDoctor[record.doctor_id] || 0) + 1;
+      const doctorId = Number(record.doctor_id);
+      byDoctor[doctorId] = (byDoctor[doctorId] ?? 0) + 1;
     });
 
     return {

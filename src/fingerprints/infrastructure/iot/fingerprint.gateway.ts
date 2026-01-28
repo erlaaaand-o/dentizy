@@ -7,6 +7,8 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
   OnGatewayInit,
+  ConnectedSocket,
+  MessageBody,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 
@@ -29,11 +31,11 @@ export class FingerprintGateway
   private readonly logger = new Logger(FingerprintGateway.name);
   private connectedClients = new Map<string, Socket>();
 
-  afterInit(server: Server) {
+  afterInit(): void {
     this.logger.log('🚀 WebSocket Gateway initialized');
   }
 
-  handleConnection(client: Socket) {
+  handleConnection(client: Socket): void {
     this.connectedClients.set(client.id, client);
     this.logger.log(
       `👤 Client connected: ${client.id} (Total: ${this.connectedClients.size})`,
@@ -46,7 +48,7 @@ export class FingerprintGateway
     });
   }
 
-  handleDisconnect(client: Socket) {
+  handleDisconnect(client: Socket): void {
     this.connectedClients.delete(client.id);
     this.logger.log(
       `👋 Client disconnected: ${client.id} (Total: ${this.connectedClients.size})`,
@@ -54,9 +56,12 @@ export class FingerprintGateway
   }
 
   @SubscribeMessage('subscribe:patient')
-  handleSubscribePatient(client: Socket, patientId: number) {
+  handleSubscribePatient(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() patientId: string, // Menggunakan string agar konsisten dengan UUID patient
+  ): void {
     const room = `patient:${patientId}`;
-    client.join(room);
+    void client.join(room); // void untuk menangani Promise dari join (jika ada)
     this.logger.log(`Client ${client.id} subscribed to ${room}`);
 
     client.emit('subscribed', {
@@ -66,20 +71,23 @@ export class FingerprintGateway
   }
 
   @SubscribeMessage('unsubscribe:patient')
-  handleUnsubscribePatient(client: Socket, patientId: number) {
+  handleUnsubscribePatient(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() patientId: string,
+  ): void {
     const room = `patient:${patientId}`;
-    client.leave(room);
+    void client.leave(room);
     this.logger.log(`Client ${client.id} unsubscribed from ${room}`);
   }
 
   @SubscribeMessage('ping')
-  handlePing(client: Socket) {
+  handlePing(@ConnectedSocket() client: Socket): void {
     client.emit('pong', { timestamp: new Date() });
   }
 
   // Event handlers
   @OnEvent('fingerprint.enrolled')
-  handleFingerprintEnrolled(event: FingerprintEnrolledEvent) {
+  handleFingerprintEnrolled(event: FingerprintEnrolledEvent): void {
     const payload = event.payload;
 
     // Broadcast to all clients
@@ -96,7 +104,7 @@ export class FingerprintGateway
   }
 
   @OnEvent('fingerprint.verified')
-  handleFingerprintVerified(event: FingerprintVerifiedEvent) {
+  handleFingerprintVerified(event: FingerprintVerifiedEvent): void {
     const payload = event.payload;
 
     // Broadcast to all clients
@@ -113,7 +121,7 @@ export class FingerprintGateway
   }
 
   @OnEvent('fingerprint.failed')
-  handleFingerprintFailed(event: FingerprintFailedEvent) {
+  handleFingerprintFailed(event: FingerprintFailedEvent): void {
     const payload = event.payload;
 
     // Broadcast to all clients
@@ -131,7 +139,7 @@ export class FingerprintGateway
   /**
    * Broadcast device status update
    */
-  broadcastDeviceStatus(status: any) {
+  broadcastDeviceStatus(status: Record<string, unknown>): void {
     this.server.emit('device:status', {
       ...status,
       timestamp: new Date(),
@@ -141,7 +149,7 @@ export class FingerprintGateway
   /**
    * Send message to specific client
    */
-  sendToClient(clientId: string, event: string, data: any) {
+  sendToClient<T = unknown>(clientId: string, event: string, data: T): void {
     const client = this.connectedClients.get(clientId);
     if (client) {
       client.emit(event, data);

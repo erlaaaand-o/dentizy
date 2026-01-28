@@ -38,6 +38,6 @@ export class CreateAppointmentDto {
   @IsOptional()
   @IsString()
   @MaxLength(1000, { message: 'Keluhan maksimal 1000 karakter' })
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   keluhan?: string;
 }

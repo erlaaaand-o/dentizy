@@ -91,7 +91,7 @@ export class PublicBookingService {
 
       return appointment;
     } catch (error) {
-      this.logger.error('❌ Public booking failed:', error.message);
+      this.logger.error('❌ Public booking failed:', error);
       // Re-throw error agar controller bisa handle response code
       throw error;
     }

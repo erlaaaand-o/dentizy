@@ -14,7 +14,7 @@ export class UpdateMedicalRecordDto {
   @IsOptional()
   @IsString()
   @MaxLength(5000)
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   subjektif?: string | null;
 
   @ApiProperty({
@@ -29,7 +29,7 @@ export class UpdateMedicalRecordDto {
   @IsOptional()
   @IsString()
   @MaxLength(5000)
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   objektif?: string | null;
 
   @ApiProperty({
@@ -44,7 +44,7 @@ export class UpdateMedicalRecordDto {
   @IsOptional()
   @IsString()
   @MaxLength(5000)
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   assessment?: string | null;
 
   @ApiProperty({
@@ -59,6 +59,6 @@ export class UpdateMedicalRecordDto {
   @IsOptional()
   @IsString()
   @MaxLength(5000)
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   plan?: string | null;
 }

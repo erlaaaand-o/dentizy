@@ -83,7 +83,7 @@ export class PatientCacheService {
 
       return result;
     } catch (error) {
-      this.logger.error(`Error in cache operation: ${error.message}`);
+      this.logger.error(`Error in cache operation: ${error}`);
       return fallback();
     }
   }
@@ -107,7 +107,7 @@ export class PatientCacheService {
       await this.cacheManager.set(cacheKey, stats, 60 * 1000); // Cache stats 1 menit
       return stats;
     } catch (error) {
-      this.logger.error(`Error in cache operation: ${error.message}`);
+      this.logger.error(`Error in cache operation: ${error}`);
       return fallback();
     }
   }
@@ -121,7 +121,7 @@ export class PatientCacheService {
       await this.cacheManager.del(cacheKey);
       this.logger.log(`💨 Invalidated cache: ${cacheKey}`);
     } catch (error) {
-      this.logger.error(`Error invalidating cache: ${error.message}`);
+      this.logger.error(`Error invalidating cache: ${error}`);
     }
   }
 

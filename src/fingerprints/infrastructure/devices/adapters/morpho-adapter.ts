@@ -3,26 +3,50 @@ import { ConfigService } from '@nestjs/config';
 
 import { IFingerprintDevice } from '../fingerprint-device.interface';
 
+interface IZKLib {
+  connect(): Promise<void>;
+  disconnect(): Promise<void>;
+  captureFingerprint?(): Promise<Buffer>;
+  // Tambahkan method lain sesuai dokumentasi library zklib nanti
+}
+
+export interface ZKTecoDeviceInfo {
+  id: string;
+  model: string;
+  version: string;
+  status: string;
+  [key: string]: unknown;
+}
+
 @Injectable()
 export class MorphoAdapter implements IFingerprintDevice {
   private readonly logger = new Logger(MorphoAdapter.name);
   private connected = false;
-  private device: any;
+  private device: IZKLib | null = null;
 
   constructor(private readonly configService: ConfigService) {}
 
   async connect(): Promise<boolean> {
     try {
-      const port = this.configService.get<string>('MORPHO_DEVICE_PORT', 'COM3');
-      const timeout = this.configService.get<number>('MORPHO_TIMEOUT', 5000);
+      const ip = this.configService.get<string>('ZKTECO_DEVICE_IP');
+      const port = this.configService.get<number>('ZKTECO_DEVICE_PORT', 4370);
 
-      // Initialize Morpho device
-      // Implementation would depend on Morpho SDK
-      // Example: this.device = new MorphoDevice(port, timeout);
-      // await this.device.initialize();
+      if (!ip) {
+        this.logger.error(
+          '❌ Configuration error: ZKTECO_DEVICE_IP is missing',
+        );
+        return false;
+      }
 
+      this.logger.log(`🔄 Connecting to ZKTeco device at ${ip}:${port}...`);
+
+      // Simulasi inisialisasi library (Uncomment saat library siap)
+      // this.device = new ZKLib(ip, port, 5000, 5000);
+      // await this.device.connect();
+
+      // Mock connection success
       this.connected = true;
-      this.logger.log(`✅ Connected to Morpho device on ${port}`);
+      this.logger.log(`✅ Connected to ZKTeco device at ${ip}:${port}`);
       return true;
     } catch (error) {
       this.logger.error(`❌ Failed to connect to Morpho device:`, error);

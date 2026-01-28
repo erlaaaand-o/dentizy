@@ -62,7 +62,7 @@ export class UpdateAppointmentDto {
   @IsOptional()
   @IsString()
   @MaxLength(1000)
-  @Transform(({ value }) => value?.trim())
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   keluhan?: string;
 
   // [BARU] Property ini mengizinkan payload nested 'medical_record'

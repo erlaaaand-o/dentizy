@@ -300,7 +300,7 @@ export class FingerprintVerifyValidator {
         await this.validateVerification(dtos[i]);
       } catch (error) {
         throw new BadRequestException(
-          `Validasi gagal pada index ${i}: ${error.message}`,
+          `Validasi gagal pada index ${i}: ${error}`,
         );
       }
     }

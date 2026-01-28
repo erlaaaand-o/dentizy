@@ -1,8 +1,16 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Fingerprint } from '../../domains/entities/fingerprint.entity';
+import {
+  Fingerprint,
+  FingerPosition,
+} from '../../domains/entities/fingerprint.entity';
 import { FingerprintCacheService } from '../../infrastructure/cache/fingerprint-cache.service';
 
 @Injectable()
@@ -66,10 +74,20 @@ export class FingerprintDeletionService {
     patientId: string,
     fingerPosition: string,
   ): Promise<{ message: string }> {
+    if (
+      !Object.values(FingerPosition).includes(fingerPosition as FingerPosition)
+    ) {
+      throw new BadRequestException(
+        `Posisi jari tidak valid: ${fingerPosition}`,
+      );
+    }
+
+    const positionEnum = fingerPosition as FingerPosition;
+
     const fingerprint = await this.fingerprintRepository.findOne({
       where: {
         patient_id: patientId,
-        finger_position: fingerPosition as any,
+        finger_position: positionEnum,
         is_active: true,
       },
     });
