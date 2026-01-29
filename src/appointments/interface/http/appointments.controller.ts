@@ -160,7 +160,7 @@ export class AppointmentsController {
   @ApiQuery({
     name: 'status',
     required: false,
-    enum: ['dijadwalkan', 'selesai', 'dibatalkan'],
+    enum: ['dijadwalkan', 'selesai', 'dibatalkan', 'menunggu_konfirmasi'],
   })
   @ApiQuery({
     name: 'page',
