@@ -1,11 +1,6 @@
 // backend/src/users/applications/dto/account-activation.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, MinLength } from 'class-validator';
-
-import {
-  IsStrongPassword,
-  PASSWORD_MIN_LENGTH,
-} from '../../../shared/validators/password.validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 /**
  * DTO untuk request activation email
@@ -44,22 +39,6 @@ export class ActivateAccountDto {
   @IsNotEmpty({ message: 'Token aktivasi harus diisi' })
   @IsString()
   token: string;
-
-  @ApiProperty({
-    description: `Password baru, minimal ${PASSWORD_MIN_LENGTH} karakter`,
-    example: 'SecurePassword123!',
-    minLength: PASSWORD_MIN_LENGTH,
-  })
-  @IsNotEmpty({ message: 'Password harus diisi' })
-  @IsString()
-  @MinLength(PASSWORD_MIN_LENGTH, {
-    message: `Password minimal ${PASSWORD_MIN_LENGTH} karakter`,
-  })
-  @IsStrongPassword({
-    message:
-      'Password harus mengandung huruf besar, huruf kecil, angka, dan karakter spesial',
-  })
-  newPassword: string;
 }
 
 /**

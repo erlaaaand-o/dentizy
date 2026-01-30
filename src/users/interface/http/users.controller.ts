@@ -53,8 +53,6 @@ import { ResetPasswordDto } from '../../applications/dto/reset-password.dto';
 import { UpdateUserDto } from '../../applications/dto/update-user.dto';
 import { UserResponseDto } from '../../applications/dto/user-response.dto';
 import { UsersService } from '../../applications/orchestrator/users.service';
-import { AccountActivationService } from '../../applications/use-cases/account-activation.service';
-import { ForgotPasswordService } from '../../applications/use-cases/forgot-password.service';
 import { User } from '../../domains/entities/user.entity';
 
 interface PaginationMeta {
@@ -102,11 +100,7 @@ interface TemporaryPasswordResponse {
   description: 'Role user tidak memiliki akses ke endpoint ini',
 })
 export class UsersController {
-  constructor(
-    private readonly usersService: UsersService,
-    private readonly forgotPasswordService: ForgotPasswordService,
-    private readonly accountActivationService: AccountActivationService,
-  ) {}
+  constructor(private readonly usersService: UsersService) {}
 
   @Post()
   @Roles(UserRole.KEPALA_KLINIK)
@@ -390,9 +384,7 @@ export class UsersController {
   async checkActivationStatus(
     @Body() dto: CheckActivationStatusDto,
   ): Promise<CheckActivationStatusResponseDto> {
-    return this.accountActivationService.checkActivationStatus(
-      dto.usernameOrEmail,
-    );
+    return this.usersService.checkActivationStatus(dto.usernameOrEmail);
   }
 
   /**
@@ -427,9 +419,7 @@ export class UsersController {
   async requestActivation(
     @Body() dto: RequestActivationDto,
   ): Promise<RequestActivationResponseDto> {
-    return this.accountActivationService.sendActivationEmail(
-      dto.usernameOrEmail,
-    );
+    return this.usersService.sendActivationEmail(dto.usernameOrEmail);
   }
 
   @Post('activation/resend')
@@ -448,9 +438,7 @@ export class UsersController {
   async resendActivation(
     @Body() dto: RequestActivationDto,
   ): Promise<RequestActivationResponseDto> {
-    return this.accountActivationService.resendActivationEmail(
-      dto.usernameOrEmail,
-    );
+    return this.usersService.resendActivationEmail(dto.usernameOrEmail);
   }
 
   @Post('activation/verify-token')
@@ -468,7 +456,7 @@ export class UsersController {
   async verifyActivationToken(
     @Body() dto: VerifyActivationTokenDto,
   ): Promise<VerifyActivationTokenResponseDto> {
-    return this.accountActivationService.verifyActivationToken(dto.token);
+    return this.usersService.verifyActivationToken(dto.token);
   }
 
   @Post('activation/activate')
@@ -491,6 +479,6 @@ export class UsersController {
   async activateAccount(
     @Body() dto: ActivateAccountDto,
   ): Promise<ActivateAccountResponseDto> {
-    return this.accountActivationService.activateAccount(dto.token);
+    return this.usersService.activateAccount(dto.token);
   }
 }

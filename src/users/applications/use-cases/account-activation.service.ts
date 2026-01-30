@@ -436,18 +436,18 @@ export class AccountActivationService {
               <h2>🦷 Klinik Dentizy</h2>
               <p>Aktivasi Akun Anda</p>
             </div>
-            
+
             <div class="content">
               <p>Halo, <strong>${data.name}</strong>!</p>
-              
+
               <div class="welcome-box">
                 <p style="margin: 0; color: #1e40af; font-weight: 600;">
                   🎉 Selamat! Akun Anda telah dibuat oleh administrator
                 </p>
               </div>
-              
+
               <p>Untuk mulai menggunakan sistem Klinik Dentizy, Anda perlu mengaktifkan akun dan membuat password terlebih dahulu.</p>
-              
+
               <div class="detail-box">
                 <h3 style="margin-top: 0; color: #2563eb;">📋 Detail Akun Anda</h3>
                 <div class="detail-item">
@@ -460,33 +460,33 @@ export class AccountActivationService {
                   🎭 <strong>Role:</strong> ${data.roles.join(', ')}
                 </div>
               </div>
-              
+
               <p><strong>Langkah aktivasi:</strong></p>
               <ol>
                 <li>Klik tombol "Aktivasi Akun" di bawah ini</li>
                 <li>Buat password baru yang aman</li>
                 <li>Login dengan username dan password Anda</li>
               </ol>
-              
+
               <div class="button-container">
                 <a href="${data.activationLink}" class="button">✨ Aktivasi Akun</a>
               </div>
-              
+
               <p style="font-size: 14px; color: #6b7280;">Atau salin link berikut ke browser Anda:</p>
               <p class="link">${data.activationLink}</p>
-              
+
               <div class="warning">
                 <p style="margin: 0;">
                   ⚠️ <strong>Penting:</strong> Link aktivasi ini akan kedaluwarsa dalam <strong>24 jam</strong>.
                 </p>
               </div>
-              
+
               <p style="margin-top: 30px;">Jika Anda tidak meminta pembuatan akun ini, abaikan email ini atau hubungi administrator kami.</p>
-              
+
               <p>Terima kasih,<br>
               <strong>Tim Klinik Dentizy</strong></p>
             </div>
-            
+
             <div class="footer">
               <p>Email ini dikirim otomatis, mohon tidak membalas.</p>
               <p>© ${new Date().getFullYear()} Klinik Dentizy. All rights reserved.</p>

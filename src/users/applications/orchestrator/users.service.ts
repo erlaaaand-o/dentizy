@@ -8,6 +8,7 @@ import { FindUsersQueryDto } from '../dto/find-users-query.dto';
 import { PasswordChangeResponseDto } from '../dto/password-change-response.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserResponseDto } from '../dto/user-response.dto';
+import { AccountActivationService } from '../use-cases/account-activation.service';
 import { ChangePasswordService } from '../use-cases/change-password.service';
 import { CreateUserService } from '../use-cases/create-user.service';
 import { DeleteUserService } from '../use-cases/delete-user.service';
@@ -63,6 +64,7 @@ export class UsersService {
     private readonly changePasswordService: ChangePasswordService,
     private readonly resetPasswordService: ResetPasswordService,
     private readonly forgotPasswordService: ForgotPasswordService,
+    private readonly accountActivationService: AccountActivationService,
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<UserResponseDto> {
@@ -168,5 +170,51 @@ export class UsersService {
       resetToken,
       newPassword,
     );
+  }
+
+  async sendActivationEmail(usernameOrEmail: string): Promise<{
+    message: string;
+    email: string;
+    expiresInHours: number;
+  }> {
+    this.logger.debug(`Sending activation email for ${usernameOrEmail}`);
+    return this.accountActivationService.sendActivationEmail(usernameOrEmail);
+  }
+
+  async resendActivationEmail(usernameOrEmail: string): Promise<{
+    message: string;
+    email: string;
+    expiresInHours: number;
+  }> {
+    this.logger.debug(`Resending activation email for ${usernameOrEmail}`);
+    return this.accountActivationService.resendActivationEmail(usernameOrEmail);
+  }
+
+  async verifyActivationToken(token: string): Promise<{
+    valid: boolean;
+    message: string;
+    userId?: string;
+    email?: string;
+  }> {
+    this.logger.debug(`Verifying activation token`);
+    return this.accountActivationService.verifyActivationToken(token);
+  }
+
+  async activateAccount(token: string): Promise<{
+    message: string;
+    username: string;
+  }> {
+    this.logger.debug(`Activating account with token`);
+    return this.accountActivationService.activateAccount(token);
+  }
+
+  async checkActivationStatus(usernameOrEmail: string): Promise<{
+    canActivate: boolean;
+    isActive: boolean;
+    hasEmail: boolean;
+    message: string;
+  }> {
+    this.logger.debug(`Checking activation status for ${usernameOrEmail}`);
+    return this.accountActivationService.checkActivationStatus(usernameOrEmail);
   }
 }
