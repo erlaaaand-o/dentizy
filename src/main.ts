@@ -55,7 +55,10 @@ function configureSecurity(
         return callback(null, false);
       }
 
-      if (allowedOrigins.includes(origin)) {
+      if (
+        allowedOrigins.includes(origin) ||
+        origin.endsWith('.asse.devtunnels.ms')
+      ) {
         return callback(null, true);
       }
 
