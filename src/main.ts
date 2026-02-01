@@ -51,18 +51,21 @@ function configureSecurity(
   app.enableCors({
     origin: (origin, callback) => {
       if (!origin) {
-        if (nodeEnv !== 'production') return callback(null, true);
-        return callback(new Error('Origin header required in production'));
+        if (nodeEnv !== 'production') {
+          return callback(null, true);
+        }
+
+        return callback(null, false);
       }
 
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
 
-      console.error(`🚫 CORS BLOCKED — Origin: ${origin}`);
-      console.error(`Allowed:`, allowedOrigins);
+      console.warn(`🚫 CORS BLOCKED — Origin: ${origin}`);
+      console.warn(`Allowed: ${allowedOrigins.join(', ')}`);
 
-      return callback(new Error(`Origin ${origin} is not allowed by CORS`));
+      return callback(null, false);
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
