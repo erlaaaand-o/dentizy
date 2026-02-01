@@ -14,8 +14,6 @@ import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { SeederService } from './seeder/seeder.service';
 
-// --- Helper Functions to Reduce Cognitive Complexity ---
-
 function configureSecurity(
   app: NestExpressApplication,
   configService: ConfigService,
@@ -27,7 +25,6 @@ function configureSecurity(
   const localNetworkBackend = `http://${localIp}:${port}`;
   const lanFrontendUrl = configService.get<string>('FRONTEND_URL_LAN');
 
-  // 1. SECURITY HEADERS
   app.use(
     helmet({
       contentSecurityPolicy: nodeEnv === 'production' ? undefined : false,
@@ -133,7 +130,6 @@ function setupSwagger(app: INestApplication, nodeEnv: string, logger: Logger) {
       'swagger.json',
     );
 
-    // Pastikan direktori ada sebelum menulis (opsional, tapi good practice)
     const dir = path.dirname(swaggerPath);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
@@ -211,14 +207,25 @@ function setupGracefulShutdown(app: INestApplication, logger: Logger) {
   });
 }
 
-// --- Main Bootstrap Function ---
-
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
+
   try {
+    const nodeEnv: 'production' | 'development' | 'test' =
+      (process.env.NODE_ENV as 'production' | 'development' | 'test') ??
+      'production';
+
     const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-      logger: ['error', 'warn', 'log', 'debug', 'verbose'],
+      logger:
+        nodeEnv === 'production'
+          ? ['error', 'warn', 'log']
+          : ['error', 'warn', 'log', 'debug', 'verbose'],
     });
+
+    const configService = app.get(ConfigService);
+
+    const port = configService.get<number>('PORT', 3000);
+    const frontendUrl = configService.get<string>('FRONTEND_URL') ?? 'N/A';
 
     app.useGlobalFilters(new HttpExceptionFilter());
 
@@ -230,23 +237,16 @@ async function bootstrap() {
       prefix: '/uploads/',
     });
 
-    const configService = app.get(ConfigService);
-    const nodeEnv = configService.get<string>('NODE_ENV', 'production');
-    const port = configService.get<number>('PORT', 3000);
-    const frontendUrl = configService.get<string>('FRONTEND_URL');
-
-    // SECURITY: Validate critical environment variables
-    if (!configService.get('JWT_SECRET')) {
+    if (!configService.get<string>('JWT_SECRET')) {
       throw new Error('JWT_SECRET is not defined in environment variables!');
     }
 
-    if (!frontendUrl) {
+    if (!configService.get<string>('FRONTEND_URL')) {
       throw new Error('FRONTEND_URL is not defined in environment variables!');
     }
 
     configureSecurity(app, configService, nodeEnv);
 
-    // 3. GLOBAL VALIDATION PIPE
     app.useGlobalPipes(
       new ValidationPipe({
         whitelist: true,
@@ -258,33 +258,33 @@ async function bootstrap() {
       }),
     );
 
-    // 4. SWAGGER
     setupSwagger(app, nodeEnv, logger);
 
-    // 5. DATABASE CONNECTION
     await checkDatabaseConnection(app, logger, nodeEnv);
 
-    // 6. SEEDING
     if (nodeEnv !== 'production') {
       await runSeeding(app, logger);
     }
 
-    // 7. SHUTDOWN HANDLERS
     setupGracefulShutdown(app, logger);
 
-    // 8. START SERVER
     await app.listen(port);
+
+    const envLabel = String(nodeEnv).padEnd(35);
+    const portLabel = String(port).padEnd(35);
+    const urlLabel = `http://localhost:${port}`.padEnd(35);
+    const corsLabel = String(frontendUrl).padEnd(35);
 
     logger.log(`
 ╔═══════════════════════════════════════════════════════╗
 ║                                                       ║
 ║   🚀 Dentizy API Server Started Successfully         ║
 ║                                                       ║
-║   🌍 Environment:  ${nodeEnv.padEnd(35)}║
-║   🔌 Port:         ${port.toString().padEnd(35)}║
-║   📡 URL:          http://localhost:${port}${' '.repeat(22)}║
+║   🌍 Environment:  ${envLabel}║
+║   🔌 Port:         ${portLabel}║
+║   📡 URL:          ${urlLabel}║
 ${nodeEnv !== 'production' ? `║   📖 API Docs:     http://localhost:${port}/api-docs${' '.repeat(14)}║` : ''}
-║   🔐 CORS Origin:  ${frontendUrl.padEnd(35)}║
+║   🔐 CORS Origin:  ${corsLabel}║
 ║   🏥 Health:       http://localhost:${port}/health${' '.repeat(19)}║
 ║                                                       ║
 ╚═══════════════════════════════════════════════════════╝
@@ -299,7 +299,8 @@ ${nodeEnv !== 'production' ? `║   📖 API Docs:     http://localhost:${port}/
       logger.log('🔓 CORS is relaxed for local development');
     }
   } catch (error) {
-    logger.error('❌ Application failed to start:', error);
+    const message = error instanceof Error ? error.message : String(error);
+    logger.error('❌ Application failed to start:', message);
     process.exit(1);
   }
 }
