@@ -134,7 +134,7 @@ export class MorphoAdapter implements IFingerprintDevice {
   private calculateSimilarity(str1: string, str2: string): number {
     // Simple Levenshtein distance-based similarity
     const longer = str1.length > str2.length ? str1 : str2;
-    const shorter = str1.length > str2.length ? str2 : str1;
+    // const shorter = str1.length > str2.length ? str2 : str1;
 
     if (longer.length === 0) {
       return 100;

@@ -9,7 +9,7 @@ import {
 
 @ValidatorConstraint({ name: 'isPositiveNumber', async: false })
 export class IsPositiveNumberConstraint implements ValidatorConstraintInterface {
-  validate(value: number, args: ValidationArguments): boolean {
+  validate(value: number, _args: ValidationArguments): boolean {
     return typeof value === 'number' && value >= 0;
   }
 

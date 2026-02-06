@@ -1,7 +1,5 @@
-import { existsSync, mkdirSync } from 'fs';
-import { extname } from 'path';
-
 import {
+  BadRequestException,
   Controller,
   Post,
   UseInterceptors,
@@ -9,58 +7,30 @@ import {
   ParseFilePipe,
   MaxFileSizeValidator,
   FileTypeValidator,
-  UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiBody,
-  ApiConsumes,
-} from '@nestjs/swagger';
-import { diskStorage } from 'multer';
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
-@ApiTags('Uploads')
 @Controller('uploads')
 export class UploadsController {
   @Post('profile-photo')
-  @UseGuards(AuthGuard('jwt'))
-  @ApiBearerAuth('access-token')
-  @ApiOperation({ summary: 'Upload foto profil (Max 2MB, JPG/PNG)' })
-  @ApiConsumes('multipart/form-data')
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        file: {
-          type: 'string',
-          format: 'binary',
-        },
-      },
-    },
-  })
   @UseInterceptors(
     FileInterceptor('file', {
-      storage: diskStorage({
-        destination: (req, file, cb) => {
-          const uploadPath = './public/uploads/profiles';
-          if (!existsSync(uploadPath)) {
-            mkdirSync(uploadPath, { recursive: true });
-          }
-          cb(null, uploadPath);
-        },
-        filename: (req, file, callback) => {
-          const uniqueSuffix =
-            Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const ext = extname(file.originalname);
-          callback(null, `profile-${uniqueSuffix}${ext}`);
+      storage: new CloudinaryStorage({
+        cloudinary: cloudinary,
+        params: async () => {
+          return {
+            folder: 'dentizy-profiles',
+            resource_type: 'image',
+            public_id: `profile-${Date.now()}`,
+            allowed_formats: ['jpg', 'png', 'webp'],
+          };
         },
       }),
     }),
   )
-  uploadFile(
+  async uploadFile(
     @UploadedFile(
       new ParseFilePipe({
         validators: [
@@ -71,11 +41,27 @@ export class UploadsController {
     )
     file: Express.Multer.File,
   ) {
-    const fileUrl = `/uploads/profiles/${file.filename}`;
+    try {
+      if (!file) {
+        throw new BadRequestException('File tidak ditemukan atau tidak valid');
+      }
 
-    return {
-      message: 'Upload berhasil',
-      url: fileUrl,
-    };
+      // Cloudinary Storage akan otomatis mengisi property 'path' dengan URL HTTPS
+      if (!file.path) {
+        throw new BadRequestException('Upload gagal, URL file tidak tersedia');
+      }
+
+      return {
+        message: 'Upload berhasil',
+        url: file.path, // Contoh output: https://res.cloudinary.com/demo/image/upload/...
+      };
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new BadRequestException(`Upload gagal: ${error.message}`);
+      }
+      throw new BadRequestException(
+        'Upload gagal: Terjadi kesalahan tak terduga',
+      );
+    }
   }
 }

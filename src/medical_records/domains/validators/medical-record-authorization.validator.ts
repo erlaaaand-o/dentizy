@@ -215,7 +215,7 @@ export class MedicalRecordAuthorizationValidator {
   /**
    * Validate user can access patient records
    */
-  validateCanAccessPatientRecords(user: User, patientId: number): void {
+  validateCanAccessPatientRecords(user: User, _patientId: number): void {
     this.validateAuthenticated(user);
 
     const userRoles = user.roles.map((r) => r.name);
@@ -307,7 +307,7 @@ export class MedicalRecordAuthorizationValidator {
   /**
    * Validate cross-clinic access (if multiple clinics)
    */
-  validateClinicAccess(user: User, clinicId?: number): void {
+  validateClinicAccess(user: User, _clinicId?: number): void {
     this.validateAuthenticated(user);
 
     // TODO: Implement multi-clinic validation

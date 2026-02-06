@@ -29,7 +29,7 @@ export class IsValidDiscountConstraint implements ValidatorConstraintInterface {
     return diskon <= subtotal;
   }
 
-  defaultMessage(args: ValidationArguments): string {
+  defaultMessage(_args: ValidationArguments): string {
     return 'Diskon tidak boleh lebih besar dari subtotal';
   }
 }

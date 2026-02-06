@@ -206,18 +206,18 @@ export class MedicalRecordEventListener {
     );
   }
 
-  private async updateStatistics(data: object): Promise<void> {
+  private async updateStatistics(_data: object): Promise<void> {
     this.logger.debug('Statistics updated');
   }
 
   private async updateDeletionStatistics(
-    event: MedicalRecordDeletedEvent,
+    _event: MedicalRecordDeletedEvent,
   ): Promise<void> {
     this.logger.debug('Deletion statistics updated');
   }
 
   private async triggerIntegrations(
-    event: MedicalRecordCreatedEvent,
+    _event: MedicalRecordCreatedEvent,
   ): Promise<void> {
     this.logger.debug('External integrations triggered');
   }

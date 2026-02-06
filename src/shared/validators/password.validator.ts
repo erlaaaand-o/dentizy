@@ -68,14 +68,14 @@ export function IsStrongPassword(validationOptions?: ValidationOptions) {
       propertyName: propertyName,
       options: validationOptions,
       validator: {
-        validate(value: unknown, args: ValidationArguments) {
+        validate(value: unknown, _args: ValidationArguments) {
           if (typeof value !== 'string') {
             return false;
           }
           const { isValid } = validatePasswordStrength(value);
           return isValid;
         },
-        defaultMessage(args: ValidationArguments) {
+        defaultMessage(_args: ValidationArguments) {
           return PASSWORD_VALIDATION_MESSAGE;
         },
       },

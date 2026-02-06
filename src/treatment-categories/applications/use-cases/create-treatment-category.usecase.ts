@@ -38,7 +38,7 @@ export class CreateTreatmentCategoryUseCase {
 
       // Map to response DTO
       return this.mapper.toResponseDto(category);
-    } catch (error) {
+    } catch {
       throw new BadRequestException('Gagal membuat kategori perawatan');
     }
   }

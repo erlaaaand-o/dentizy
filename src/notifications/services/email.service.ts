@@ -66,7 +66,7 @@ export class EmailService {
       try {
         await this.sendEmail(email);
         sent++;
-      } catch (error) {
+      } catch {
         failed++;
       }
     }

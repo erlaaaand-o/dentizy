@@ -76,7 +76,7 @@ export class UpdateMedicalRecordTreatmentUseCase {
       );
 
       return response;
-    } catch (error) {
+    } catch {
       throw new BadRequestException('Gagal mengupdate perawatan rekam medis');
     }
   }

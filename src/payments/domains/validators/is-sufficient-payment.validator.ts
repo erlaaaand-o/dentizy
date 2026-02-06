@@ -26,7 +26,7 @@ export class IsSufficientPaymentConstraint implements ValidatorConstraintInterfa
     return jumlahBayar >= 0;
   }
 
-  defaultMessage(args: ValidationArguments): string {
+  defaultMessage(_args: ValidationArguments): string {
     return 'Jumlah bayar tidak valid';
   }
 }

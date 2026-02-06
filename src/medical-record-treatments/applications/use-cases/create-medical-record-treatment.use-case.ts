@@ -63,7 +63,7 @@ export class CreateMedicalRecordTreatmentUseCase {
       );
 
       return response;
-    } catch (error) {
+    } catch {
       throw new BadRequestException(
         'Gagal menambahkan perawatan ke rekam medis',
       );

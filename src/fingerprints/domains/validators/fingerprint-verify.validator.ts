@@ -194,8 +194,8 @@ export class FingerprintVerifyValidator {
    */
   async validateRateLimit(
     identifier: string,
-    maxAttempts: number = 5,
-    windowMinutes: number = 5,
+    _maxAttempts: number = 5,
+    _windowMinutes: number = 5,
   ): Promise<void> {
     // This is a placeholder for rate limiting logic
     // In production, integrate with Redis or similar
