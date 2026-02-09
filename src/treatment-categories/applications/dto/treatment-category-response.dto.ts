@@ -32,7 +32,7 @@ export class TreatmentCategoryResponseDto {
 
   @ApiProperty({
     example: '2024-01-01T00:00:00.000Z',
-    description: 'Tanggal diupdate',
+    description: 'Tanggal dihapus',
   })
   deletedAt: Date;
 
