@@ -76,13 +76,6 @@ export class PatientResponseDto {
   alamat: string;
 
   @ApiProperty({
-    description: 'Catatan medis khusus yang perlu diperhatikan',
-    example: 'Hipertensi ringan',
-  })
-  @Expose()
-  catatan_khusus: string;
-
-  @ApiProperty({
     description: 'Status apakah pasien terdaftar online',
     example: true,
   })
@@ -115,6 +108,14 @@ export class PatientResponseDto {
   @Expose()
   @Type(() => Date)
   updated_at: Date;
+
+  @ApiProperty({
+    description: 'Tanggal dihapus data pasien',
+    example: '2025-02-01T12:00:00.000Z',
+  })
+  @Expose()
+  @Type(() => Date)
+  deleted_at: Date;
 }
 
 export interface PaginatedPatients {

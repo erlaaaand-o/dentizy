@@ -57,6 +57,9 @@ export class MedicalRecordTreatmentResponseDto {
   @ApiProperty({ example: '2024-01-01T00:00:00.000Z' })
   updatedAt: Date;
 
+  @ApiProperty({ example: '2024-01-01T00:00:00.000Z' })
+  deletedAt: Date;
+
   @ApiPropertyOptional({ type: TreatmentDetailDto })
   treatment?: TreatmentDetailDto;
 

@@ -94,6 +94,9 @@ class AppointmentMedicalRecordDto {
 
   @ApiProperty({ type: Date })
   updated_at: Date;
+
+  @ApiProperty({ type: Date })
+  deleted_at: Date;
 }
 
 // --- MAIN DTO ---

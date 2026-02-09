@@ -30,6 +30,12 @@ export class TreatmentCategoryResponseDto {
   })
   updatedAt: Date;
 
+  @ApiProperty({
+    example: '2024-01-01T00:00:00.000Z',
+    description: 'Tanggal diupdate',
+  })
+  deletedAt: Date;
+
   constructor(partial: Partial<TreatmentCategoryResponseDto | null>) {
     Object.assign(this, partial);
   }
