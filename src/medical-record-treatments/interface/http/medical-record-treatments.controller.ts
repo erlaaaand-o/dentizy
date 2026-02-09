@@ -124,7 +124,7 @@ export class MedicalRecordTreatmentsController {
   })
   @ApiParam({
     name: 'medicalRecordId',
-    type: Number,
+    type: String,
     description: 'ID Rekam Medis',
   })
   @ApiResponse({
@@ -155,7 +155,7 @@ export class MedicalRecordTreatmentsController {
   })
   @ApiParam({
     name: 'medicalRecordId',
-    type: Number,
+    type: String,
     description: 'ID Rekam Medis',
   })
   @ApiResponse({
@@ -200,7 +200,7 @@ export class MedicalRecordTreatmentsController {
   })
   @ApiParam({
     name: 'id',
-    type: Number,
+    type: String,
     description: 'ID Medical Record Treatment',
   })
   @ApiResponse({
@@ -225,7 +225,7 @@ export class MedicalRecordTreatmentsController {
   @ApiOperation({ summary: 'Update perawatan rekam medis' })
   @ApiParam({
     name: 'id',
-    type: Number,
+    type: String,
     description: 'ID Medical Record Treatment',
   })
   @ApiResponse({
@@ -257,7 +257,7 @@ export class MedicalRecordTreatmentsController {
   @ApiOperation({ summary: 'Hapus perawatan rekam medis (soft delete)' })
   @ApiParam({
     name: 'id',
-    type: Number,
+    type: String,
     description: 'ID Medical Record Treatment',
   })
   @ApiResponse({
