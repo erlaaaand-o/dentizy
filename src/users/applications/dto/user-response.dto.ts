@@ -57,5 +57,14 @@ export class UserResponseDto {
 
   @ApiProperty({ required: false, nullable: true })
   @Expose()
+  @Type(() => Date)
+  deleted_at?: Date | null;
+
+  @ApiProperty({ example: true, description: 'Status aktif user' })
+  @Expose()
+  is_active: boolean;
+
+  @ApiProperty({ required: false, nullable: true })
+  @Expose()
   profile_photo?: string | null;
 }
