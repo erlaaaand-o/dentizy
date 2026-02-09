@@ -20,8 +20,9 @@ import {
 import { ThrottlerGuard } from '@nestjs/throttler';
 import type { Request } from 'express';
 
+import { VerifyOTPResponseDto } from '../../../users/applications/dto/forgot-password-response.dto';
 import {
-  ForgotPasswordRequestDto, // Perhatikan nama DTO-nya (sesuai file users dto)
+  ForgotPasswordRequestDto,
   VerifyOTPDto,
   ResetPasswordWithTokenDto,
 } from '../../../users/applications/dto/forgot-password.dto';
@@ -229,21 +230,39 @@ export class AuthController {
 
   @Post('forgot-password')
   @Public()
+  @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Request OTP untuk reset password' })
+  @ApiResponse({
+    status: 200,
+    description: 'OTP berhasil dikirim',
+    schema: { example: { message: 'OTP sent to email' } },
+  })
   async forgotPassword(@Body() dto: ForgotPasswordRequestDto) {
     return this.usersService.sendOTP(dto.emailOrUsername);
   }
 
   @Post('verify-otp')
   @Public()
+  @HttpCode(HttpStatus.CREATED) // Gunakan 201 jika sesuai logika frontend Anda sebelumnya
   @ApiOperation({ summary: 'Verifikasi OTP dan dapatkan Reset Token' })
+  @ApiResponse({
+    status: 201,
+    description: 'OTP Valid',
+    type: VerifyOTPResponseDto,
+  })
   async verifyOTP(@Body() dto: VerifyOTPDto) {
     return this.usersService.verifyOTP(dto.email, dto.otp);
   }
 
   @Post('reset-password')
   @Public()
+  @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Set password baru menggunakan Reset Token' })
+  @ApiResponse({
+    status: 200,
+    description: 'Password berhasil direset',
+    schema: { example: { message: 'Password updated successfully' } },
+  })
   async resetPassword(@Body() dto: ResetPasswordWithTokenDto) {
     return this.usersService.resetPasswordWithToken(
       dto.resetToken,

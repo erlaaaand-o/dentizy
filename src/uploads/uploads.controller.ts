@@ -7,14 +7,25 @@ import {
   ParseFilePipe,
   MaxFileSizeValidator,
   FileTypeValidator,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiConsumes,
+  ApiBody,
+} from '@nestjs/swagger';
 import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
+@ApiTags('Uploads')
 @Controller('uploads')
 export class UploadsController {
   @Post('profile-photo')
+  @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(
     FileInterceptor('file', {
       storage: new CloudinaryStorage({
@@ -30,38 +41,46 @@ export class UploadsController {
       }),
     }),
   )
+  @ApiConsumes('multipart/form-data')
+  @ApiOperation({ summary: 'Upload foto profil ke Cloudinary' })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: { file: { type: 'string', format: 'binary' } },
+    },
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'Upload berhasil',
+    schema: {
+      example: {
+        url: 'https://res.cloudinary.com/...',
+        filename: 'profile-12345.jpg',
+        size: 102450,
+        mimetype: 'image/jpeg',
+      },
+    },
+  })
   async uploadFile(
     @UploadedFile(
       new ParseFilePipe({
         validators: [
-          new MaxFileSizeValidator({ maxSize: 2 * 1024 * 1024 }), // Max 2MB
+          new MaxFileSizeValidator({ maxSize: 2 * 1024 * 1024 }),
           new FileTypeValidator({ fileType: /^image\/(jpg|jpeg|png|webp)$/ }),
         ],
       }),
     )
     file: Express.Multer.File,
   ) {
-    try {
-      if (!file) {
-        throw new BadRequestException('File tidak ditemukan atau tidak valid');
-      }
-
-      // Cloudinary Storage akan otomatis mengisi property 'path' dengan URL HTTPS
-      if (!file.path) {
-        throw new BadRequestException('Upload gagal, URL file tidak tersedia');
-      }
-
-      return {
-        message: 'Upload berhasil',
-        url: file.path, // Contoh output: https://res.cloudinary.com/demo/image/upload/...
-      };
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        throw new BadRequestException(`Upload gagal: ${error.message}`);
-      }
-      throw new BadRequestException(
-        'Upload gagal: Terjadi kesalahan tak terduga',
-      );
+    if (!file) {
+      throw new BadRequestException('File tidak ditemukan atau tidak valid');
     }
+
+    return {
+      url: file.path,
+      filename: file.filename || file.originalname,
+      size: file.size,
+      mimetype: file.mimetype,
+    };
   }
 }
