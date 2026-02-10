@@ -90,7 +90,7 @@ export class PaymentsController {
     description:
       'Endpoint khusus kasir untuk input pembayaran, hitung kembalian, dan update status lunas.',
   })
-  @ApiParam({ name: 'id', description: 'ID Pembayaran', type: Number })
+  @ApiParam({ name: 'id', description: 'ID Pembayaran', type: String })
   @ApiOkResponse({
     description: 'Pembayaran berhasil diproses',
     type: PaymentResponseDto,
@@ -202,7 +202,7 @@ export class PaymentsController {
   @ApiParam({
     name: 'medicalRecordId',
     description: 'ID Medical Record',
-    type: Number,
+    type: String,
   })
   @ApiOkResponse({
     description: 'Data pembayaran ditemukan',
@@ -232,7 +232,7 @@ export class PaymentsController {
   @ApiParam({
     name: 'patientId',
     description: 'ID Pasien',
-    type: Number,
+    type: String,
   })
   @ApiQuery({
     name: 'limit',
@@ -361,7 +361,7 @@ export class PaymentsController {
   @ApiParam({
     name: 'id',
     description: 'ID Pembayaran',
-    type: Number,
+    type: String,
   })
   @ApiOkResponse({
     description: 'Detail pembayaran',
@@ -387,7 +387,7 @@ export class PaymentsController {
     description:
       'Endpoint untuk mengupdate data pembayaran. Status akan otomatis dihitung ulang jika jumlah bayar berubah.',
   })
-  @ApiParam({ name: 'id', description: 'ID Pembayaran', type: Number })
+  @ApiParam({ name: 'id', description: 'ID Pembayaran', type: String })
   @ApiOkResponse({
     description: 'Pembayaran berhasil diupdate',
     type: PaymentResponseDto,
@@ -418,7 +418,7 @@ export class PaymentsController {
     description:
       'Endpoint untuk membatalkan pembayaran. Pembayaran yang sudah dibatalkan tidak dapat diubah kembali.',
   })
-  @ApiParam({ name: 'id', description: 'ID Pembayaran', type: Number })
+  @ApiParam({ name: 'id', description: 'ID Pembayaran', type: String })
   @ApiOkResponse({
     description: 'Pembayaran berhasil dibatalkan',
     type: PaymentResponseDto,
@@ -445,7 +445,7 @@ export class PaymentsController {
     summary: 'Menghapus pembayaran (soft delete)',
     description: 'Endpoint untuk menghapus pembayaran secara soft delete',
   })
-  @ApiParam({ name: 'id', description: 'ID Pembayaran', type: Number })
+  @ApiParam({ name: 'id', description: 'ID Pembayaran', type: String })
   @ApiOkResponse({ description: 'Pembayaran berhasil dihapus' })
   @ApiNotFoundResponse({ description: 'Pembayaran tidak ditemukan' })
   async remove(

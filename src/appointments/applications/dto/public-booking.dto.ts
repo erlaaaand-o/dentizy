@@ -30,9 +30,9 @@ export class PublicBookingDto {
   @ApiProperty({
     description: 'Tanggal Lahir (YYYY-MM-DD)',
     example: '1990-01-01',
+    type: Date,
   })
-  @IsDateString()
-  tanggal_lahir: string;
+  tanggal_lahir: Date;
 
   @ApiProperty({ description: 'Nomor HP (WhatsApp)', example: '08123456789' })
   @IsString()

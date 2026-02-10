@@ -8,7 +8,6 @@ import {
   Length,
   Matches,
   IsEnum,
-  IsDateString,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -54,10 +53,13 @@ export class CreatePatientDto {
   })
   no_hp?: string;
 
-  @ApiPropertyOptional({ example: '1990-01-15' })
+  @ApiProperty({
+    description: 'Tanggal Lahir (YYYY-MM-DD)',
+    example: '1990-01-01',
+    type: Date,
+  })
   @IsOptional()
-  @IsDateString({}, { message: 'Format tanggal tidak valid (YYYY-MM-DD)' })
-  tanggal_lahir?: string;
+  tanggal_lahir?: Date;
 
   @ApiPropertyOptional({ enum: Gender, example: Gender.MALE })
   @IsOptional()

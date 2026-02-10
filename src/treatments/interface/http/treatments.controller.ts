@@ -132,7 +132,7 @@ export class TreatmentsController {
   @ApiParam({
     name: 'id',
     description: 'Treatment ID',
-    type: Number,
+    type: String,
     example: 1,
   })
   @ApiResponse({
@@ -155,7 +155,7 @@ export class TreatmentsController {
   @ApiParam({
     name: 'id',
     description: 'Treatment ID',
-    type: Number,
+    type: String,
     example: 1,
   })
   @ApiResponse({
@@ -189,7 +189,7 @@ export class TreatmentsController {
   @ApiParam({
     name: 'id',
     description: 'Treatment ID',
-    type: Number,
+    type: String,
     example: 1,
   })
   @ApiResponse({
@@ -219,7 +219,7 @@ export class TreatmentsController {
   @ApiParam({
     name: 'id',
     description: 'Treatment ID',
-    type: Number,
+    type: String,
     example: 1,
   })
   @ApiResponse({
@@ -242,7 +242,7 @@ export class TreatmentsController {
   @ApiParam({
     name: 'id',
     description: 'Treatment ID',
-    type: Number,
+    type: String,
     example: 1,
   })
   @ApiResponse({
@@ -261,7 +261,7 @@ export class TreatmentsController {
   @ApiParam({
     name: 'id',
     description: 'Treatment ID',
-    type: Number,
+    type: String,
     example: 1,
   })
   @ApiResponse({
