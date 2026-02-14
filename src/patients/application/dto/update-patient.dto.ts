@@ -44,11 +44,11 @@ export class UpdatePatientDto extends PartialType(CreatePatientDto) {
 
   @ApiPropertyOptional({
     description: 'Tanggal lahir pasien',
-    example: '1990-01-01',
+    example: '1990-01-01', // Sesuai example ini, backend mengharapkan YYYY-MM-DD
   })
   @IsOptional()
   @IsDateString()
-  tanggal_lahir?: Date;
+  tanggal_lahir?: string;
 
   @ApiPropertyOptional({
     description: 'Alamat pasien',

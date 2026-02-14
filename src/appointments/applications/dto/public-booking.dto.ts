@@ -30,9 +30,10 @@ export class PublicBookingDto {
   @ApiProperty({
     description: 'Tanggal Lahir (YYYY-MM-DD)',
     example: '1990-01-01',
-    type: Date,
   })
-  tanggal_lahir: Date;
+  @IsOptional()
+  @IsDateString({}, { message: 'Format tanggal lahir tidak valid' }) // Tambahkan ini agar aman
+  tanggal_lahir?: string;
 
   @ApiProperty({ description: 'Nomor HP (WhatsApp)', example: '08123456789' })
   @IsString()

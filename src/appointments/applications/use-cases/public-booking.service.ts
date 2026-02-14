@@ -34,7 +34,7 @@ export class PublicBookingService {
       if (existingPatient) {
         // 2A. VALIDASI KEAMANAN (Mencegah penyalahgunaan NIK)
         // Cocokkan Tanggal Lahir input dengan Database
-        const inputBirthDate = new Date(dto.tanggal_lahir)
+        const inputBirthDate = new Date(dto.tanggal_lahir!)
           .toISOString()
           .split('T')[0];
         const dbBirthDate = new Date(existingPatient.tanggal_lahir!)
