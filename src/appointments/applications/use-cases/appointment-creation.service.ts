@@ -32,7 +32,6 @@ export class AppointmentCreationService {
       const appointment = await this.transactionManager.executeInTransaction(
         queryRunner,
         async (qr) => {
-          // 1. Get Entities
           const patient = await this.repository.findPatientByIdInTransaction(
             qr,
             dto.patient_id,
@@ -42,21 +41,15 @@ export class AppointmentCreationService {
             dto.doctor_id,
           );
 
-          // 2. Validasi Role & Eksistensi
-          this.createValidator.validateCreateAppointment(
-            patient,
-            dto.patient_id,
-            doctor,
-            dto.doctor_id,
-          );
+          this.createValidator.validatePatientExists(patient, dto.patient_id);
+          this.createValidator.validateDoctorExists(doctor, dto.doctor_id);
+          this.createValidator.validateDoctorRole(doctor, dto.doctor_id);
 
-          // 3. Validasi Format Waktu
           this.timeValidator.validateAppointmentTime(
             dto.tanggal_janji,
             dto.jam_janji,
           );
 
-          // 4. Hitung Buffer
           const appointmentDate = new Date(dto.tanggal_janji);
           appointmentDate.setHours(0, 0, 0, 0);
 
@@ -66,9 +59,6 @@ export class AppointmentCreationService {
               dto.jam_janji,
             );
 
-          // 5. VALIDASI KONFLIK DUA ARAH
-
-          // A. Cek Jadwal Dokter (Dokter tidak boleh sibuk)
           await this.conflictValidator.validateDoctorNoConflict(
             qr,
             dto.doctor_id,
@@ -78,7 +68,6 @@ export class AppointmentCreationService {
             bufferEnd,
           );
 
-          // B. Cek Jadwal Pasien (Pasien tidak boleh punya jadwal aktif lain di jam sama)
           await this.conflictValidator.validatePatientNoConflict(
             qr,
             dto.patient_id,
@@ -88,11 +77,10 @@ export class AppointmentCreationService {
             bufferEnd,
           );
 
-          // 6. Create Entity (patient and doctor are validated to be non-null)
           const appointmentData = this.domainService.createAppointmentEntity(
             dto,
-            patient!,
-            doctor!,
+            patient,
+            doctor,
             appointmentDate,
           );
 
@@ -101,7 +89,6 @@ export class AppointmentCreationService {
         'create-appointment',
       );
 
-      // 7. Emit Event
       const shouldScheduleReminder =
         this.domainService.shouldScheduleReminder(appointment);
       this.eventEmitter.emit(

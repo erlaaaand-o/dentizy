@@ -32,6 +32,7 @@ module.exports = [
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/await-thenable': 'error',
       'unused-imports/no-unused-imports': 'error',
+      "@typescript-eslint/no-non-null-assertion": "error",
       'unused-imports/no-unused-vars': [
         'warn',
         { argsIgnorePattern: '^_' },

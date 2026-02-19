@@ -172,6 +172,6 @@ export class MedicalRecordCreationService {
     });
 
     this.validator.validateExists(record);
-    return record!;
+    return record;
   }
 }

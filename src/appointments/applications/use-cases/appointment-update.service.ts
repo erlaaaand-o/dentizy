@@ -48,7 +48,7 @@ export class AppointmentUpdateService {
           this.validator.validateAppointmentExists(appointment, id);
 
           // TypeScript now knows appointment is not null
-          const validAppointment = appointment!;
+          const validAppointment = appointment;
 
           // 2. VALIDASI: Status untuk update
           this.validator.validateStatusForUpdate(validAppointment);

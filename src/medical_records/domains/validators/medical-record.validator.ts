@@ -36,7 +36,9 @@ export class MedicalRecordValidator {
   /**
    * Validate medical record exists
    */
-  validateExists(medicalRecord: MedicalRecord | null | undefined): void {
+  validateExists(
+    medicalRecord: MedicalRecord | null | undefined,
+  ): asserts medicalRecord is MedicalRecord {
     if (!medicalRecord) {
       throw new BadRequestException('Rekam medis tidak ditemukan');
     }

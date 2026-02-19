@@ -17,11 +17,12 @@ export class AppointmentValidator {
   /**
    * Validasi appointment exists
    */
-  validateAppointmentExists(appointment: Appointment | null, id: string): void {
+  validateAppointmentExists(
+    appointment: Appointment | null,
+    id: string,
+  ): asserts appointment is Appointment {
     if (!appointment) {
-      throw new NotFoundException(
-        `Janji temu dengan ID #${id} tidak ditemukan`,
-      );
+      throw new NotFoundException(`Appointment ${id} not found`);
     }
   }
 

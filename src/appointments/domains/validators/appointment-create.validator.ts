@@ -16,7 +16,10 @@ export class AppointmentCreateValidator {
   /**
    * Validasi patient exists
    */
-  validatePatientExists(patient: Patient | null, patientId: string): void {
+  validatePatientExists(
+    patient: Patient | null,
+    patientId: string,
+  ): asserts patient is Patient {
     if (!patient) {
       throw new NotFoundException(
         `Pasien dengan ID #${patientId} tidak ditemukan`,
@@ -27,7 +30,10 @@ export class AppointmentCreateValidator {
   /**
    * Validasi doctor exists
    */
-  validateDoctorExists(doctor: User | null, doctorId: string): void {
+  validateDoctorExists(
+    doctor: User | null,
+    doctorId: string,
+  ): asserts doctor is User {
     if (!doctor) {
       throw new NotFoundException(
         `Dokter dengan ID #${doctorId} tidak ditemukan`,
@@ -63,6 +69,6 @@ export class AppointmentCreateValidator {
   ): void {
     this.validatePatientExists(patient, patientId);
     this.validateDoctorExists(doctor, doctorId);
-    this.validateDoctorRole(doctor!, doctorId);
+    this.validateDoctorRole(doctor, doctorId);
   }
 }
