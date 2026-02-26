@@ -26,18 +26,20 @@ export class PublicBookingService {
 
   async execute(dto: PublicBookingDto): Promise<Appointment> {
     try {
-      // 1. Cek Apakah Pasien Sudah Ada (Read Only)
       const existingPatient = await this.patientRepository.findByNik(dto.nik);
 
       let patientId: string;
 
       if (existingPatient) {
-        // 2A. VALIDASI KEAMANAN (Mencegah penyalahgunaan NIK)
-        // Cocokkan Tanggal Lahir input dengan Database
-        const inputBirthDate = new Date(dto.tanggal_lahir!)
+        const inputBirthDate = new Date(dto.tanggal_lahir)
           .toISOString()
           .split('T')[0];
-        const dbBirthDate = new Date(existingPatient.tanggal_lahir!)
+
+        if (!existingPatient.tanggal_lahir) {
+          throw new Error('Patient birth date is missing');
+        }
+
+        const dbBirthDate = new Date(existingPatient.tanggal_lahir)
           .toISOString()
           .split('T')[0];
 
@@ -47,10 +49,8 @@ export class PublicBookingService {
           );
         }
 
-        // Pasien valid
         patientId = existingPatient.id;
       } else {
-        // 2B. BUAT PASIEN BARU (Status Sementara: Non-Aktif)
         const newPatientDto: CreatePatientDto = {
           nama_lengkap: dto.nama_lengkap,
           nik: dto.nik,
@@ -75,7 +75,6 @@ export class PublicBookingService {
         );
       }
 
-      // 3. BUAT APPOINTMENT
       const appointmentDto: CreateAppointmentDto = {
         patient_id: patientId,
         doctor_id: dto.doctor_id,
@@ -85,14 +84,12 @@ export class PublicBookingService {
         status: AppointmentStatus.MENUNGGU_KONFIRMASI,
       };
 
-      // Panggil AppointmentCreationService (sudah handle validation & conflict check)
       const appointment =
         await this.appointmentCreationService.execute(appointmentDto);
 
       return appointment;
     } catch (error) {
       this.logger.error('❌ Public booking failed:', error);
-      // Re-throw error agar controller bisa handle response code
       throw error;
     }
   }

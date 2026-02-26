@@ -28,28 +28,18 @@ export class AppointmentCompletionService {
    */
   async execute(id: string, user: User): Promise<Appointment> {
     try {
-      // 1. FIND APPOINTMENT
       const appointment = await this.repository.findById(id);
+
       this.validator.validateAppointmentExists(appointment, id);
 
-      // TypeScript now knows appointment is not null
-      const validAppointment = appointment!;
+      this.validator.validateViewAuthorization(appointment, user);
+      this.validator.validateStatusForCompletion(appointment);
+      this.validator.validateCompletionAuthorization(appointment, user);
 
-      // 2. VALIDASI: Authorization
-      this.validator.validateViewAuthorization(validAppointment, user);
-
-      // 3. VALIDASI: Status harus DIJADWALKAN
-      this.validator.validateStatusForCompletion(validAppointment);
-
-      // 4. VALIDASI: Authorization untuk completion
-      this.validator.validateCompletionAuthorization(validAppointment, user);
-
-      // 5. UPDATE STATUS
       const updatedAppointment =
-        this.domainService.completeAppointment(validAppointment);
+        this.domainService.completeAppointment(appointment);
       const savedAppointment = await this.repository.save(updatedAppointment);
 
-      // 6. EMIT EVENT
       this.eventEmitter.emit(
         'appointment.completed',
         new AppointmentCompletedEvent(savedAppointment, user.id),

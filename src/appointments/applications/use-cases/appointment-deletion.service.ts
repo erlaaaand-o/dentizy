@@ -26,23 +26,16 @@ export class AppointmentDeletionService {
    */
   async execute(id: string, user: User): Promise<void> {
     try {
-      // 1. FIND APPOINTMENT
       const appointment = await this.repository.findById(id);
+
       this.validator.validateAppointmentExists(appointment, id);
+      this.validator.validateForDeletion(appointment);
 
-      // TypeScript now knows appointment is not null
-      const validAppointment = appointment!;
+      await this.repository.remove(appointment);
 
-      // 2. VALIDASI: Tidak boleh delete jika sudah ada medical record
-      this.validator.validateForDeletion(validAppointment);
-
-      // 3. DELETE APPOINTMENT
-      await this.repository.remove(validAppointment);
-
-      // 4. EMIT EVENT
       this.eventEmitter.emit(
         'appointment.deleted',
-        new AppointmentDeletedEvent(validAppointment, user.id),
+        new AppointmentDeletedEvent(appointment, user.id),
       );
 
       this.logger.log(`🗑️ Appointment #${id} deleted by user #${user.id}`);

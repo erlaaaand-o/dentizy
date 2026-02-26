@@ -30,7 +30,7 @@ export class AppointmentFindService {
       this.validator.validateAppointmentExists(appointment, id);
 
       // TypeScript now knows appointment is not null
-      const validAppointment = appointment!;
+      const validAppointment = appointment;
 
       // 3. VALIDASI: Authorization (dokter hanya bisa lihat milik sendiri)
       this.validator.validateViewAuthorization(validAppointment, user);
