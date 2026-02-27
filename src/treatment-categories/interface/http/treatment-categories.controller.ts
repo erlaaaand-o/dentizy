@@ -95,7 +95,7 @@ export class TreatmentCategoriesController {
   @HttpCode(HttpStatus.OK)
   @Roles(UserRole.KEPALA_KLINIK, UserRole.DOKTER, UserRole.STAF)
   @ApiOperation({ summary: 'Get treatment category by ID' })
-  @ApiParam({ name: 'id', type: Number, description: 'Category ID' })
+  @ApiParam({ name: 'id', type: String, description: 'Category ID' })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Category found',
@@ -118,7 +118,7 @@ export class TreatmentCategoriesController {
   @HttpCode(HttpStatus.OK)
   @Roles(UserRole.KEPALA_KLINIK) // Hanya admin yang boleh edit master data
   @ApiOperation({ summary: 'Update treatment category' })
-  @ApiParam({ name: 'id', type: Number, description: 'Category ID' })
+  @ApiParam({ name: 'id', type: String, description: 'Category ID' })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Category updated successfully',
@@ -148,7 +148,7 @@ export class TreatmentCategoriesController {
   @HttpCode(HttpStatus.OK)
   @Roles(UserRole.KEPALA_KLINIK) // Hanya admin yang boleh hapus
   @ApiOperation({ summary: 'Soft delete treatment category' })
-  @ApiParam({ name: 'id', type: Number, description: 'Category ID' })
+  @ApiParam({ name: 'id', type: String, description: 'Category ID' })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Category deleted successfully',
@@ -173,7 +173,7 @@ export class TreatmentCategoriesController {
   @HttpCode(HttpStatus.OK)
   @Roles(UserRole.KEPALA_KLINIK) // Hanya admin yang boleh restore
   @ApiOperation({ summary: 'Restore soft deleted category' })
-  @ApiParam({ name: 'id', type: Number, description: 'Category ID' })
+  @ApiParam({ name: 'id', type: String, description: 'Category ID' })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Category restored successfully',
