@@ -14,6 +14,7 @@ import { UsersModule } from '../users/users.module';
 
 import { AppointmentsService } from './applications/orchestrator/appointments.service';
 import { AppointmentCancellationService } from './applications/use-cases/appointment-cancellation.service';
+import { AppointmentCleanupService } from './applications/use-cases/appointment-cleanup.service';
 import { AppointmentCompletionService } from './applications/use-cases/appointment-completion.service';
 import { AppointmentCreationService } from './applications/use-cases/appointment-creation.service';
 import { AppointmentDeletionService } from './applications/use-cases/appointment-deletion.service';
@@ -64,6 +65,7 @@ import { PublicAppointmentsController } from './interface/http/public-appointmen
     AppointmentSearchService,
     AppointmentUpdateService,
     AppointmentDeletionService,
+    AppointmentCleanupService,
     PublicBookingService,
 
     // Domain Services
